@@ -1,6 +1,7 @@
 #page-login {
     height: 100%;
     background: #f4f4f4;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .cabecalho {
@@ -22,6 +23,7 @@
 
 .login form h2 {
     font-size: 30px;
+    font-family: 'Archivo Narrow', sans-serif;
 }
 
 .login form img {
@@ -62,4 +64,4 @@
     transition: background-color 0.2s;
     margin-top: 50px;
     font-size: 14px;
-  }
+}
