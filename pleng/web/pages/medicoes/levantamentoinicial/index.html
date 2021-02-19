@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title> Levantamento inicial | Pleng </title>
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600&family=Julius+Sans+One&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+        <link href="../../../assets/styles/grid.css" rel="stylesheet" />
+        <link href="./styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="page-levantamentoinicial" class="container">
+            <div class="grid-12">
+                <div class="cabecalho">
+                    <h1> PLENG </h1>
+                </div>
+
+                <main>
+                    <div class="grid-12">
+                        <div class="titulo">
+                            <h1> Levantamento inicial da obra </h1>
+                        </div>
+
+                        <div class="grid-12 levantamento">
+                            <div class="grid-8 formulario">
+                                <form method="POST" name="login" action="">
+                                    <h3> Cadastre as etapas</h3>
+                                    <div class="field">
+                                        <label> Selecione a etapa: </label>
+                                        <select>
+                                            <option> Etapas... </option>
+                                        </select>
+                                    </div>
+                                    <div class="field grid-12">
+                                        <div class="horizontal">
+                                            <div class="grid-8">
+                                                <label> Informe o tamanho total dessa etapa e a unidade: </label>
+                                                <div class="grid-12">
+                                                    <input type="text" class="grid-4 tamanho" /> <input type="text" class="grid-4 tamanho" />
+                                                </div>
+                                            </div>
+                                            <div class="grid-3 posicao">
+                                                <label> Posição: </label>
+                                                <input type="text" class="grid-12" /> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field">
+                                        <label> Adicione uma observação: </label>
+                                        <textarea></textarea>
+                                    </div>
+
+                                    <div class="grid-12">
+                                        <button type="button" class="btnCancelar"> Cancelar </button>
+                                        <div class="botoes">
+                                            <button type="button" class="btnAvancar"> Cadastrar outra etapa </button>
+                                            <button type="button" class="btnAvancar"> Salvar </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="grid-4 menu">
+                                <h3> Etapas cadastradas </h3>
+                                <ul>
+                                    <li> Etapa 1 </li>
+                                    <li> Etapa 2 </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
