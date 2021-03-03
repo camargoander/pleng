@@ -15,6 +15,8 @@ if(!$db) {
     while($row = $result->fetchArray()) {
         if(($email === $row['email']) && ($senha === $row['senha'])) {
             // login ok
+            $_SESSION['usuario'] = $row['idusuario'];
+            
             header('location:../../../web/pages/home');
         } else {
             // erro no login
