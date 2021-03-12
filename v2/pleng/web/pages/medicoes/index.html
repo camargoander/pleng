@@ -1,0 +1,61 @@
+<html>
+<head>
+    <?php include('../../assets/head/HeadPrincipal.html'); ?>
+    <title> Pleng | Medições </title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600&family=Julius+Sans+One&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+    <link href="../../assets/styles/grid.css" rel="stylesheet" />
+    <link href="../../assets/styles/padrao.css" rel="stylesheet" />
+    <link href="../../assets/styles/formStyle.css" rel="stylesheet" />
+    <link href="./styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="page-medicoes" class="container">
+        <?php include('../../assets/cabecalho/CabecalhoPrincipal.html'); ?>
+
+        <div class="grid-12">
+            <main>
+                <div class="titulo">
+                    <h1> medições </h1>
+                </div>
+
+                <form class="grid-5">
+                    <h2> Levantamento inicial </h2>
+                    <img src="../../assets/imgs/iconmed1.svg" />
+                    <div>
+                        <button type="button" class="grid-6 btnBranco"> Editar </button>
+                        <button type="button" class="grid-6 btnVerde"> Criar </button>
+                    </div>
+                </form>
+                <form class="grid-5">
+                    <h2> Diário de obra </h2>
+                    <img src="../../assets/imgs/iconmed2.svg" />
+                    <div>
+                        <button type="button" class="grid-6 btnBranco"> Editar </button>
+                        <button type="button" class="grid-6 btnVerde"> Criar </button>
+                    </div>
+                </form>
+                <div class="titulo">
+                    <h1> Últimos levantamentos </h1>
+                </div>
+
+                <table>
+                    <tr>
+                        <td> Nome da etapa </td>
+                        <td class="data"> 06/03/2021 </td>
+                        <td class="porcentagem"> 60% </td>
+                    </tr>
+                    <tr>
+                        <td> Nome da etapa </td>
+                        <td class="data"> 01/03/2021 </td>
+                        <td class="porcentagem"> 30% </td>
+                    </tr>
+                </table>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

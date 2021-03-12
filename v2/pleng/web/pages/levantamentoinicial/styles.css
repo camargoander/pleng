@@ -1,0 +1,39 @@
+.items {
+    width: 100%;
+    text-align: left;
+    display: flex;
+}
+
+.item {
+    width: 45%;
+}
+
+.item:first-child {
+    margin-right: 10%;
+}
+
+form {
+    text-align: justify;
+}
+
+form .btnCancelar {
+    float: left;
+    height: 50px;
+    width: 150px;
+}
+
+form .btnSalvar {
+    float: right;
+    height: 50px;
+    width: 200px;
+    margin-left: 15px;
+}
+
+.etapa form {
+    background-color: #E1E5F2;
+    padding: 15px;
+}
+
+.etapa form button {
+    margin-top: 10;
+}
