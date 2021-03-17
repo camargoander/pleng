@@ -1,0 +1,67 @@
+<html>
+<head>
+    <?php include('../../assets/head/HeadPrincipal.html'); ?>
+    <title> Pleng | Seus projetos </title>
+
+</head>
+<body>
+    <div id="page-home" class="container">
+        
+        <header>
+            <img src="../../assets/imgs/logo.svg" alt="logo pleng" />
+        </header>
+
+        <main class="home">
+            
+            <?php include('../../assets/cabecalho/menuLateral.html'); ?>
+
+            <div class="grid-12">
+                <div class="titulo">
+                    <h1> Selecione seu projeto </h1>
+                </div>
+
+                <?php include(''); ?>
+
+                <div class="grid-4">
+                    <form name="projeto">
+                        <h3> Nome do projeto </h3>
+                        <img src="" />
+
+                        <div class="field">
+                            <label> Cidade: <b> cidade </b> </label>
+                        </div>
+                        <div class="field">
+                            <label> Endereço: <b> endereço </b> </label>
+                        </div>
+                
+                        <div class="grid-12 btn">
+                            <form method="POST" name="projetoExcluir" action="">
+                                
+                                <input type="hidden" value="<? echo $row['idprojeto']?>" name="id" />
+                                <input type="hidden" value="E" name="projBtn" />
+
+                                <button type="submit" class="grid-6 btnVermelho"> Excluir </button>
+                            </form>
+                            <form method="POST" name="projetoSelecionar" action="">
+                                    
+                                <input type="hidden" value="<? echo $row['idprojeto']?>" name="id" />
+                                <input type="hidden" value="S" name="projBtn" />
+
+                                <button type="submit" class="grid-12 btnVerde"> Selecionar </button>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <a href="../projetos/cadastrar/index.html">
+                        <button type="button" class="adicionar">
+                            <img src="../../assets/imgs/iconadd.svg">
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

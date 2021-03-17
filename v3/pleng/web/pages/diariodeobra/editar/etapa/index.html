@@ -1,0 +1,68 @@
+<form method="POST" name="etapadiariodeobra" action="" class="formEtapa">
+    <div class="grid-10 etapa">
+        <label>
+            <h2> Nome da etapa </h2>
+            <input type="checkbox" />
+            <div class="collapse" id="col3Content">
+
+                <div class="items">
+                    <div class="item">
+                        <div class="field">
+                            <label> Quantidade de material usado: </label>
+                            <input type="text" name="qtdematusado" />
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="field">
+                            <div class="field">
+                                <label> Quantidade de material pedido: </label>
+                                <input type="text" name="qtdematpedido" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="items">
+                    <div class="item">
+                        <div class="field">
+                            <label> Quantidade de material usado até agora: </label>
+                            <input type="text" name="qtdematatual" disabled />
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="field">
+                            <div class="field">
+                                <label> Quantidade de material a ser usado até a finalização: </label>
+                                <input type="text" name="qtdemattotal" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="items">
+                    <div class="item">
+                        <div class="field">
+                            <label> Tamanho concluido: </label>
+                            <input type="text" name="tamanho" />
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="field">
+                            <div class="field">
+                                <label> Tamanho total: </label>
+                                <input type="text" name="tamanhototal" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-12">
+                    <button type="button" class="btnBranco"> Cancelar </button>
+                    <div class="botoes">
+                        <button type="button" class="btnVerde"> Salvar </button>
+                    </div>
+                </div>
+            </div>
+        </label>
+    </div>
+</form>
