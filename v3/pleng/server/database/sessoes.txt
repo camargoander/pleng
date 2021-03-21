@@ -1,0 +1,21 @@
+login
+
+$_SESSION['idUsuAtivo'] = $row['idusu'];
+$_SESSION['nomeUsuAtivo'] = $row['nome'];
+
+selecionaProjeto
+
+$_SESSION['idProjAtivo'] = $row['idproj'];
+$_SESSION['nomeProjAtivo'] = $row['nome'];
+$_SESSION['descProjAtivo'] = $row['descricao'];
+$_SESSION['estProjAtivo'] = $row['estado'];
+$_SESSION['cidProjAtivo'] = $row['cidade'];
+$_SESSION['endProjAtivo'] = $row['endereco'];
+$_SESSION['empProjAtivo'] = $row['idemp'];
+$_SESSION['dataProjAtivo'] = $row['data_inicio'];
+
+selecionaPerfil 
+
+$_SESSION['nomeUsuAtivo'] = $row['nome'];
+$_SESSION['emailUsuAtivo'] = $row['email'];
+$_SESSION['senhaUsuAtivo'] = $row['senha'];
