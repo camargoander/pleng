@@ -24,16 +24,16 @@
                     <h2> Levantamento inicial </h2>
                     <img src="../../assets/imgs/iconmed1.svg" />
                     <div>
-                        <button type="button" class="grid-6 btnBranco"> Editar </button>
-                        <button type="button" class="grid-6 btnVerde"> Criar </button>
+                        <a href=""><button type="button" class="grid-6 btnBranco"> Editar </button></a>
+                        <a href="../levantamentoinicial"><button type="button" class="grid-6 btnVerde"> Criar </button></a>
                     </div>
                 </form>
                 <form class="grid-5">
                     <h2> Diário de obra </h2>
                     <img src="../../assets/imgs/iconmed2.svg" />
                     <div>
-                        <button type="button" class="grid-6 btnBranco"> Editar </button>
-                        <button type="button" class="grid-6 btnVerde"> Criar </button>
+                        <a href="../diariodeobra/lista"><button type="button" class="grid-6 btnBranco"> Editar </button></a>
+                        <a href="../diariodeobra/cadastrar"><button type="button" class="grid-6 btnVerde"> Criar </button></a>
                     </div>
                 </form>
                 <div class="titulo">
@@ -41,16 +41,7 @@
                 </div>
 
                 <table>
-                    <tr>
-                        <td> Nome da etapa </td>
-                        <td class="data"> 06/03/2021 </td>
-                        <td class="porcentagem"> 60% </td>
-                    </tr>
-                    <tr>
-                        <td> Nome da etapa </td>
-                        <td class="data"> 01/03/2021 </td>
-                        <td class="porcentagem"> 30% </td>
-                    </tr>
+                    <?php include('../../../server/src/medicoes/listaUltimasEtapas.php'); ?>
                 </table>
             </main>
         </div>
