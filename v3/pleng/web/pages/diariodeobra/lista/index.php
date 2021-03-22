@@ -48,16 +48,7 @@
             </form>
 
             <table>
-                <tr>
-                    <td> Nome da etapa </td>
-                    <td class="data"> 06/03/2021 </td>
-                    <td class="porcentagem"> 60% </td>
-                </tr>
-                <tr>
-                    <td> Nome da etapa </td>
-                    <td class="data"> 01/03/2021 </td>
-                    <td class="porcentagem"> 30% </td>
-                </tr>
+            <?php include('../../../server/src/diariodeobra/listarDiario.php'); ?>
             </table>
 
         </main>
