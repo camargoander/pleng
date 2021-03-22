@@ -31,6 +31,12 @@ if(!$db) {
         $_SESSION['dataProjAtivo'] = $row['data_inicio'];
     }
 
+    $result = $db->query("SELECT idlevantamento FROM levantamentoinicial WHERE idproj = '$idproj' LIMIT 0,1");
+
+    while($row = $result->fetchArray()) {
+        $_SESSION['idLevantamentoAtivo'] = $row['idlevantamento'];
+    }
+
     header('location:../../../web/pages/projetos/editar/index.php');
 }
 ?>
