@@ -12,7 +12,7 @@ class MyDB extends SQLite3
 
 $db = new MyDB();
 
-$idproj = $SESSION['idProjAtivo'];
+$idproj = $_SESSION['idProjAtivo'];
 
 if(!$db) {
     echo $db->lastErrorMsg();
@@ -29,12 +29,6 @@ if(!$db) {
         $_SESSION['endProjAtivo'] = $row['endereco'];
         // $_SESSION['empProjAtivo'] = $row['idemp'];
         $_SESSION['dataProjAtivo'] = $row['data_inicio'];
-    }
-
-    $result = $db->query("SELECT idlevantamento FROM levantamentoinicial WHERE idproj = '$idproj' LIMIT 0,1");
-
-    while($row = $result->fetchArray()) {
-        $_SESSION['idLevantamentoAtivo'] = $row['idlevantamento'];
     }
 
     header('location:../../../web/pages/projetos/editar/index.php');
