@@ -25,14 +25,14 @@ $quiTarde = $_POST['climaquintatarde'];
 $sexManha = $_POST['climasextamanha'];
 $sexTarde = $_POST['climasextatarde'];
 
-$levantamento = $_SESSION['idLevantamentoAtivo'];
+$projeto = $_SESSION['idProjAtivo'];
 
 if(!$db) {
     echo $db->lastErrorMsg();
 } else {
 
-    $result = $db->query("INSERT INTO diariodeobra(data_diario, segManha, segTarde, terManha, terTarde, quaManha, quaTarde, quiManha, quiTarde, sexManha, sexTarde, idlevantamento) 
-    VALUES ('".$data."', '".$segManha."', '".$segTarde."', '".$terManha."', '".$terTarde."', '".$quaManha."', '".$quaTarde."', '".$quiManha."', '".$quiTarde."', '".$sexManha."', '".$sexTarde."', $levantamento)");
+    $result = $db->query("INSERT INTO diariodeobra(data_diario, segManha, segTarde, terManha, terTarde, quaManha, quaTarde, quiManha, quiTarde, sexManha, sexTarde, idproj) 
+    VALUES ('".$data."', '".$segManha."', '".$segTarde."', '".$terManha."', '".$terTarde."', '".$quaManha."', '".$quaTarde."', '".$quiManha."', '".$quiTarde."', '".$sexManha."', '".$sexTarde."', $projeto)");
 
     $_SESSION['diarioIniciado'] = true;
 
