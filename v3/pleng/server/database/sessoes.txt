@@ -14,8 +14,6 @@ $_SESSION['endProjAtivo'] = $row['endereco'];
 $_SESSION['empProjAtivo'] = $row['idemp'];
 $_SESSION['dataProjAtivo'] = $row['data_inicio'];
 
-$_SESSION['idLevantamentoAtivo'] = $row['idlevantamento'];
-
 selecionaPerfil 
 
 $_SESSION['nomeUsuAtivo'] = $row['nome'];
@@ -25,3 +23,12 @@ $_SESSION['senhaUsuAtivo'] = $row['senha'];
 cadastrarDiario
 
 $_SESSION['diarioIniciado'] = true;
+
+selecionarEtapa
+
+$_SESSION['idEtapa'] = $row['idetapaproj'];
+$_SESSION['tamanhoEtapa'] = $row['tamanho_total'];
+$_SESSION['unidadeEtapa'] = $row['unidade'];
+$_SESSION['posEtapa'] = $row['pos'];
+$_SESSION['situacaoEtapa'] = $row['situacao'];
+$_SESSION['descricaoEtapa'] = $row['descricao'];
