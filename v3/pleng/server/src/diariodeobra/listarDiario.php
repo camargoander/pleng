@@ -10,11 +10,13 @@ class MyDB extends SQLite3
    }
 }
 
+$id = $_SESSION['idProjAtivo'];
+
 if(!$db) {
     echo $db->lastErrorMsg();
 } else {
 
-    $result = $db->query('SELECT * FROM diariodeobra INNER JOIN levantamentoinicial ON levantamentoinicial.idproj = projeto.idproj');
+    $result = $db->query("SELECT * FROM diariodeobra WHERE idproj = $id");
 
     while ($row = $result->fetchArray()) {
         echo "
