@@ -14,7 +14,7 @@ if(!$db) {
     echo $db->lastErrorMsg();
 } else {
 
-    $result = $db->query('SELECT * FROM diariodeobra INNER JOIN levantamentoinicial ON levantamentoinicial.idproj = projeto.idproj LIMIT 5');
+    $result = $db->query("SELECT * FROM diariodeobra WHERE idproj = $id LIMIT 5");
 
     while ($row = $result->fetchArray()) {
         echo "
