@@ -24,9 +24,9 @@ if(!$db) {
 
     while ($row = $result->fetchArray()) {
         echo "<option value='" .$row['idetapaproj']."'";
-        // if($_SESSION['etapaAti'] == $row['idemp']) {
-        //     echo "selected";
-        // }
+        if($_SESSION['idEtapaProj'] == $row['idetapaproj']) {
+            echo "selected";
+        }
         echo">"  .$row['idetapaproj']. " - " .$row['nome']. "</option>";
     }
 }
