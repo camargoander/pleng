@@ -17,7 +17,7 @@
         
         <main>
             <div class="titulo">
-                <h1> Editar etapa blabla </h1>
+                <h1> Editar etapa </h1>
             </div>
 
             <div class="grid-12">
@@ -29,7 +29,7 @@
                         <div class="grid-9">
                             <h3> Etapa </h3>
                             <p> 
-                                Selecione a etapa, informe seu tamanho total e a unidade de medida.
+                                Verifique a etapa, seu tamanho total e a unidade de medida.
                                 Caso a etapa que deseja não esteja cadastrada, vá até a aba "Dados pré-cadastrados" 
                                 e faça as alterações necessárias.
                             </p>
@@ -37,14 +37,16 @@
 
                         <div class="field">
                             <label> Etapa: </label>
-                            <input type="text" value="<?php echo $_SESSION['nomeEtapa']; ?>">
+                            <select disabled>
+                                <?php include('../../../../server/src/listas/listaEtapaProjeto.php'); ?>
+                            </select>
                         </div>
 
                         <div class="items">
                             <div class="item">
                                 <div class="field">
                                     <label> Tamanho total: </label>
-                                    <input type="text" name="tamanho" value="<? echo $_SESSION['tamanhoEtapa']; ?>" />
+                                    <input type="text" name="tamanhototal" value="<? echo $_SESSION['tamanhoEtapa']; ?>" />
                                 </div>
                             </div>
                             <div class="item">
@@ -82,16 +84,32 @@
                                     
                                     <div class="container">
                                         <div class="contRadio">
-                                            <input type="radio" class="hidden" id="input1" name="situacao">
+                                            <input type="radio" class="hidden" id="input1" name="situacao" value="N"
+                                            <?php 
+                                                if($_SESSION['situacaoEtapa'] === 'N') {
+                                                    echo "checked";
+                                                }
+                                            ?>
+                                            >
                                             <label class="entry" for="input1"><div class="circle"></div>
                                                 <div class="entry-label">Não iniciada</div>
                                             </label>
-                                            <input type="radio" class="hidden" id="input2" name="situacao">
+                                            <input type="radio" class="hidden" id="input2" name="situacao" value="A"
+                                            <?php 
+                                                if($_SESSION['situacaoEtapa'] === 'A') {
+                                                    echo "checked";
+                                                }
+                                            ?>>
                                             <label class="entry" for="input2">
                                                 <div class="circle"></div>
                                                 <div class="entry-label">Em andamento</div>
                                             </label>
-                                            <input type="radio" class="hidden" id="input3" name="situacao">
+                                            <input type="radio" class="hidden" id="input3" name="situacao" value="F"
+                                            <?php 
+                                                if($_SESSION['situacaoEtapa'] === 'F') {
+                                                    echo "checked";
+                                                }
+                                            ?>>
                                             <label class="entry" for="input3">
                                                 <div class="circle"></div>
                                                 <div class="entry-label">Finalizada</div>
@@ -119,7 +137,7 @@
 
                         <div class="field">
                             <label> Descrição: </label>
-                            <textarea><?php echo $_SESSION['descricaoEtapa']?></textarea>
+                            <textarea name="descricao"><?php echo $_SESSION['descricaoEtapa']?></textarea>
                         </div>
                     </div>
 
