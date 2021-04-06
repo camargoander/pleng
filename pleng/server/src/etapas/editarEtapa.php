@@ -12,14 +12,13 @@ class MyDB extends SQLite3
 
 $db = new MyDB();
 
-$id = $_SESSION['idEtapa'];
-$nome = $_POST['nome'];
-$estado = $_POST['estado'];
-$cidade = $_POST['cidade'];
-$endereco = $_POST['endereco'];
-$empreiteiro = $_POST['empreiteiro'];
+$id = $_SESSION['idEtapaProj'];
+
+$tamanho_total = $_POST['tamanhototal'];
+$unidade = $_POST['unidade'];
+$pos = $_POST['posicao'];
+$situacao = $_POST['situacao'];
 $descricao = $_POST['descricao'];
-$data = $_POST['data_inicio'];
 
 if(!$db) {
     echo $db->lastErrorMsg();

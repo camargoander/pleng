@@ -12,15 +12,15 @@ class MyDB extends SQLite3
 
 $db = new MyDB();
 
-$idetapaproj = $_POST['id'];
+$idetapaproj = $_POST['data'];
+$etapaproj = json_decode($idetapaproj, true);
 
 if(!$db) {
     echo $db->lastErrorMsg();
 } else {
 
-    $result = $db->query("DELETE FROM etapa_projeto WHERE idetapaproj = '$idetapaproj'");
+    $result = $db->query("DELETE FROM etapa_projeto WHERE idetapaproj = '$etapaproj'");
 
-    header('location:../../../web/pages/etapas/listaetapas/index.php');
 }
 
 ?>

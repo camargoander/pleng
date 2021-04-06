@@ -21,7 +21,8 @@ if(!$db) {
     $result = $db->query("SELECT * FROM etapa_projeto WHERE idetapaproj = '$idetapaproj'");
 
     while ($row = $result->fetchArray()) {
-       $_SESSION['idEtapa'] = $row['idetapaproj'];
+       $_SESSION['idEtapa'] = $row['idetapa'];
+       $_SESSION['idEtapaProj'] = $row['idetapaproj'];
        $_SESSION['tamanhoEtapa'] = $row['tamanho_total'];
        $_SESSION['unidadeEtapa'] = $row['unidade'];
        $_SESSION['posEtapa'] = $row['pos'];
