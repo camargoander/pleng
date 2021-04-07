@@ -48,6 +48,18 @@
 
                 <div class="grid-4">
                     <form>
+                        <h2> Grupos </h2>
+
+                        <p> Verifique e altere seus grupos de quantidade de material. </p>
+
+                        <a href="" class="grid-12">
+                            <button type="button" class="btnVerde"> Acessar </button>
+                        </a>
+                    </form>
+                </div>
+
+                <div class="grid-4">
+                    <form>
                         <h2> Materiais da etapa </h2>
 
                         <p> Verifique e altere os materiais usados em cada etapado projeto. </p>
@@ -60,7 +72,7 @@
 
                 <div class="grid-4">
                     <form>
-                        <h2> Quantidade de material </h2>
+                        <h2> Quantidade de material por grupo </h2>
 
                         <p> Verifique e altere a quantidade de material pra cada etapa no projeto. </p>
 
