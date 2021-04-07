@@ -1,5 +1,5 @@
 <div class="grid-4">
-    <form method="POST" name="editarmaterial" action="">
+    <form method="POST" name="editarmaterial" action="../../../../server/src/dadosprecadastrados/editarMaterial.php">
         <h3> <?php echo $row['nome']; ?> </h3>
 
         <div class="field">
