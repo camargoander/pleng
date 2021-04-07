@@ -6,11 +6,13 @@ class MyDB extends SQLite3
 {
    function __construct()
    {
-      $this->open('../../../server/database/pleng.db');
+      $this->open('../../../../server/database/pleng.db');
    }
 }
 
 $id = $_SESSION['idProjAtivo'];
+
+$db = new MyDB();
 
 if(!$db) {
     echo $db->lastErrorMsg();
