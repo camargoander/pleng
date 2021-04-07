@@ -26,7 +26,7 @@
 
         <div class="grid-12">
             <button type="submit" class="btnVerde"> Editar </button>
-            <button type="button" class="btnVermelho"> Deletar </button>
+            <button type="button" class="btnVermelho" onclick="deletarDados(<?php echo $row['idmat']; ?>, 'idmat', 'material', 'material');"> Deletar </button>
         </div>
     </form>
 </div>
