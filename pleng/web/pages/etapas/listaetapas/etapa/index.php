@@ -4,7 +4,7 @@
 
         <p><b>Situação: </b> <?php echo $row['situacao']; ?> </p>
 
-        <input type="hidden" name="id" value="<?php $row['idetapaproj']?>">
+        <input type="hidden" name="id" value="<?php echo $row['idetapaproj'];?>">
         
         <button type="submit" class="btnVerde"> Editar </button>
         <button type="button" class="btnVermelho" onclick="deletarEtapa(<?php echo $row['idetapaproj']; ?>);"> Deletar </button>
