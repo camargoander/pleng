@@ -28,7 +28,7 @@
 
                         <p> Verifique e altere os materiais usados nas etapas do seu projeto. </p>
 
-                        <a href="" class="grid-12">
+                        <a href="./material" class="grid-12">
                             <button type="button" class="btnVerde"> Acessar </button>
                         </a>
                     </form>
@@ -40,7 +40,7 @@
 
                         <p> Verifique e altere as etapas usadas no projeto. </p>
 
-                        <a href="" class="grid-12">
+                        <a href="./etapa" class="grid-12">
                             <button type="button" class="btnVerde"> Acessar </button>
                         </a>
                     </form>
@@ -52,7 +52,7 @@
 
                         <p> Verifique e altere seus grupos de quantidade de material. </p>
 
-                        <a href="" class="grid-12">
+                        <a href="./grupo" class="grid-12">
                             <button type="button" class="btnVerde"> Acessar </button>
                         </a>
                     </form>
@@ -64,7 +64,7 @@
 
                         <p> Verifique e altere os materiais usados em cada etapado projeto. </p>
 
-                        <a href="" class="grid-12">
+                        <a href="./materialetapa" class="grid-12">
                             <button type="button" class="btnVerde"> Acessar </button>
                         </a>
                     </form>
@@ -72,11 +72,11 @@
 
                 <div class="grid-4">
                     <form>
-                        <h2> Quantidade de material por grupo </h2>
+                        <h2> Qtde. material por grupo </h2>
 
                         <p> Verifique e altere a quantidade de material pra cada etapa no projeto. </p>
 
-                        <a href="" class="grid-12">
+                        <a href="./materialgrupo" class="grid-12">
                             <button type="button" class="btnVerde"> Acessar </button>
                         </a>
                     </form>

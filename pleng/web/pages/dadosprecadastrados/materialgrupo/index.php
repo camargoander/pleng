@@ -1,7 +1,7 @@
 <html>
 <head>
     <?php include('../../../assets/cmp/head/HeadSecundario.php'); ?>
-    <title> Pleng | Materiais da etapa </title>
+    <title> Pleng | Quantidade de material por grupo </title>
 
     <link href='https://css.gg/search.css' rel='stylesheet'>
 </head>
@@ -18,7 +18,7 @@
         <main>
             <div class="grid-12">
                 <div class="titulo">
-                    <h1> Materiais da etapa </h1>
+                    <h1> Quantidade de material por grupo </h1>
                 </div>
 
                 <?php include('../../../../server/src/dadosprecadastrados/listaMaterialEtapa.php');?>
