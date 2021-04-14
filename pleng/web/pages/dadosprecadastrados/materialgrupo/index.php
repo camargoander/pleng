@@ -21,7 +21,7 @@
                     <h1> Quantidade de material por grupo </h1>
                 </div>
 
-                <?php include('../../../../server/src/dadosprecadastrados/listaMaterialEtapa.php');?>
+                <?php include('../../../../server/src/dadosprecadastrados/listaMaterialGrupo.php');?>
 
             </div>
         </main>
