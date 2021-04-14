@@ -16,13 +16,13 @@ if(!$db) {
     echo $db->lastErrorMsg();
 } else {
 
-    $result = $db->query('SELECT * FROM material_etapa');
+    $result = $db->query('SELECT * FROM material_grupo');
 
     while($row = $result->fetchArray()) {
 
         while ($row = $result->fetchArray()) {
 
-            include('./materialetapa/index.php');
+            include('./materialgrupo/index.php');
         }
     }
    
