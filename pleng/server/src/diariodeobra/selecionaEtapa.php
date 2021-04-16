@@ -12,8 +12,6 @@ class MyDB extends SQLite3
 
 $db = new MyDB();
 
-$idproj = $_SESSION['idProjAtivo'];
-
 $etapaSelecionada = $_POST['data'];
 $etapa = json_decode($etapaSelecionada, true);
 
