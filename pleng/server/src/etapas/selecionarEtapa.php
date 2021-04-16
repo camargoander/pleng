@@ -19,8 +19,8 @@ if(!$db) {
 } else {
 
     $result = $db->query("SELECT etapa_projeto.*, etapa.nome as nomeEtapa 
-    FROM etapa_projeto, etapa WHERE etapa_projeto.idetapaproj = '$idetapaproj' 
-    AND etapa_projeto.idetapa = etapa.idetapa");
+                          FROM etapa_projeto, etapa WHERE etapa_projeto.idetapaproj = '$idetapaproj' 
+                          AND etapa_projeto.idetapa = etapa.idetapa");
 
     while($row = $result->fetchArray()) {
       $_SESSION['nomeEtapaEpAtiva'] = $row['nomeEtapa'];
