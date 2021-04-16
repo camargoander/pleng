@@ -1,6 +1,6 @@
 # PLENG, a solução para o gerenciamento de seus projetos
 
- <img src=”pleng/pleng/web/assets/imgs/logo.svg”>
+ <img src="pleng/web/assets/imgs/logo.svg">
  
 PLENG (sigla para Planejamento do Engenheiro) é um sistema desenvolvido principalmente em PHP que tem como principal objetivo facilitar o gerenciamento de projetos na área da engenharia civil, auxiliando na previsão de calculos e apresentando de uma forma mais simples o desempenho da obra, além dos dados relacionados a mesma para poder contribuir com seu andamento e esclarecer questões encontradas pelo seu responsável.
 
