@@ -12,8 +12,6 @@ class MyDB extends SQLite3
 
 $db = new MyDB();
 
-$idproj = $_SESSION['idProjAtivo'];
-
 $iddiario = $_POST['data'];
 $diario = json_decode($iddiario, true);
 
