@@ -36,7 +36,7 @@ if(!$db) {
     $result = $db->query("INSERT INTO diariodeobra(datadiario, nome, observacao, temsegmanha, temsegtarde, temtermanha, temtertarde, temquamanha, temquatarde, temquimanha, temquitarde, temsexmanha, temsextarde, idproj) 
     VALUES ('".$data."', '".$nome."', '".$observacao."', '".$segManha."', '".$segTarde."', '".$terManha."', '".$terTarde."', '".$quaManha."', '".$quaTarde."', '".$quiManha."', '".$quiTarde."', '".$sexManha."', '".$sexTarde."', '".$projeto."')");
 
-    $result = $db->query("SELECT * FROM diariodeobra WHERE idproj = '$id' 
+    $result = $db->query("SELECT * FROM diariodeobra WHERE idproj = '$projeto' 
                           AND iddiario = (SELECT MAX(iddiario) FROM diariodeobra)");
 
     while ($row = $result->fetchArray()) {
