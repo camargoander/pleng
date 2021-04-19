@@ -1,7 +1,7 @@
 # PLENG, a solução para o gerenciamento de seus projetos
 
 <p align="center">
-   <img src="pleng/web/assets/imgs/logo.svg" width="250" >
+   <img src="v1.0/web/assets/imgs/logo.svg" width="250" >
 </p>
 
  
