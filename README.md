@@ -16,9 +16,9 @@ PLENG (sigla para Planejamento do Engenheiro) é um sistema desenvolvido princip
 
 <ol>
    <li>
-      <h2> Projetos </h2>
+      <h3> Projetos </h3>
       <p> A partir do seu login, você pode cadastrar um novo projeto, além de editar suas informações a qualquer momento ou deletá-lo caso necessário.</p>
-   <li>
+   </li>
 </ol>
 
 
