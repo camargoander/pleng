@@ -15,6 +15,8 @@ $db = new MyDB();
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
+$login = false;
+
 if(!$db) {
     echo $db->lastErrorMsg();
 } else {
@@ -26,10 +28,14 @@ if(!$db) {
          $_SESSION['idUsuAtivo'] = $row['idusu'];
          $_SESSION['nomeUsuAtivo'] = $row['nome'];
 
-         header('location:../../../web/pages/home/index.php');
-      } else {
-        header('location:../../../web/pages/login/index.php');
+         $login = true;
       }
+    }
+
+    if($login) {
+      header('location:../../../web/pages/home/index.php');
+    } else {
+      header('location:../../../web/pages/login/index.php');
     }
 }
 
