@@ -12,6 +12,13 @@ PLENG (sigla para Planejamento do Engenheiro) é um sistema desenvolvido princip
 
 <b> Versão 1.0 - Liberada dia 18/04/2021 </b>
 
-<p> A versão 1.0 do <b> PLENG </b> está oficialmente liberada e conta com diversas funções que visam facilitar o gerenciamento de seus projetos e que você pode acessar após efetuar seu login! </p>
+<p> A versão 1.0 do <b> PLENG </b> está oficialmente liberada e conta com diversas funções que visam facilitar o gerenciamento de seus projetos. Ainda não está completo, porém já está apto a auxiliar o usuário em seus planejamentos. Confira a lista com as funcionalidades disponiveis: </p>
+
+<ol>
+   <li>
+      <h2> Projetos </h2>
+      <p> A partir do seu login, você pode cadastrar um novo projeto, além de editar suas informações a qualquer momento ou deletá-lo caso necessário.</p>
+   <li>
+</ol>
 
 
