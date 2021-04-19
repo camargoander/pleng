@@ -25,7 +25,7 @@ PLENG (sigla para Planejamento do Engenheiro) é um sistema desenvolvido princip
       <p> Faça o levantamento inicial e o planejamento do seu projeto de uma forma mais simples, selecionando as etapas que serão executadas ao seu decorrer e não se preocupe em         calcular a quantidade de material a ser usada: o PLENG faz isso para você!</p>
    </li>
    
-    <li>
+   <li>
       <h3> Etapa </h3>
       <p> As informações iniciais cadastras em cada etapa do levantamento podem ser alteradas a qualquer momento se for preciso.</p>
    </li>
