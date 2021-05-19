@@ -50,7 +50,7 @@ PLENG (sigla para Planejamento do Engenheiro) é um sistema desenvolvido princip
 <ol>
    <li>
       <h3> Galeria </h3>
-      <p> Agora você pode deixar arquivado e vincular imagens aos seus projetos para poder acompanhar melhor a volução e desenvolvimento do mesmo.</p>
+      <p> Agora você pode deixar arquivado imagens e vincular as mesmas ao seu projeto para poder acompanhar melhor a evolução e desenvolvimento do mesmo.</p>
    </li>
    
    <li>
