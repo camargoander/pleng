@@ -63,8 +63,8 @@ PLENG (sigla para Planejamento do Engenheiro) é um sistema desenvolvido princip
          <li>
             <p> Correção do cadastrado da quantidade de material utilizado por grupo, agora sendo separado por etapas. </p>
          </li>
-      </ol>
-   </li>
+     </ol>
+  </li>
     
 </ol>
 
