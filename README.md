@@ -56,7 +56,6 @@ PLENG (sigla para Planejamento do Engenheiro) é um sistema desenvolvido princip
    <li>
       <h3> Correções </h3>
       <ol>
-         
          <li>
             <p> Atualização automatica da quantidade de dias de execução do projeto sempre que o mesmo for selecionado. </p>
          </li>
@@ -65,8 +64,7 @@ PLENG (sigla para Planejamento do Engenheiro) é um sistema desenvolvido princip
             <p> Correção do cadastrado da quantidade de material utilizado por grupo, agora sendo separado por etapas. </p>
          </li>
       </ol>
-  </li>
-    
+  </li>   
 </ol>
 
 
