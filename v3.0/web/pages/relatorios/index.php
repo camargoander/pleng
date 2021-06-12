@@ -21,46 +21,56 @@
                 </div>
 
                 <div class="grid-4">
-                    <div class="projeto">
+                    <div class="relatorio">
                         <h3> Relatório de materiais por etapa </h3>
                         <div class="grid-12 btn">  
-                            <a href=""><button type="submit" class="grid-12 btnVerde"> Emitir </button></a>
+                            <a href="../../../server/src/relatorios/materiaisEtapa.php" target="_blank">
+                                <button type="submit" class="grid-12 btnVerde"> Emitir </button>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid-4">
-                    <div class="projeto">
+                    <div class="relatorio">
                         <h3> Relatório de materiais do projeto </h3>
                         <div class="grid-12 btn">  
-                            <a href=""><button type="submit" class="grid-12 btnVerde"> Emitir </button></a>
+                            <a href="../../../server/src/relatorios/materiaisProjeto.php"  target="_blank">
+                                <button type="submit" class="grid-12 btnVerde"> Emitir </button>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid-4">
-                    <div class="projeto">
-                        <h3> Relatório de acompanhamento </h3>
+                    <div class="relatorio">
+                        <h3> Relatório de diário de obra </h3>
                         <div class="grid-12 btn">  
-                            <a href=""><button type="submit" class="grid-12 btnVerde"> Emitir </button></a>
+                            <a href=""  target="_blank">
+                                <button type="submit" class="grid-12 btnVerde"> Emitir </button>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid-4">
-                    <div class="projeto">
-                        <h3> Relatório de finalização </h3>
+                    <div class="relatorio">
+                        <h3> Relatório de diário de obra (resumo) </h3>
                         <div class="grid-12 btn">  
-                            <a href=""><button type="submit" class="grid-12 btnVerde"> Emitir </button></a>
+                            <a href="">
+                                <button type="submit" class="grid-12 btnVerde"> Emitir </button>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid-4">
-                    <div class="projeto">
+                    <div class="relatorio">
                         <h3> Manual de usuário </h3>
                         <div class="grid-12 btn">  
-                            <a href=""><button type="submit" class="grid-12 btnVerde"> Emitir </button></a>
+                            <a href="">
+                                <button type="submit" class="grid-12 btnVerde"> Emitir </button>
+                            </a>
                         </div>
                     </div>
                 </div>
