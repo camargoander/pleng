@@ -1,33 +1,89 @@
-<?php
+<?
 
-include("mpdf60/mpdf.php");
+session_start();
 
-$html = "
-<div class='grid-12'>
-<h1> Lista de materiais do projeto </h1>
+require('../../fpdf/fpdf.php');
 
-<br/>
+header("Content-type: text/html; charset=utf-8");
 
-<h3> nome do projeto </h3>
-<table>
-    <tr>
-        <td> Nome </td>
-        <td> Quantidade </td>
-    </tr>
-</table>
-</div>
-";
+class MyDB extends SQLite3
+{
+   function __construct()
+   {
+      $this->open('../../database/pleng.db');
+   }
+}
 
-$mpdf=new mPDF();
+class PDF extends FPDF
+{
 
-$mpdf->SetDisplayMode('fullpage');
+    // Simple table
+    function BasicTable($header)
+    {
+        $db = new MyDB();
+        $id = $_SESSION['idProjAtivo'];
 
-// add css
-$css = file_get_contents("css/estilo.css");
+        $result = $db->query("SELECT * FROM projeto WHERE idproj = $id");
 
-$mpdf->WriteHTML($css,1);
-$mpdf->WriteHTML($html);
-$mpdf->Output();
+        while ($row = $result->fetchArray()) {
+            $this->SetFont('Arial','b',12);
+            $this->Cell(78,8,utf8_decode('Projeto: ' .$row['nome']),0, 0, 'L');
+            $this->Ln();
 
-exit;
+             // Header
+            foreach($header as $col) {
+                $this->SetFont('Arial','b',11);
+
+                if($col != 'Material') {
+                    $this->Cell(33,8,$col,1);
+                } else {
+                    $this->Cell(78,8,$col,1);
+                }
+            }
+
+            $this->Ln();
+
+            $resultMat = $db->query("SELECT etapa_projeto.tamanho_total, material.nome, qtde_material.qtde, (qtde_material.qtde * etapa_projeto.tamanho_total) as qtde_final, 
+                                SUM(qtde_material.qtde * etapa_projeto.tamanho_total) as soma  
+                                FROM etapa_projeto 
+                                INNER JOIN qtde_material ON etapa_projeto.idetapa = qtde_material.idetapa 
+                                INNER JOIN material ON qtde_material.idmat = material.idmat 
+                                WHERE etapa_projeto.idproj = $id group by qtde_material.idmat");
+            
+            while($rowMaterial = $resultMat->fetchArray()) {
+                $this->SetFont('Arial','',10);
+
+                $this->Cell(78,8,utf8_decode($rowMaterial['nome']),1);
+                $this->Cell(33,8,utf8_decode($rowMaterial['qtde']),1);
+                $this->Cell(33,8,utf8_decode($rowMaterial['tamanho_total']),1);
+                $this->Cell(33,8,utf8_decode($rowMaterial['qtde_final']),1);
+
+                $this->Ln();
+            }   
+            $this->Ln();         
+        }   
+    }
+}
+
+$pdf = new PDF();
+
+// title
+$title = 'Relatório de materiais do projeto';
+$pdf->SetTitle(utf8_decode($title));
+
+// Iniciar pdf
+$pdf->AddPage();
+
+// titulo
+$pdf->SetFont('Arial','b',14);
+$pdf->Cell(190,10, utf8_decode($title), 0, 0, 'C');
+
+$pdf->Ln();
+$pdf->Ln();
+
+$header = array('Material', 'Quantidade Un.', 'Tamanho total', 'Quantidade total');
+
+$pdf->BasicTable($header);
+
+$pdf->Output();
 ?>
