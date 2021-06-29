@@ -5,7 +5,7 @@
 </p>
 
  
-PLENG (sigla para Planejamento do Engenheiro) é um sistema desenvolvido principalmente em PHP que tem como principal objetivo facilitar o gerenciamento de projetos na área da engenharia civil, auxiliando na previsão de calculos e apresentando de uma forma mais simples o desempenho da obra, além dos dados relacionados a mesma para poder contribuir com seu andamento e esclarecer questões encontradas pelo seu responsável.
+PLENG (sigla para Planejamento de Engenharia) é um sistema desenvolvido principalmente em PHP que tem como principal objetivo facilitar o gerenciamento de projetos na área da engenharia civil, auxiliando na previsão de calculos e apresentando de uma forma mais simples o desempenho da obra, além dos dados relacionados a mesma para poder contribuir com seu andamento e esclarecer questões encontradas pelo seu responsável.
 
 <br/>
 <hr/>
