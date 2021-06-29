@@ -17,6 +17,33 @@ class MyDB extends SQLite3
 class PDF extends FPDF
 {
 
+    // Page header
+    function Header()
+    {
+        $data = date('d/m/Y');
+        // Logo
+        $this->Image('../../../web/assets/imgs/logo.svg',10,6,30);
+        $this->SetFont('Arial','B',15);
+
+        $this->Cell(80);
+        // Title
+        $this->Cell(30,10,'PLENG - Planejamento de engenharia',0,0,'C');
+        $this->Cell(30,10, $data,0,0,'R');
+        $this->Cell(0,10,'Página:  '.$this->PageNo().' de {nb}',0,0,'R');
+        $this->Ln(20);
+    }
+
+    // Page footer
+    function Footer()
+    {
+        // Position at 1.5 cm from bottom
+        $this->SetY(-15);
+        // Arial italic 8
+        $this->SetFont('Arial','I',8);
+        // Page number
+        $this->Cell(0,10,'Pleng - Planejamento de engenharia',0,0,'C');
+    }
+
     // Simple table
     function BasicTable($header)
     {

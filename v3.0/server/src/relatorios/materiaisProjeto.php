@@ -27,18 +27,15 @@ class PDF extends FPDF
 
         while ($row = $result->fetchArray()) {
             $this->SetFont('Arial','b',12);
-            $this->Cell(78,8,utf8_decode('Projeto: ' .$row['nome']),0, 0, 'L');
+            $this->Cell(88,8,utf8_decode('Projeto: ' .$row['nome']),0, 0, 'L');
             $this->Ln();
 
              // Header
             foreach($header as $col) {
                 $this->SetFont('Arial','b',11);
 
-                if($col != 'Material') {
-                    $this->Cell(33,8,$col,1);
-                } else {
-                    $this->Cell(78,8,$col,1);
-                }
+                $this->Cell(88,8,$col,1);
+                
             }
 
             $this->Ln();
@@ -53,10 +50,8 @@ class PDF extends FPDF
             while($rowMaterial = $resultMat->fetchArray()) {
                 $this->SetFont('Arial','',10);
 
-                $this->Cell(78,8,utf8_decode($rowMaterial['nome']),1);
-                $this->Cell(33,8,utf8_decode($rowMaterial['qtde']),1);
-                $this->Cell(33,8,utf8_decode($rowMaterial['tamanho_total']),1);
-                $this->Cell(33,8,utf8_decode($rowMaterial['qtde_final']),1);
+                $this->Cell(88,8,utf8_decode($rowMaterial['nome']),1);
+                $this->Cell(88,8,utf8_decode($rowMaterial['qtde_final']),1);
 
                 $this->Ln();
             }   
@@ -81,7 +76,7 @@ $pdf->Cell(190,10, utf8_decode($title), 0, 0, 'C');
 $pdf->Ln();
 $pdf->Ln();
 
-$header = array('Material', 'Quantidade Un.', 'Tamanho total', 'Quantidade total');
+$header = array('Material', 'Quantidade total');
 
 $pdf->BasicTable($header);
 
