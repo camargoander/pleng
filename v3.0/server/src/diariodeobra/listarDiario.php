@@ -27,6 +27,7 @@ if(!$db) {
             <td class='iddiario'> ".$row['iddiario']." </td>
             <td class='nomediario'> ".$row['nome']." </td>
             <td class='data'> ".$row['datadiario']." </td>
+            <td class='btn'> <button type='button' onclick='emitiRel(".$row['iddiario'].")'> <i class='gg-file-document'></i> </button> </td>
         </tr>
         ";
     }
