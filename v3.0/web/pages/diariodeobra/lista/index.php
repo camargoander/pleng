@@ -4,6 +4,7 @@
     <title> Pleng | Histórico de diários </title>
 
     <link href='https://css.gg/search.css' rel='stylesheet'>
+    <link href='https://css.gg/file-document.css' rel='stylesheet'>
 </head>
 
 <body>

@@ -34,6 +34,15 @@ table tr .iddiario {
     width: 10%;
 }
 
+table tr .btn {
+    width: 30px;
+}
+
+table tr .btn button {
+    border: none;
+    cursor: pointer;
+}
+
 form {
     padding: 10px;
     box-shadow: 0px 5px 20px 5px rgba(214, 213, 213, 0.65);
