@@ -17,20 +17,38 @@ class MyDB extends SQLite3
 class PDF extends FPDF
 {
 
-    // Page header
     function Header()
     {
         $data = date('d/m/Y');
         // Logo
-        $this->Image('../../../web/assets/imgs/logo.svg',10,6,30);
-        $this->SetFont('Arial','B',15);
+        $this->Image('../../../web/assets/imgs/logo.png',10,6, 30, 30, '', '');
+        
+        $this->SetFont('Arial','B',8);
 
         $this->Cell(80);
+        $this->Ln(5);
+
         // Title
-        $this->Cell(30,10,'PLENG - Planejamento de engenharia',0,0,'C');
-        $this->Cell(30,10, $data,0,0,'R');
-        $this->Cell(0,10,'Página:  '.$this->PageNo().' de {nb}',0,0,'R');
-        $this->Ln(20);
+        $this->SetFont('Arial','B',15);
+        $this->Cell(0,10,utf8_decode('Relatório de diário de obra'),0,5,'C');
+        $this->SetFont('Arial','B',10);
+
+        $db = new MyDB();
+        $idproj = $_SESSION['idProjAtivo'];
+        $resultTitle = $db->query("SELECT * FROM projeto WHERE idproj = $idproj");
+
+        while ($rowTitle = $resultTitle->fetchArray()) {
+            $this->Cell(0,10,utf8_decode('Projeto: '. $rowTitle['nome']),0,0,'C');
+
+        }
+
+        $this->SetFont('Arial','B',8);
+
+        $this->Cell(-4,-5, $data,0,5,'R');
+
+        $this->Cell(0,-5,utf8_decode('Página: '.$this->PageNo().' de {nb}'),0,0,'R');
+
+        $this->Ln(30);
     }
 
     // Page footer
@@ -50,30 +68,29 @@ class PDF extends FPDF
         $db = new MyDB();
         $id = $_SESSION['idProjAtivo'];
 
-         // Header
-         foreach($header as $col) {
-            $this->SetFont('Arial','b',11);
-
-            if($col == 'Data')  {
-                $this->Cell(30,8,$col,1);
-            } else if($col == 'Nome') {
-                $this->Cell(60,8,$col,1);
-            } else {
-                $this->Cell(100,8,$col,1);
-            }
-        }
-
-        $this->Ln();
-
         $result = $db->query("SELECT * FROM diariodeobra WHERE idproj = $id");
 
         while ($row = $result->fetchArray()) {
+                $this->SetFont('Arial','b',10);
+
+                $this->Cell(52.5,8,utf8_decode('Data do diário'),1);
+                $this->Cell(132.5,8,utf8_decode('Nome'),1);
+                $this->Ln(); 
+
                 $this->SetFont('Arial','',10);
 
-                $this->Cell(30,8,utf8_decode($row['datadiario']),1);
-                $this->Cell(60,8,utf8_decode($row['nome']),1);
-                $this->Cell(100,8,utf8_decode($row['observacao']),1);
+                $this->Cell(52.5,8,utf8_decode($row['datadiario']),1);
+                $this->Cell(132.5,8,utf8_decode($row['nome']),1);
+                $this->Ln(); 
 
+                $this->SetFont('Arial','b',10);
+
+                $this->Cell(185,8,utf8_decode('Observação'),1);
+                $this->Ln();     
+
+                $this->SetFont('Arial','',10);
+
+                $this->MultiCell(185,8,utf8_decode($row['observacao']),1);
                 $this->Ln();     
         }   
     }
@@ -81,21 +98,14 @@ class PDF extends FPDF
 
 $pdf = new PDF();
 
-// title
+// Iniciar pdf
+$pdf->AddPage();
+$pdf->AliasNbPages();
+
 $title = 'Relatório de diário de obra';
 $pdf->SetTitle(utf8_decode($title));
 
-// Iniciar pdf
-$pdf->AddPage();
-
-// titulo
-$pdf->SetFont('Arial','b',14);
-$pdf->Cell(190,10, utf8_decode($title), 0, 0, 'C');
-
 $pdf->Ln();
-$pdf->Ln();
-
-$header = array('Data', 'Nome', utf8_decode('Observação'));
 
 $pdf->BasicTable($header);
 
