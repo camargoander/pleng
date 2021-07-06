@@ -23,11 +23,12 @@ if(!$db) {
     while ($row = $result->fetchArray()) {
 
         echo "
-        <tr onclick='selecionaDiario(" .$row['iddiario']. ")'>
-            <td class='iddiario'> ".$row['iddiario']." </td>
-            <td class='nomediario'> ".$row['nome']." </td>
-            <td class='data'> ".$row['datadiario']." </td>
-            <td class='btn'> <button type='button' onclick='emitiRel(".$row['iddiario'].")'> <i class='gg-file-document'></i> </button> </td>
+        <tr>
+            <td onclick='selecionaDiario(" .$row['iddiario']. ")' class='iddiario'> ".$row['iddiario']." </td>
+            <td onclick='selecionaDiario(" .$row['iddiario']. ")' class='nomediario'> ".$row['nome']." </td>
+            <td onclick='selecionaDiario(" .$row['iddiario']. ")' class='data'> ".$row['datadiario']." </td>
+            <td class='btn'> <a target='_blank' href='../../../../server/src/relatorios/diarioDeObra.php?id=".$row['iddiario']."'>
+                <button type='button'> <i class='gg-file-document'></i> </button> </a> </td>
         </tr>
         ";
     }
