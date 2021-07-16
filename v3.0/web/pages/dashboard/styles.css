@@ -1,0 +1,36 @@
+.infos {
+    text-align: left;
+}
+
+.etapas {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 50px;
+}
+
+.etapas h3 {
+    text-align: left;
+}
+.etapas span {
+    margin-bottom: 25px;
+}
+
+.etapas span:nth-child(2), .etapas span:nth-child(4) {
+    color: #808080;
+}
+
+.etapas span:nth-child(5) {
+    width: 100%;
+    padding: 20px;
+    background-color: #124c6d;
+    border-radius: 10px;
+
+}
+.etapas span:last-child {
+    padding: 20px;
+    background-color: #6fc2f1;
+    border-radius: 10px;
+    position: relative;
+    top: -65;
+}
