@@ -55,14 +55,14 @@
         </li>    
 
         <li class="darkerlishadow">
-            <a href="">
+            <a href="../../dashboard/index.php">
                 <i class="fa gg-trello"></i>
                 <span class="nav-text">Dashboards</span>
             </a>
         </li>
         
         <li class="darkerli">
-            <a href="">
+            <a href="../../relatorios/index.php">
                 <i class="fa gg-file"></i>
                 <span class="nav-text">Relatórios</span>
             </a>
