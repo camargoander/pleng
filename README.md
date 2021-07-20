@@ -66,6 +66,31 @@ PLENG (sigla para Planejamento de Engenharia) é um sistema desenvolvido princip
   </li>   
 </ol>
 
+<hr/>
+
+<h2> Versão 3.0 - Liberada dia 20/07/2021 </h2>
+
+<p> A versão 3.0 do <b> PLENG </b> está oficialmente liberada e conta com novas atualizações e correções. Confira a lista com as novas funcionalidades disponiveis e o que foi alterado: </p>
+
+<ol>
+   <li>
+      <h3> Relatórios </h3>
+      <p> A página de relatórios está funcionando e permite que o usuário emita diferentes relatórios, como: materiais por etapa, materiais 
+         por projeto e resumo dos diários de obra.</p>
+   </li>
+   
+   <li>
+      <h3> Informações do diário de obra </h3>
+      <p> O Pleng permite a emissão de um relatório com todas as informações do diário de obra registrado na página com a lista de diários.</p>
+   </li>
+   
+   <li>
+      <h3> Dashboards </h3>
+      <p> Para facilitar a visualização de alguns dados, o sistema conta também com a página de dashboard com gráficos e demais informações 
+         importantes para a conclusão do projeto selecionado.</p>
+   </li>
+</ol>
+
 
 
 
