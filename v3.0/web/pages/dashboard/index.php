@@ -31,15 +31,16 @@
                     <div class="grid-6">
                         <h3> Gastos por etapas </h3>
 
-                        <img src="" />
+                        <img src="../../../server/src/dashboard/gastosPorEtapa.php" />
                     </div>
 
-                    
-                
                 </div>
 
-                <div class="grid-12 infos">
+                <div class="grid-12 infos materiais">
                     <h3> Consumo de materiais </h3>
+
+                    <img src="../../../server/src/dashboard/materialConsumido.php" />
+                    <img src="../../../server/src/dashboard/materialTotal.php" />
                 </div>
             </main>
         </div>
