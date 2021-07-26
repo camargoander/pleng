@@ -1,0 +1,234 @@
+/* // https://coolors.co/9ceaef-bee9e8-0e7c7b-fef9ef-ffeedd */
+
+.navMenu {
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+}
+
+.navMenu a {
+  color: #FEF9EF;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  margin: 20px;
+  bottom: 0;;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a img {
+    width: 80px;
+    height: 80px;
+
+}
+
+.navMenu a:hover {
+  color: #FFEEDD;
+}
+
+/* //////////////////// */
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Archivo Narrow', sans-serif;;
+}
+
+p, button, input, label, body, a, span {
+    font-family: 'Archivo', sans-serif;
+}
+
+body {
+    color: #FEF9EF;
+    background-color: #0E7C7B;
+    overflow-x: hidden;
+}
+
+.msg {
+	margin-left: 12.5%!important;
+	margin-bottom: 60px;
+    margin-top: 10%;
+}
+
+.msg h1 {
+	font-size: 45px;
+	margin-bottom: 0px;
+}
+
+.msg p {
+	font-size: 18px;
+    margin: 30px;
+}
+
+.msg button {
+  width: 400px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #BEE9E8;
+  border: none;
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+
+.msg button:hover {
+  background-color: #9CEAEF;
+}
+
+.infos {
+  background-color: #FFEEDD;
+  color: #0E7C7B;
+  padding: 15px 0;
+  border-radius: 20px;
+}
+
+.infos img {
+  width:100px;
+  margin-top: 15px;
+}
+
+/* line */
+.line {
+	border-left: 1px solid #FFEEDD;
+	height: 470px;
+	margin-left: 30%;
+  margin-top: 10px;
+}
+
+/* carrossel */
+.pleng {
+  display: grid!important;
+  align-items: center;
+  justify-items: center;
+}
+
+div#carousel {
+  grid-row: 1 / 2;
+  grid-column: 1 / 8;
+  height: 450px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transform-style: preserve-3d;
+  perspective: 500px;
+  --items: 5;
+  --middle: 3;
+  --position: 3;
+}
+  
+div.item {
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  --r: calc(var(--position) - var(--offset));
+  --abs: max(calc(var(--r) * -1), var(--r));
+  transition: all 0.25s linear;
+  transform: rotateY(calc(-10deg * var(--r)))translateX(calc(-300px * var(--r)));
+  z-index: calc((var(--position) - var(--abs)));
+}
+  
+div.item:nth-of-type(1) {
+  --offset: 1;
+  background-color: #90f1ef;
+}
+div.item:nth-of-type(2) {
+  --offset: 2;
+  background-color: #ff70a6;
+}
+div.item:nth-of-type(3) {
+  --offset: 3;
+  background-color: #ff9770;
+}
+div.item:nth-of-type(4) {
+  --offset: 4;
+  background-color: #ffd670;
+}
+div.item:nth-of-type(5) {
+  --offset: 5;
+  background-color: #e9dab3;
+}
+
+div.item img {
+  width: 90%;
+  height: 150px;
+  margin-top: 10px;
+}
+  
+.hidden:nth-child(1):checked ~ div#carousel {
+  --position: 1;
+}
+
+.hidden:nth-child(3):checked ~ div#carousel {
+  --position: 2;
+}
+
+.hidden:nth-child(5):checked ~ div#carousel {
+  --position: 3;
+}
+
+.hidden:nth-child(7):checked ~ div#carousel {
+  --position: 4;
+}
+.hidden:nth-child(9):checked ~ div#carousel {
+  --position: 5;
+}
+
+.hidden {
+  display: none;
+}
+
+.circle {
+  border: 2px solid #545556;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 20px;
+  position: absolute;
+  transition: border-color 300ms;
+  width: 20px;
+  margin-left: 5%;
+  margin-top: -35px;
+}
+
+.highlight {
+  background: #4D98EF;
+  border-radius: 50%;
+  height: 12px;
+  transition: transform 400ms cubic-bezier(0.175, 0.885, 0.32, 1.2);
+  transform: translateX(-395px);
+  margin-top: -46px;
+  width: 12px;
+}
+.hidden:nth-child(1):checked ~ .highlight {
+  transform: translateX(-461px);
+}
+.hidden:nth-child(3):checked ~ .highlight {
+  transform: translateX(-348px);
+}
+.hidden:nth-child(5):checked ~ .highlight {
+  transform: translateX(-236px);
+}
+.hidden:nth-child(7):checked ~ .highlight {
+  transform: translateX(-124px);
+}
+.hidden:nth-child(9):checked ~ .highlight {
+  transform: translateX(-11px);
+}
+.hidden:nth-child(1):checked + .entry .circle {
+  border-color: #4D98EF;
+}
+.hidden:nth-child(3):checked + .entry .circle {
+  border-color: #4D98EF;
+}
+.hidden:nth-child(5):checked + .entry .circle {
+  border-color: #4D98EF;
+}
+.hidden:nth-child(7):checked + .entry .circle {
+  border-color: #4D98EF;
+}
+.hidden:nth-child(9):checked + .entry .circle {
+  border-color: #4D98EF;
+}
