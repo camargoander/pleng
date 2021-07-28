@@ -40,6 +40,10 @@ h1, h2, h3, h4, h5 {
     font-family: 'Archivo Narrow', sans-serif;;
 }
 
+p {
+  line-height: 22px;
+}
+
 p, button, input, label, body, a, span {
     font-family: 'Archivo', sans-serif;
 }
@@ -73,8 +77,8 @@ body {
 .msg {
 	margin-bottom: 60px;
   border: 1px solid #FEF9EF;
-  padding: 30px 30px 60px 30px;
-  margin-top: 5%;
+  padding: 15px 30px 60px 30px;
+  margin-top: 7%;
   background-color: #fef9ef25;
   max-width: 1120px;
 }
@@ -105,6 +109,20 @@ body {
 
 .conteudo {
   max-width: 1120px;
+}
+
+.conteudo h1 {
+  text-align: right;
+}
+
+.conteudo ul {
+  margin-left: 30px;
+  text-align: left;
+}
+
+.conteudo ul li {
+  margin-top: 10px;
+  list-style-image:url('../../assets/imgs/check.svg');
 }
 
 .texto {
