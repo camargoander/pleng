@@ -1,57 +1,5 @@
-/* // https://coolors.co/9ceaef-bee9e8-0e7c7b-fef9ef-ffeedd */
-
-.navMenu {
-  position: absolute;
-  left: 50%;
-  top: 55px;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  z-index: 1;
-}
-
-.navMenu a {
-  color: #FEF9EF;
-  text-decoration: none;
-  font-size: 1.2em;
-  text-transform: uppercase;
-  font-weight: 500;
-  display: inline-block;
-  margin: 20px;
-  bottom: 0;;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-
-.navMenu a img {
-    width: 80px;
-    height: 80px;
-
-}
-
-.navMenu a:hover {
-  color: #FFEEDD;
-}
-
-/* //////////////////// */
-
-h1, h2, h3, h4, h5 {
-    font-family: 'Archivo Narrow', sans-serif;;
-}
-
-p {
-  line-height: 22px;
-}
-
-p, button, input, label, body, a, span {
-    font-family: 'Archivo', sans-serif;
-}
-
 body {
-    color: #FEF9EF;
-    background: linear-gradient(345deg, rgba(10,92,90,1) 0%, rgba(14,124,123,1) 50%, rgba(22,202,199,1) 100%);
-    overflow-x: hidden;
+  background: linear-gradient(345deg, rgba(10,92,90,1) 0%, rgba(14,124,123,1) 50%, rgba(22,202,199,1) 100%);
 }
 
 .ini {
