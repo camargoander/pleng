@@ -1,5 +1,7 @@
 body {
   background: linear-gradient(345deg, rgba(10,92,90,1) 0%, rgba(14,124,123,1) 50%, rgba(22,202,199,1) 100%);
+  text-align: center;
+  text-align: -webkit-center;
 }
 
 .ini {
