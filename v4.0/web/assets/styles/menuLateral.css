@@ -1,5 +1,5 @@
 .nome {
-  color: #fff;
+  color: #FEF9EF;
   margin-left: 60px;
   width: 300px;
   list-style: none;
@@ -23,7 +23,7 @@ width:350px;
 
 .main-menu 
 {
-background:#022B3A;
+background:#00525E;
 position:fixed;
 top:0;
 bottom:0;
@@ -42,7 +42,7 @@ text-align: start;
 position:relative;
 width:350px;
 display:table;
-color:#E1E5F2;
+color:#FEF9EF;
 font-size: 14px;
 text-decoration:none;
 transform:translateZ(0) scale(1,1);
@@ -68,12 +68,12 @@ padding:0;
 /* Darker element side menu Start*/
 .darkerli
 {
-background-color:#1F7A8C;
+background-color:#007D8D;
 }
 
 .darkerlishadow
 {
-background-color:#1F7A8C;
+background-color:#007D8D;
 text-transform:capitalize;  
 -webkit-box-shadow: inset 0px 5px 5px -4px rgba(50, 50, 50, 0.55);
 -moz-box-shadow:    inset 0px 5px 5px -4px rgba(50, 50, 50, 0.55);
@@ -83,7 +83,7 @@ box-shadow:         inset 0px 5px 5px -4px rgba(50, 50, 50, 0.55);
 
 .darkerlishadowdown
 {
-background-color:#1F7A8C;
+background-color:#007D8D;
 text-transform:capitalize;  
 -webkit-box-shadow: inset 0px -4px 5px -4px rgba(50, 50, 50, 0.55);
 -moz-box-shadow:    inset 0px -4px 5px -4px rgba(50, 50, 50, 0.55);
@@ -100,7 +100,7 @@ nav.main-menu li.active>a,
 .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 .dashboard-page nav.dashboard-menu ul li.active a 
 {
-color:#fff;
+color:#FEF9EF;
 background-color:#011D27;
 text-shadow: 0px 0px 0px; 
 }

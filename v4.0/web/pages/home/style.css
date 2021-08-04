@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(345deg, rgba(10,92,90,1) 0%, rgba(14,124,123,1) 50%, rgba(22,202,199,1) 100%);
+  background: linear-gradient(345deg, #003c46 0%, #1c8a99 50%, #00A2B8 100%);
   text-align: center;
   text-align: -webkit-center;
 }
@@ -80,7 +80,7 @@ body {
   margin-top: -70px;
   background-color: #FEF9EF;
   border-radius: 8px;
-  color: #0e7c7b;
+  color: #00525E;
 }
 
 .texto img {
