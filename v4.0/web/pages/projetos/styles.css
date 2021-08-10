@@ -8,6 +8,16 @@ main {
     text-align: justify;
 }
 
+main h1 {
+    margin-left: 10%;
+}
+
+.pesquisa, .projetos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .pesquisa button:first-child{
     width: calc(100% + 20px);
     height: 45px;
@@ -22,6 +32,7 @@ main {
 .pesquisa button:first-child:hover {
     background-color: #007D8D;
 }
+
 .pesquisa input {
     margin: 0 5 0 20;
     padding: 10;
