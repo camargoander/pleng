@@ -32,6 +32,16 @@ form fieldset input {
     margin-top: 10px;
 }
 
+form fieldset select {
+    flex: 1;
+    background: #E1E5F2;
+    border-radius: 8px;
+    border: 0;
+    padding: 12px 24px;
+    color: #007D8D;
+    margin-top: 10px;
+}
+
 form fieldset textarea {
     flex: 1;
     background: #E1E5F2;
@@ -63,4 +73,14 @@ form button {
 
 form button:hover {
     background-color: #007D8D;
+}
+
+form .btnSecundario {
+    background-color: #FEF9EF;
+    color: #00A2B8;
+    border: 1px solid #00A2B8;
+}
+
+form .btnSecundario:hover {
+    background-color: #E1E5F2;
 }
