@@ -35,6 +35,7 @@ transition:width .2s linear;
 transform:translateZ(0) scale(1,1);
 opacity:1;
 text-align: start;
+z-index: 9999;
 }
 
 .main-menu li>a 
