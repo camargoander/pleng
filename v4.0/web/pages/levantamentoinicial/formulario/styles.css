@@ -1,0 +1,36 @@
+body {
+    background-color: #F4F4F4;
+    color: #00525E;
+}
+
+main {
+    max-width: 1200px;
+    text-align: justify;
+}
+
+main h1 {
+    margin-left: 10%;
+}
+
+.infos .items {
+    width: 100%;
+    text-align: left;
+    display: flex;
+}
+
+.infos .item {
+    width: 50%;
+}
+
+.infos .item:first-child {
+    margin-right: 5%;
+}
+
+.infos form {
+    width: 100%;
+}
+
+.infos section:last-child {
+    margin-left: 150px;
+    text-align: center;
+}
