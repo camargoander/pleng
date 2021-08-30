@@ -6,22 +6,55 @@ body {
 main {
     max-width: 1200px;
     text-align: justify;
-}
-
-main h1 {
-    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 form {
-    width: 100%;
+    width: 70%;
+}
+
+.items {
+  width: 100%;
+  text-align: left;
+  display: flex;
+}
+
+.item {
+  width: 70%;
+}
+
+.item:first-child {
+  margin-right: 5%;
+  width: 30%;
+}
+
+.item input[type='date'] {
+  padding: 10px 20px;
+}
+
+button:last-child {
+  margin-top: 10px;
+}
+
+
+.fieldtempo {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 32% 17% 17% 17% 17%;
+  margin-top: 15px;
+}
+
+.fieldtempo label {
+  font-weight: bold;
+  width: 100%;
 }
 
 .tabs {
-  left: 50%;
-  transform: translateX(-50%);
-  position: relative;
   padding: 10px 50px;
-  padding-bottom: 80px;
+  padding-bottom: 20px;
+  width: 80%;
 }
 
 .tabs input[name=tab-control] {
@@ -44,27 +77,18 @@ form {
   transition: all 0.2s ease-in-out;
 }
 
-.tabs ul li label svg {
-  fill: #929daf;
-  height: 1.2em;
-  vertical-align: bottom;
-  margin-right: 0.2em;
-  transition: all 0.2s ease-in-out;
-}
-
 .tabs .slider {
   position: relative;
-  width: 25%;
+  width: 50%;
   transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
 }
 
 .tabs .slider .indicator {
   position: relative;
-  width: 50px;
   max-width: 100%;
   margin: 0 auto;
   height: 4px;
-  background: #428BFF;
+  background: #00525E;
   border-radius: 1px;
 }
 
@@ -83,47 +107,17 @@ form {
 }
 .tabs input[name=tab-control]:nth-of-type(2):checked ~ ul > li:nth-child(2) > label {
   cursor: default;
-  color: #428BFF;
+  color: #00525E;
 }
 .tabs input[name=tab-control]:nth-of-type(2):checked ~ ul > li:nth-child(2) > label svg {
-  fill: #428BFF;
+  fill: #00525E;
 }
 
 
 .tabs input[name=tab-control]:nth-of-type(2):checked ~ .slider {
-  transform: translateX(100%);
+  transform: translateX(105%);
 }
 .tabs input[name=tab-control]:nth-of-type(2):checked ~ .content > section:nth-child(2) {
-  display: block;
-}
-.tabs input[name=tab-control]:nth-of-type(3):checked ~ ul > li:nth-child(3) > label {
-  cursor: default;
-  color: #428BFF;
-}
-.tabs input[name=tab-control]:nth-of-type(3):checked ~ ul > li:nth-child(3) > label svg {
-  fill: #428BFF;
-}
-
-
-.tabs input[name=tab-control]:nth-of-type(3):checked ~ .slider {
-  transform: translateX(200%);
-}
-.tabs input[name=tab-control]:nth-of-type(3):checked ~ .content > section:nth-child(3) {
-  display: block;
-}
-.tabs input[name=tab-control]:nth-of-type(4):checked ~ ul > li:nth-child(4) > label {
-  cursor: default;
-  color: #428BFF;
-}
-.tabs input[name=tab-control]:nth-of-type(4):checked ~ ul > li:nth-child(4) > label svg {
-  fill: #428BFF;
-}
-
-
-.tabs input[name=tab-control]:nth-of-type(4):checked ~ .slider {
-  transform: translateX(300%);
-}
-.tabs input[name=tab-control]:nth-of-type(4):checked ~ .content > section:nth-child(4) {
   display: block;
 }
 
