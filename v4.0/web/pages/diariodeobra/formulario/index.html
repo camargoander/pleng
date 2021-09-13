@@ -135,19 +135,25 @@
                     <input type="radio" id="tab3" name="tab-control">  
 
                     <ul>
-                        <li title="Features">
+                        <li title="Geral">
                             <label for="tab1" role="button">
                                 <img src="" />
                                 <span>Geral</span>
                             </label>
                         </li>
                         
-                        <li title="Delivery Contents">
+                        <li title="Tempo e clima">
                             <label for="tab2" role="button">
                                 <img src="" />
                                 <span> Tempo e clima </span>
                             </label>
                         </li>  
+                        <li title="Etapas">
+                            <label for="tab3" role="button">
+                                <img src="" />
+                                <span> Etapas </span>
+                            </label>
+                        </li> 
                         
                     </ul>
                     
@@ -244,6 +250,71 @@
                                 </label>
                             </div>
                         </section>
+
+                        <section class="etapas">
+                            <h2>Etapas</h2>
+
+                            
+
+                            <div class="items">
+                                <div class="item">
+                                    <fieldset>
+                                        <label> Etapa: </label>
+                                        <select>
+                                            <option> Nome da etapa </option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                                <div class="item">
+                                    <fieldset>
+                                        <label> Tamanho concluido: </label>
+                                        <input type="text" />
+                                    </fieldset>
+                                </div>
+                                <div class="item">
+                                    <fieldset>
+                                        <label> Tamanho total: </label>
+                                        <input type="text" />
+                                    </fieldset>
+                                </div>
+                                
+                            </div>
+
+                            <div class="items">
+                                
+                                <div class="item">
+                                    <fieldset>
+                                        <label> Material: </label>
+                                        <select name="material">
+                                            <option value="1"> Nome do material </option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                                <div class="item">
+                                    <fieldset>
+                                        <label> Qtde. usada: </label>
+                                        <input type="text" name="qtdeMatUsada" />
+                                    </fieldset>
+                                </div>
+                                <div class="item">
+                                    <fieldset>
+                                        <button type="button" onclick="onClickSalvarMaterial()"> Salvar material </button>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <h3> Materiais </h3>
+
+                            <div class="lista grid-12">
+                                <div class="itemlista">
+                                    <label> <b> Nome do material </b></label>
+                                    <label> <b> Qtde usada </b></label>
+                                    <label> <b> Qtde total </b></label>
+
+                                    <label> <b> X </b></label>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div> 
                 <button type="submit"> Salvar </button>      
@@ -251,4 +322,6 @@
             </form>
         </main>
     </body>
+
+    <script src="./main.js"></script>
 </html>
