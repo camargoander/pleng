@@ -68,7 +68,7 @@ main h1 {
 .diario {
     display: grid;
     flex-direction: row;
-    grid-template-columns: 60% 300px 100px;
+    grid-template-columns: 60% 275px 100px 25px;
     justify-content: center;
     align-items: center;
     background: #FEF9EF;
@@ -89,7 +89,7 @@ main h1 {
 }
 
 
-.diario button {
+.diario .btnVerMais {
     width: 100%;
     height: 50px;
     border-radius: 8px;
@@ -101,6 +101,13 @@ main h1 {
     color: #FEF9EF;
 }
 
-.diario button:hover {
+.diario .btnVerMais:hover {
     background-color: #007D8D;
+}
+
+.diario .btnImprimir {
+    border: 0;
+    background: none;
+    margin-top: -20px;
+    cursor: pointer;
 }
