@@ -14,11 +14,11 @@
 
         
         <?php 
-            include('../../../assets/cmp/principal/cabecalho.php');
+            include('../../../assets/cmp/subpastas/cabecalho.php');
         ?>
 
         <?php 
-            include('../../../assets/cmp/principal/menulateral.php');
+            include('../../../assets/cmp/subpastas/menulateral.php');
         ?>
 
         <main class="container">
