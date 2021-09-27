@@ -1,25 +1,18 @@
 <html>
     <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600&family=Archivo:wght@200&display=swap" rel="stylesheet">
-        <meta charset="utf-8"/>
 
-        <link href="../../../assets/styles/grid.css" rel="stylesheet" />
-        <link href="../../../assets/styles/headerLogo.css" rel="stylesheet" />
-        <link href="../../../assets/styles/padrao.css" rel="stylesheet" />
-
-        <link href="./styles.css" rel="stylesheet" />
+        <?php 
+            include('../../../assets/cmp/subpastas/head.php');
+        ?>
 
         <link href='https://css.gg/arrow-left.css' rel='stylesheet'>
 
         <title> PLENG | Pasta de fotos </title>
     </head>
     <body>
-        <header>
-            <h4> Planejando um futuro melhor ao seu lado</h4>
-            <img src="../../../assets/imgs/logo.svg" />
-        </header>
+        <?php 
+            include('../../../assets/cmp/subpastas/cabecalho.php');
+        ?>
 
         <nav>
             <a href="../index.html"> <i class="gg-arrow-left"></i> </a>
