@@ -50,6 +50,39 @@ class LevantamentoInicial
 
         $deleteLevantamento->execute();
     }
+
+    public function listarLevantamentoInicialAndamento(int $idprojeto)
+    {
+        $selectLevantamentoAndamento = $this->sqlite->prepare('SELECT * FROM levantamento_inicial WHERE idprojeto = :idprojeto AND situacao = "A"');
+
+        $selectLevantamentoAndamento->bindParam(':idprojeto', $idprojeto);
+
+        $levantamentoAndamento = $selectLevantamentoAndamento->execute();
+
+        return $levantamentoAndamento;
+    }
+
+    public function listarLevantamentoInicialFinalizado(int $idprojeto)
+    {
+        $selectLevantamentoFinalizado = $this->sqlite->prepare('SELECT * FROM levantamento_inicial WHERE idprojeto = :idprojeto AND situacao = "F"');
+
+        $selectLevantamentoFinalizado->bindParam(':idprojeto', $idprojeto);
+
+        $levantamentoFinalizado = $selectLevantamentoFinalizado->execute();
+
+        return $levantamentoFinalizado;
+    }
+
+    public function listarLevantamentoInicialNaoIniciada(int $idprojeto)
+    {
+        $selectLevantamentoNaoIniciada = $this->sqlite->prepare('SELECT * FROM levantamento_inicial WHERE idprojeto = :idprojeto AND situacao = "N"');
+
+        $selectLevantamentoNaoIniciada->bindParam(':idprojeto', $idprojeto);
+
+        $levantamentoNaoIniciada = $selectLevantamentoNaoIniciada->execute();
+
+        return $levantamentoNaoIniciada;
+    }
 }
 
 ?>
