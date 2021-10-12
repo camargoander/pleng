@@ -1,3 +1,42 @@
+<?php
+
+    require('../../../../server/config/conexaosubpastas.php');
+    require('../../../../server/config/redireciona.php');
+
+    include('../../../../server/src/Projeto.php');
+    include('../../../../server/src/Empreiteiro.php');
+
+    if(!isset($_SESSION['usuario'])) {
+        redireciona('../../login/login.php');
+
+        return;
+    }
+
+    $projetos = new Projeto($db);
+    $empreiteiros = new Empreiteiro($db);
+
+    $itemEmpreiteiro = $empreiteiros->listarEmpreiteiro();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $projetoDados = (object) array (
+            'nome' => $_POST['nome'],
+            'descricao' => $_POST['descricao'],
+            'endereco' => $_POST['endereco'],
+            'cidade' => $_POST['city'],
+            'estado' => $_POST['state'],
+            'dataini' => $_POST['data_inicio'],
+            'qtdedias' => $_POST['qtde_dias'],
+            'idempreiteiro' => $_POST['empreiteiro'],
+            'idusuario' => $_SESSION['usuario']
+        );
+
+        $projetos->cadastrarProjeto($projetoDados);
+
+        redireciona('../index.php');
+    }
+?>
+
 <html>
     <head>
         
@@ -23,7 +62,7 @@
 
         <main class="container">
             <h1> Cadastre um novo projeto </h1>
-            <form class="grid-12">
+            <form class="grid-12" method="POST" action="./index.php">
                 <div class="grid-8 cont" id="parte1">
                     <div class="grid-3">
                         <img src="../../../assets/imgs/iconnum1.svg" />
@@ -100,6 +139,11 @@
                     <fieldset>
                         <label> Empreiteiro: </label>
                         <select name="empreiteiro">
+                            <?php while($emp = $itemEmpreiteiro->fetchArray()) : ?>
+                                <option value="<?= $emp['idempreiteiro']; ?>">
+                                    <?= $emp['nome']; ?>
+                                </option>
+                            <?php endwhile; ?>
                         </select>
                     </fieldset>
 
@@ -145,7 +189,7 @@
                 </div>
 
                 <div class="grid-8 btns">
-                    <a href="../index.html"><button type="button" class="btnSecundario"> Cancelar </button></a>
+                    <a href="../index.php"><button type="button" class="btnSecundario"> Cancelar </button></a>
                     <div>
                         <button type="button" onclick="onClickVoltar();"> < Voltar </button>
                         <button type="button" onclick="onClickAvancar();" id="btnEditar"> Avançar > </button>

@@ -9,10 +9,10 @@ class Projeto
         $this->sqlite = $sqlite;
     }
 
-    public function cadastrarProjeto(object $projeto): void
+    public function cadastrarProjeto(object $projeto)
     {
-        $insertProjeto = $this->sqlite->prepare('INSERT INTO projeto(nome, descricao, endereco, cidade, estado, dataini, qtdedias, idemp, idusu)
-                                                VALUES(:nome, :descricao, :endereco, :cidade, :estado, :dataini, :qtdedias, :idemp, :idusu)');
+        $insertProjeto = $this->sqlite->prepare('INSERT INTO projeto(nome, descricao, endereco, cidade, estado, dataini, qtdedias, idusuario, idempreiteiro)
+                                                VALUES(:nome, :descricao, :endereco, :cidade, :estado, :dataini, :qtdedias, :idusu, :idempreiteiro)');
         
         $insertProjeto->bindParam(':nome', $projeto->nome);
         $insertProjeto->bindParam(':descricao', $projeto->descricao);
@@ -21,44 +21,42 @@ class Projeto
         $insertProjeto->bindParam(':estado', $projeto->estado);
         $insertProjeto->bindParam(':dataini', $projeto->dataini);
         $insertProjeto->bindParam(':qtdedias', $projeto->qtdedias);
-        $insertProjeto->bindParam(':idemp', $projeto->idemp);
-        $insertProjeto->bindParam(':idusu', $projeto->idusu);
+        $insertProjeto->bindParam(':idempreiteiro', $projeto->idempreiteiro);
+        $insertProjeto->bindParam(':idusu', $projeto->idusuario);
 
         $insertProjeto->execute();
     }
 
-    public function editarProjeto(object $projeto): void
+    public function editarProjeto(object $projeto)
     {
         $updateProjeto = $this->sqlite->prepare('UPDATE projeto SET
                                                     nome = :nome,
                                                     descricao = :descricao,
                                                     endereco = :endereco,
-                                                    cidade = :cidade,
-                                                    estado = :estado,
                                                     dataini = :dataini,
-                                                    qtdedias = :qtdedias
-                                                WHERE idproj = :idproj');
+                                                    qtdedias = :qtdedias,
+                                                    idempreiteiro = :idempreiteiro
+                                                WHERE idprojeto = :idproj');
         
         $updateProjeto->bindParam(':nome', $projeto->nome);
         $updateProjeto->bindParam(':descricao', $projeto->descricao);
         $updateProjeto->bindParam(':endereco', $projeto->endereco);
-        $updateProjeto->bindParam(':cidade', $projeto->cidade);
-        $updateProjeto->bindParam(':estado', $projeto->estado);
         $updateProjeto->bindParam(':dataini', $projeto->dataini);
         $updateProjeto->bindParam(':qtdedias', $projeto->qtdedias);
-        $updateProjeto->bindParam(':idproj', $projeto->idproj);
+        $updateProjeto->bindParam(':idempreiteiro', $projeto->idempreiteiro);
+        $updateProjeto->bindParam(':idproj', $projeto->projeto);
 
         $updateProjeto->execute();
     }
 
-    public function deletarProjeto(int $id)
-    {
-        $deleteProjeto = $this->sqlite->prepare('DELETE FROM projeto WHERE idproj = :idproj');
+    // public function deletarProjeto(int $id)
+    // {
+    //     $deleteProjeto = $this->sqlite->prepare('DELETE FROM projeto WHERE idproj = :idproj');
 
-        $deleteProjeto->bindParam(':idproj', $id);
+    //     $deleteProjeto->bindParam(':idproj', $id);
 
-        $deleteProjeto->execute();
-    }
+    //     $deleteProjeto->execute();
+    // }
 
     public function listarProjetos(int $idusuario)
     {
@@ -69,6 +67,58 @@ class Projeto
         $projetos = $selectProjeto->execute();
 
         return $projetos;
+    }
+
+    public function listarProjetosFiltrado(int $idusuario, string $filtro)
+    {
+        $selectProjeto = $this->sqlite->prepare('SELECT * FROM projeto 
+                                                    WHERE idusuario = :idusu
+                                                    AND upper(nome) LIKE :filtro');
+
+        $selectProjeto->bindParam(':idusu', $idusuario);
+        $selectProjeto->bindParam(':filtro', $filtro);
+
+        $projetos = $selectProjeto->execute();
+
+        return $projetos;
+    }
+
+    private function selecionarProjetoAtualizar(int $idprojeto) {
+
+        $selecionaProjeto = $this->sqlite->prepare('SELECT * FROM projeto WHERE idprojeto = :id LIMIT 0,1');
+
+        $selecionaProjeto->bindParam(':id', $idprojeto);
+
+        $projeto = $selecionaProjeto->execute()->fetchArray();
+
+        return $projeto;  
+    }
+
+    private function atualizarQtdeDias(int $idprojeto) {
+
+        $projeto = $this->selecionarProjetoAtualizar($idprojeto);
+
+        $dataAtual = date('Y-m-d');
+        $dataRegistrada = $projeto['dataini'];
+
+        $diferenca = strtotime($dataAtual) - strtotime($dataRegistrada);
+
+        $dias = floor($diferenca / (60 * 60 * 24));
+
+        $atualizaDia = $this->sqlite->prepare('UPDATE projeto 
+                                                SET qtdedias = :dia
+                                               WHERE idprojeto = :id');
+                    
+        $atualizaDia->bindParam(':id', $idprojeto);
+        $atualizaDia->bindParam(':dia', $dias);
+
+        $atualizaDia->execute();
+
+        return $this->selecionarProjetoAtualizar($idprojeto);
+    }
+
+    public function selecionarProjeto(int $idprojeto) {
+        return $this->atualizarQtdeDias($idprojeto);
     }
 }
 ?>

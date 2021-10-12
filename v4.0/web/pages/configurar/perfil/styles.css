@@ -28,7 +28,7 @@ main h1 {
 }
 
 form {
-    width: 100%;
+    width: 100%!important;
 }
 
 section:last-child {

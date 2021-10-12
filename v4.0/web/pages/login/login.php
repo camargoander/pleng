@@ -1,3 +1,23 @@
+<?php
+    require('../../../server/config/conexao.php');
+    require('../../../server/config/redireciona.php');
+
+    include('../../../server/src/Usuario.php');
+
+    unset($_SESSION['usuario']);
+
+    $usuario = new Usuario($db);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $user = $usuario->acessarConta($_POST['email'], $_POST['senha']);
+
+        if(is_array($user)) {
+            $_SESSION['usuario'] = $user['idusuario'];
+            redireciona('../projetos/index.php');
+        }
+    }
+?>
+
 <hmtl>
     <head>
         <link rel="preconnect" href="https://fonts.googleapis.com">

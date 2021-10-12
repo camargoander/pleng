@@ -19,6 +19,11 @@ main h1 {
     flex-flow: row wrap;
 }
 
+.container section a {
+    margin: 5px 20px;
+    text-decoration: none;
+    color: #00525E;
+}
 .container section div {
     background-color: #FEF9EF;
     padding: 20px 25px 30px 25px;
@@ -26,6 +31,7 @@ main h1 {
     box-shadow: 0px 0px 5px 2px rgba(218, 218, 218, 0.65);
     margin-bottom: 20px;
     display: flex;
+    cursor: pointer;
 }
 
 .container section div span {

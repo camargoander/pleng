@@ -1,3 +1,22 @@
+<?php
+
+    require('../../../../server/config/conexaosubpastas.php');
+    require('../../../../server/config/redireciona.php');
+
+    include('../../../server/src/Usuario.php');
+
+    if(!isset($_SESSION['usuario'])) {
+        redireciona('../login/login.php');
+
+        return;
+    }
+
+    $usuario = new Usuario($db);
+
+    $infoUsu = $usuario->selecionarUsuario($_SESSION['usuario']);
+
+?>
+
 <html>
     <head>
 
@@ -26,24 +45,24 @@
                 <form>
                     <fieldset>
                         <label> Nome: </label>
-                        <input type="text" name="nome" />
+                        <input type="text" name="nome" value="<?= $infoUsu['nome']; ?>" />
                     </fieldset>
 
                     <fieldset>
                         <label> Email: </label>
-                        <input type="email" name="email" />
+                        <input type="email" name="email" value="<?= $infoUsu['email']; ?>"/>
                     </fieldset>
 
                     <fieldset>
                         <label> Senha: </label>
-                        <input type="password" name="senha" />
+                        <input type="password" name="senha" value="<?= $infoUsu['senha']; ?>"/>
                     </fieldset>
 
                     <div class="items">
                         <div class="item">
                             <fieldset>
                                 <label> Data do cadastro: </label>
-                                <input type="date" name="datacadastro" readonly />
+                                <input type="date" name="datacadastro" readonly value="<?= $infoUsu['data_cadastro']; ?>" />
                             </fieldset>
                         </div>
                         <div class="item">

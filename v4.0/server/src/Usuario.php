@@ -16,7 +16,7 @@ class Usuario
         $loginUsuario->bindParam(':email', $email);
         $loginUsuario->bindParam(':senha', $senha);
 
-        $usuario = $loginUsuario->execute();
+        $usuario = $loginUsuario->execute()->fetchArray();
 
         return $usuario;
     } 
@@ -35,6 +35,16 @@ class Usuario
         $updateUsuario->bindParam(':idusu', $usuario->idusu);
 
         $updateUsuario->execute();
+    }
+
+    public function selecionarUsuario(int $idusuario) {
+        $selectUsuario = $this->sqlite->prepare('SELECT * FROM usuario WHERE idusuario = :id');
+
+        $selectUsuario->bindParam(':id', $idusuario);
+
+        $usuario = $selectUsuario->execute()->fetchArray();
+
+        return $usuario;
     }
 }
 

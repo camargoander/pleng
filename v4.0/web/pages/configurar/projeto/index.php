@@ -1,3 +1,50 @@
+<?php
+
+    require('../../../../server/config/conexaosubpastas.php');
+    require('../../../../server/config/redireciona.php');
+
+    include('../../../../server/src/Projeto.php');
+    include('../../../../server/src/Empreiteiro.php');
+
+    if(!isset($_SESSION['usuario'])) {
+        redireciona('../../login/login.php');
+
+        return;
+    }
+
+    if(!isset($_SESSION['projeto'])) {
+        redireciona('../../projetos/index.php');
+
+        return;
+    }
+
+    $projetos = new Projeto($db);
+    $empreiteiros = new Empreiteiro($db);
+
+    $itemEmpreiteiro = $empreiteiros->listarEmpreiteiro();
+
+    $projeto = $projetos->selecionarProjeto($_SESSION['projeto']);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $projetoDados = (object) array (
+            'nome' => $_POST['nome'],
+            'descricao' => $_POST['descricao'],
+            'endereco' => $_POST['endereco'],
+            'dataini' => $_POST['data_inicio'],
+            'qtdedias' => $_POST['qtde_dias'],
+            'idempreiteiro' => $_POST['empreiteiro'],
+            'projeto' => $_SESSION['projeto']
+        );
+
+        // var_dump($projetoDados);
+        $projetos->editarProjeto($projetoDados);
+
+        redireciona('../../projetos/index.php');
+    }
+
+?>
+
 <html>
     <head>
 
@@ -23,7 +70,7 @@
         <main class="container">
             <h1> Configurar projeto </h1>
             <section class="grid-9">
-                <form class="layout">
+                <form class="layout" method="POST" action="./index.php">
                     <input name="nav" type="radio" class="nav home-radio" id="home" checked="checked" />
                     <div class="page home-page">
                         <div class="page-contents">
@@ -31,12 +78,12 @@
 
                             <fieldset>
                                 <label> Nome: </label>
-                                <input type="text" name="nome" />
+                                <input type="text" name="nome" value="<?= $projeto['nome']; ?>"/>
                             </fieldset>
         
                             <fieldset>
                                 <label> Descrição: </label>
-                                <textarea name="descricao"></textarea>
+                                <textarea name="descricao"><?= $projeto['descricao']; ?></textarea>
                             </fieldset>
 
                         </div>
@@ -54,24 +101,20 @@
                                 <div class="item">
                                     <fieldset>
                                         <label> Estado: </label>  
-                                        <select name="state" id="state" onchange="selectedState(this)">
-                                            <option></option>
-                                        </select>
+                                        <input readOnly type="text" value="<?= $projeto['estado']; ?>" />
                                     </fieldset>
                                 </div>
                                 <div class="item">
                                     <fieldset>
                                         <label> Cidade: </label>  
-                                        <select name="city" id="city">
-                                            <option>Selecionar cidade</option>
-                                        </select> 
+                                        <input readOnly type="text" value="<?= $projeto['cidade']; ?>" />
                                     </fieldset>
                                 </div>
                             </div>
         
                             <fieldset>
                                 <label> Endereço: </label>
-                                <input type="text" name="endereco" />
+                                <input type="text" name="endereco" value="<?= $projeto['endereco']?>"/>
                             </fieldset>
                         </div>
                     </div>
@@ -86,6 +129,18 @@
                             <fieldset>
                                 <label> Empreiteiro: </label>
                                 <select name="empreiteiro">
+                                <?php while($emp = $itemEmpreiteiro->fetchArray()) : ?>
+                                <option 
+                                    value="<?= $emp['idempreiteiro']; ?>
+                                    <?php
+                                        if($emp['idempreiteiro'] === $projeto['idempreiteiro']) {
+                                            echo "selected";
+                                        }
+                                    ?>
+                                ">
+                                    <?= $emp['nome']; ?>
+                                </option>
+                            <?php endwhile; ?>
                                 </select>
                             </fieldset>
         
@@ -93,13 +148,13 @@
                                 <div class="item">
                                     <fieldset>
                                         <label> Data de início: </label>
-                                    <input type="date" id="dataIni" class="grid-10" name="data_inicio" onchange="calculaDias();" />
+                                        <input value="<?= $projeto['dataini']; ?>" type="date" id="dataIni" class="grid-10" name="data_inicio" onchange="calculaDias();" />
                                     </fieldset>
                                 </div>
                                 <div class="item">
                                     <fieldset>
                                         <label> Quantidade de dias: </label>
-                                    <input type="text" id="qtdeDias" class="grid-12" name="qtde_dias" readonly />
+                                        <input value="<?= $projeto['qtdedias']; ?>"type="text" id="qtdeDias" class="grid-12" name="qtde_dias" readonly />
                                     </fieldset>
                                 </div>
                             </div>
@@ -111,10 +166,12 @@
 
                     <div class="buttons">
                         <button type="submit"> Salvar </button>
-                        <a href="../../menu/index.html"><button type="button" class="btnSecundario"> Cancelar </button></a>
+                        <a href="../../menu/index.php"><button type="button" class="btnSecundario"> Cancelar </button></a>
                     </div>
                 </form>
             </section>
         </main>
     </body>
+
+    <script src="./main.js"></script>
 </html>

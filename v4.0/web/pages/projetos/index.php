@@ -1,3 +1,28 @@
+<?php
+
+    require('../../../server/config/conexao.php');
+    require('../../../server/config/redireciona.php');
+
+    include('../../../server/src/Projeto.php');
+
+    if(!isset($_SESSION['usuario'])) {
+        redireciona('../login/login.php');
+
+        return;
+    }
+
+    $projetos = new Projeto($db);
+    
+    $itemProjeto = $projetos->listarProjetos($_SESSION['usuario']);
+
+    $action = (isset($_REQUEST['action'] )) ? $_REQUEST['action']  : '';
+
+    if($action == 'filtrar') {
+        $itemProjeto = $projetos->listarProjetosFiltrado($_SESSION['usuario'], "%".strtoupper($_POST['filtro'])."%");
+        $action = '';
+    }
+?>
+
 <html>
     <head>
 
@@ -7,7 +32,7 @@
 
         <title> PLENG | Seus projetos </title>
     </head>
-    <body>
+    <body onload="limparRota()">
 
         <?php 
             include('../../assets/cmp/principal/cabecalho.php');
@@ -22,40 +47,33 @@
 
             <section class="pesquisa grid-12">
                 <div class="grid-3">
-                    <button> Cadastrar projeto </button>
+                    <a href="./formulario/index.php">
+                        <button> Cadastrar projeto </button>
+                    </a>
                 </div>
                 <div class="grid-6">
-                    <input type="text" placeholder="Nome do seu projeto" />
-                    <button> <i class="gg-search"></i> </button>
+                    <form method="POST" action="./index.php?action=filtrar">
+                    <input type="text" name="filtro" placeholder="Nome do seu projeto" />
+                    <button type="submit"> <i class="gg-search"></i> </button>
                 </div>
             </section>
 
             <section class="projetos grid-12">
-                <div class="grid-3">
-                    <h3> Nome do projeto </h3>
-                    <p><b> Local: </b>Rua Pedro Doneda, 73 </p>
-                    <p><b>Responsável: </b> Batatinha </p>
-                    <button> Selecionar </button>
-                </div>
-                <div class="grid-3">
-                    <h3> Nome do projeto </h3>
-                    <p><b> Local: </b>Rua Pedro Doneda, 73 </p>
-                    <p><b>Responsável: </b> Batatinha </p>
-                    <button> Selecionar </button>
-                </div>
-                <div class="grid-3">
-                    <h3> Nome do projeto </h3>
-                    <p><b> Local: </b>Rua Pedro Doneda, 73 </p>
-                    <p><b>Responsável: </b> Batatinha </p>
-                    <button> Selecionar </button>
-                </div>
-                <div class="grid-3">
-                    <h3> Nome do projeto </h3>
-                    <p><b> Local: </b>Rua Pedro Doneda, 73 </p>
-                    <p><b>Responsável: </b> Batatinha </p>
-                    <button> Selecionar </button>
-                </div>
+            
+                <?php while($proj = $itemProjeto->fetchArray()) : ?>
+
+                    <div class="grid-3">
+                        <h3> <?= $proj['nome']; ?> </h3>
+                        <p><b> Local: </b> <?= $proj['endereco']; ?> </p>
+                        <a href="../menu/index.php?id=<?= $proj['idprojeto']?>">
+                            <button type="button"> Selecionar </button>
+                        </a>
+                    </div>
+
+                <?php endwhile; ?>
             </section>
         </main>
     </body>
+
+    <script src="main.js"></script>
 </html>
