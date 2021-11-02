@@ -21,7 +21,8 @@ class Empreiteiro
 
     public function editarEmpreiteiro(string $nome, int $idemp)
     {
-        $insertEmpreiteiro = $this->sqlite->prepare('UPDATE empreiteiro SET nome = :nome WHERE idemp = :idemp');
+        $insertEmpreiteiro = $this->sqlite->prepare('UPDATE empreiteiro SET nome = :nome 
+                                                        WHERE idempreiteiro = :idemp');
                                 
         $insertEmpreiteiro->bindParam(':nome', $nome);
         $insertEmpreiteiro->bindParam(':idemp', $idemp);
@@ -31,7 +32,8 @@ class Empreiteiro
 
     public function deletarEmpreiteiro(int $idemp)
     {
-        $deleteEmpreiteiro = $this->sqlite->prepare('DELETE FROM empreiteiro WHERE idemp = :idemp');
+        $deleteEmpreiteiro = $this->sqlite->prepare('DELETE FROM empreiteiro 
+                                                        WHERE idempreiteiro = :idemp');
                                 
         $deleteEmpreiteiro->bindParam(':idemp', $idemp);
 
@@ -45,6 +47,31 @@ class Empreiteiro
         $empreiteiros = $selectEmpreiteiro->execute();
 
         return $empreiteiros;
+    }
+
+    public function listarEmpreiteiroComFiltro(string $filtro)
+    {
+        $selectEmpreiteiroFiltrado = $this->sqlite->prepare('SELECT * FROM empreiteiro 
+                                                        WHERE upper(nome) 
+                                                        LIKE :filtro');
+
+        $selectEmpreiteiroFiltrado->bindParam(':filtro', $filtro);
+
+        $empreiteirosFiltrados = $selectEmpreiteiroFiltrado->execute();
+
+        return $empreiteirosFiltrados;
+    }
+
+    public function selecionarEmpreiteiro(int $id)
+    {
+        $selectEmpreiteiroEspecifico = $this->sqlite->prepare('SELECT * FROM empreiteiro 
+                                                                WHERE idempreiteiro = :id');
+
+        $selectEmpreiteiroEspecifico->bindParam(':id', $id);
+
+        $empreiteiroEspecifico = $selectEmpreiteiroEspecifico->execute()->fetchArray();
+
+        return $empreiteiroEspecifico;
     }
 }
 

@@ -18,6 +18,13 @@ main h1 {
     flex-wrap: wrap;
 }
 
+.pesquisa form {
+    padding: 0;
+    background: none;
+    display: block;
+    margin-top: -55px;
+}
+
 .pesquisa button:first-child{
     width: calc(100% + 20px);
     height: 45px;
@@ -61,7 +68,7 @@ main h1 {
 .emp {
     display: grid;
     flex-direction: row;
-    grid-template-columns: 60% 275px 100px 25px;
+    grid-template-columns: 80% 100px 60px;
     justify-content: center;
     align-items: center;
     background: #FEF9EF;
@@ -101,12 +108,17 @@ main h1 {
 .emp .btnExcluir {
     border: 0;
     background: none;
-    margin-top: -20px;
+    /* margin-top: -20px; */
     cursor: pointer;
+    width: 60px;
+}
+
+.emp .btnExcluir img {
+    width: 50%;
 }
 
 form {
-    width: 100%;
+    width: 100%!important;
 }
 
 .items {

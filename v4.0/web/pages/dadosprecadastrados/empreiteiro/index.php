@@ -1,3 +1,52 @@
+<?php
+
+    require('../../../../server/config/conexaosubpastas.php');
+    require('../../../../server/config/redireciona.php');
+
+    include('../../../../server/src/Empreiteiro.php');
+
+    if(!isset($_SESSION['usuario'])) {
+        redireciona('../login/login.php');
+
+        return;
+    }
+
+    $action = (isset($_REQUEST['action'] )) ? $_REQUEST['action']  : '';
+
+    $empreiteiro = new Empreiteiro($db);
+
+    $itemEmpreiteiro = $empreiteiro->listarEmpreiteiro();
+    $info = (isset($_GET['id'])) ? $empreiteiro->selecionarEmpreiteiro($_GET['id']) : '';
+
+    switch($action) {
+        
+        case 'deletar': {
+            $empreiteiro->deletarEmpreiteiro($_POST['id']);
+
+            redireciona('./index.php');
+        }
+
+        case 'cadastrar': {
+            $empreiteiro->cadastrarEmpreiteiro($_POST['nome']);
+            redireciona('./index.php');
+
+            break;
+        }
+
+        case 'editar': {
+            $empreiteiro->editarEmpreiteiro($_POST['nome'], $_POST['id']);
+            redireciona('./index.php');
+
+            break;
+        }
+
+        case 'filtrar': {
+            $itemEmpreiteiro = $empreiteiro->listarEmpreiteiroComFiltro("%".strtoupper($_POST['filtro'])."%");
+            $action = '';
+        }
+    }
+?>
+
 <html>
     <head>
 
@@ -26,75 +75,38 @@
 
             <section class="pesquisa grid-12">
                 <div class="grid-3">
-                    <button> Cadastrar empreiteiro </button>
+                    <a href="#cadastrarModal">
+                        <button> Cadastrar empreiteiro </button>
+                    </a>
                 </div>
                 <div class="grid-6">
-                    <input type="text" placeholder="Nome do empreiteiro" />
-                    <button> <i class="gg-search"></i> </button>
+                <form method="POST" action="./index.php?action=filtrar">
+                    <input type="text" name="filtro" placeholder="Nome do empreiteiro" />
+                    <button type="submit"> <i class="gg-search"></i> </button>
+                </form>
                 </div>
             </section>
 
             <section class="grid-12">
 
-                <div class="emp grid-12">
-                    <label> Nome do empreiteiro </label>
-                    <input type="number" value="123" readonly />
+                <?php while($emp = $itemEmpreiteiro->fetchArray()) : ?>
 
-                    <button type="button" class="btnEditar"> Editar </button>
-                    <button type="button" class="btnExcluir" title="Excluir"> <i class="fa gg-file"></i> </button>
-                </div>
-                <div class="emp grid-12">
-                    <label> Nome do empreiteiro </label>
-                    <input type="number" value="123" readonly />
+                    <div class="emp grid-12">
+                        <label> <?= $emp['nome']; ?> </label>
 
-                    <button type="button" class="btnEditar"> Editar </button>
-                    <button type="button" class="btnExcluir" title="Excluir"> <i class="fa gg-file"></i> </button>
-                </div>
-                <div class="emp grid-12">
-                    <label> Nome do empreiteiro </label>
-                    <input type="number" value="123" readonly />
-
-                    <button type="button" class="btnEditar"> Editar </button>
-                    <button type="button" class="btnExcluir" title="Excluir"> <i class="fa gg-file"></i> </button>
-                </div>
-                <div class="emp grid-12">
-                    <label> Nome do empreiteiro </label>
-                    <input type="number" value="123" readonly />
-
-                    <button type="button" class="btnEditar"> Editar </button>
-                    <button type="button" class="btnExcluir" title="Excluir"> <i class="fa gg-file"></i> </button>
-                </div>
-                
+                        <a href="?id=<?= $emp['idempreiteiro'];?>#editarModal">
+                            <button type="button" class="btnEditar"> Editar </button>
+                        </a>
+                        <a href="?idemp=<?= $emp['idempreiteiro'];?>#deletarModal">
+                            <button type="button" class="btnExcluir" title="Excluir"> 
+                                <img src="../../../assets/imgs/minus.svg"/> 
+                            </button>
+                        </a>
+                    </div>
+                <?php endwhile; ?>
             </section>
 
-            <!-- popup de cadastrar -->
-            <div id="cadastrarModal" class="modalDialog">
-                <div>
-                    <a href="#" title="Close" class="close">
-                        <div class="close-container">
-                            <div class="leftright"></div>
-                            <div class="rightleft"></div>
-                        </div>
-                    </a>
-                    <h2>Empreiteiros</h2>
-
-                    <form method="POST" action="./index.php?action=cadastrar">
-                        <fieldset>
-                            <input type="text" name="nome" placeholder="Nome do empreiteiro" />
-                        </fieldset>
-                        
-                        <div class="items">
-                            <div class="item">
-                                <a href="#"><button type="button" class="btnSecundario"> Cancelar </button></a>
-                            </div>
-                            <div class="item">
-                                <button type="submit" class="btnPrincipal"> Cadastrar </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
+            <?php require('./popups.php');?>
         </main>
     </body>
 </html>
