@@ -11,11 +11,11 @@ class Material
 
     public function cadastrarMaterial(object $material)
     {
-        $insertMaterial = $this->sqlite->prepare('INSERT INTO material(nome, nome_fornecedor, unidade, preco) 
-                                                VALUES (:nome, :nome_fornecedor, :unidade, :preco)');
+        $insertMaterial = $this->sqlite->prepare('INSERT INTO material(nome, fornecedor, unidade, preco) 
+                                                VALUES (:nome, :fornecedor, :unidade, :preco)');
                                 
         $insertMaterial->bindParam(':nome', $material->nome);
-        $insertMaterial->bindParam(':nome_fornecedor', $material->nome_fornecedor);
+        $insertMaterial->bindParam(':fornecedor', $material->fornecedor);
         $insertMaterial->bindParam(':unidade', $material->unidade);
         $insertMaterial->bindParam(':preco', $material->preco);
 
@@ -26,13 +26,13 @@ class Material
     {
         $updateMaterial = $this->sqlite->prepare('UPDATE material SET 
                                                     nome = :nome,
-                                                    nome_fornecedor = :nome_fornecedor,
+                                                    fornecedor = :fornecedor,
                                                     unidade = :unidade,
                                                     preco = :preco 
                                                 WHERE idmat = :idmat');
                                 
         $updateMaterial->bindParam(':nome', $material->nome);
-        $updateMaterial->bindParam(':nome_fornecedor', $material->nome_fornecedor);
+        $updateMaterial->bindParam(':fornecedor', $material->fornecedor);
         $updateMaterial->bindParam(':unidade', $material->unidade);
         $updateMaterial->bindParam(':preco', $material->preco);
         $updateMaterial->bindParam(':idmat', $material->idmat);
@@ -56,6 +56,32 @@ class Material
         $materiais = $selectMaterial->execute();
 
         return $materiais;
+    }
+
+    public function listarMaterialComFiltro(string $filtro)
+    {
+        $selectMaterialFiltrado = $this->sqlite->prepare('SELECT * FROM material 
+                                                            WHERE upper(nome) 
+                                                            LIKE :filtro');
+
+        $selectMaterialFiltrado->bindParam(':filtro', $filtro);
+
+        $materiais = $selectMaterialFiltrado->execute();
+
+        return $materiais;
+    }
+
+    public function selecionarMaterial(int $idmat)
+    {
+        $selectMaterialEspecifico = $this->sqlite->prepare('SELECT * FROM material
+                                                            WHERE idmat = :id');
+
+        $selectMaterialEspecifico->bindParam(':id', $idmat);
+
+        $materialEspecifico = $selectMaterialEspecifico->execute()->fetchArray();
+
+        return $materialEspecifico;
+
     }
 }
 
