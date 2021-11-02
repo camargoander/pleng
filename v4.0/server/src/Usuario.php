@@ -27,7 +27,7 @@ class Usuario
                                                     nome = :nome,
                                                     email = :email,
                                                     senha = :senha
-                                                WHERE idusu = :idusu');
+                                                WHERE idusuario = :idusu');
         
         $updateUsuario->bindParam(':nome', $usuario->nome);
         $updateUsuario->bindParam(':email', $usuario->email);
@@ -37,8 +37,9 @@ class Usuario
         $updateUsuario->execute();
     }
 
-    public function selecionarUsuario(int $idusuario) {
-        $selectUsuario = $this->sqlite->prepare('SELECT * FROM usuario WHERE idusuario = :id');
+    public function selecionarUsuario(int $idusuario) 
+    {
+        $selectUsuario = $this->sqlite->prepare('SELECT * FROM usuario WHERE idusuario = :id LIMIT 0,1');
 
         $selectUsuario->bindParam(':id', $idusuario);
 

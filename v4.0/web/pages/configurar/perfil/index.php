@@ -3,7 +3,8 @@
     require('../../../../server/config/conexaosubpastas.php');
     require('../../../../server/config/redireciona.php');
 
-    include('../../../server/src/Usuario.php');
+    include('../../../../server/src/Usuario.php');
+    include('../../../../server/src/Projeto.php');
 
     if(!isset($_SESSION['usuario'])) {
         redireciona('../login/login.php');
@@ -15,6 +16,23 @@
 
     $infoUsu = $usuario->selecionarUsuario($_SESSION['usuario']);
 
+    $projeto = new Projeto($db);
+
+    $qtdeProjeto = $projeto->somaQtdeProjetos($_SESSION['usuario']);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $usuarioDados = (object) array (
+            'nome' => $_POST['nome'],
+            'email' => $_POST['email'],
+            'senha' => $_POST['senha'],
+            'idusu' => $_SESSION['usuario']
+        );
+
+        $usuario->editarUsuario($usuarioDados);
+
+        redireciona('../../menu/index.php');
+    }
 ?>
 
 <html>
@@ -42,7 +60,7 @@
         <main class="container">
             <h1> Suas informações </h1>
             <section class="grid-5">
-                <form>
+                <form method="POST" action="./index.php">
                     <fieldset>
                         <label> Nome: </label>
                         <input type="text" name="nome" value="<?= $infoUsu['nome']; ?>" />
@@ -68,7 +86,7 @@
                         <div class="item">
                             <fieldset>
                                 <label> Total de projetos até o momento: </label>
-                                <input type="text" name="nome" readonly />
+                                <input type="text" name="qtde" readonly value="<?= $qtdeProjeto['qtde']; ?>" />
                             </fieldset>
                         </div>
                     </div>

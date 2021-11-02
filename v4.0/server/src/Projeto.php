@@ -83,7 +83,8 @@ class Projeto
         return $projetos;
     }
 
-    private function selecionarProjetoAtualizar(int $idprojeto) {
+    private function selecionarProjetoAtualizar(int $idprojeto) 
+    {
 
         $selecionaProjeto = $this->sqlite->prepare('SELECT * FROM projeto WHERE idprojeto = :id LIMIT 0,1');
 
@@ -94,7 +95,8 @@ class Projeto
         return $projeto;  
     }
 
-    private function atualizarQtdeDias(int $idprojeto) {
+    private function atualizarQtdeDias(int $idprojeto) 
+    {
 
         $projeto = $this->selecionarProjetoAtualizar($idprojeto);
 
@@ -117,8 +119,20 @@ class Projeto
         return $this->selecionarProjetoAtualizar($idprojeto);
     }
 
-    public function selecionarProjeto(int $idprojeto) {
+    public function selecionarProjeto(int $idprojeto) 
+    {
         return $this->atualizarQtdeDias($idprojeto);
+    }
+
+    public function somaQtdeProjetos(int $idUsuario) 
+    {
+        $qtdeProjetos = $this->sqlite->prepare('SELECT COUNT(idprojeto) AS qtde FROM projeto WHERE idusuario = :id');
+
+        $qtdeProjetos->bindParam(':id', $idUsuario);
+
+        $qtde = $qtdeProjetos->execute()->fetchArray();
+
+        return $qtde; 
     }
 }
 ?>
