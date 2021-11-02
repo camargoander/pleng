@@ -1,4 +1,5 @@
 var listaMateriais = [];
+var materiaisArray = [];
 
 function onClickSalvarMaterial() {
     var select = document.querySelector('select[name="material"]'),
@@ -8,7 +9,7 @@ function onClickSalvarMaterial() {
     
     var material = {
         id: id,
-        nome: nome,
+        nome: nome.trim(),
         qtde: qtde,
     };
 
@@ -77,16 +78,19 @@ function onDeletarMaterial(id) {
 
 function onAtualizarLista() {
     var lista = document.querySelector('.lista'),
-        cabecalho = this.criarCabecalho();
+        cabecalho = this.criarCabecalho()
+        materiaisInput = document.querySelector('#matValue');
 
     lista.innerHTML = "";
 
+    materiaisArray = [];
     
     if(listaMateriais.length > 0) {
         
         lista.appendChild(cabecalho);
 
         listaMateriais.forEach(function(record) {
+
             var div = document.createElement('div'),
                 labelNome = document.createElement('label'),
                 labelQtde = document.createElement('label');
@@ -108,8 +112,13 @@ function onAtualizarLista() {
             div.appendChild(btnExcluir);
 
             lista.appendChild(div);
+
+            materiaisArray.push(JSON.stringify(record))
         });
+
+        materiaisInput.value = materiaisArray.toString().replace('},', '}\\');
     }
+
 
     setTimeout(() => {
         this.limpaRota();

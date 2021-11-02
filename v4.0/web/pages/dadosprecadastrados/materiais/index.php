@@ -24,6 +24,8 @@
             $material->deletarMaterial($_POST['id']);
 
             redireciona('./index.php');
+            break;
+
         }
 
         case 'cadastrar': {

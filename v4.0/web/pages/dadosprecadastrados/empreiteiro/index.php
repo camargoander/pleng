@@ -24,6 +24,7 @@
             $empreiteiro->deletarEmpreiteiro($_POST['id']);
 
             redireciona('./index.php');
+            break;
         }
 
         case 'cadastrar': {
@@ -80,10 +81,10 @@
                     </a>
                 </div>
                 <div class="grid-6">
-                <form method="POST" action="./index.php?action=filtrar">
-                    <input type="text" name="filtro" placeholder="Nome do empreiteiro" />
-                    <button type="submit"> <i class="gg-search"></i> </button>
-                </form>
+                    <form method="POST" action="./index.php?action=filtrar">
+                        <input type="text" name="filtro" placeholder="Nome do empreiteiro" />
+                        <button type="submit"> <i class="gg-search"></i> </button>
+                    </form>
                 </div>
             </section>
 
