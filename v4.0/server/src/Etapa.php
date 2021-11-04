@@ -82,6 +82,38 @@ class Etapa
         }
     }
 
+    public function editarEtapa(string $nome, int $id, array $materiais)
+    {
+        $updateEtapa = $this->sqlite->prepare('UPDATE etapa 
+                                                SET nome = :nome
+                                                WHERE idetapa = :id');
+                                
+        $updateEtapa->bindParam(':nome', $nome);
+        $updateEtapa->bindParam(':id', $id);
+
+        $updateEtapa->execute();
+
+        $this->editarMaterialEtapa($id, $materiais);
+    }
+
+    private function editarMaterialEtapa(int $idetapa, array $materiais)
+    {
+        foreach($materiais as $material) {
+            $material = json_decode($material);
+            
+            $updateMatEtapa = $this->sqlite->prepare('UPDATE material_etapa
+                                                        SET qtde = :qtde
+                                                        WHERE idetapa = :etapa
+                                                        AND idmat = :material');
+
+            $updateMatEtapa->bindParam(':qtde', $material->qtde);
+            $updateMatEtapa->bindParam(':etapa', $id);
+            $updateMatEtapa->bindParam(':material', $material->id);
+
+            $updateMatEtapa->execute();
+        }
+    }
+
     private function selecionaUltimaEtapa()
     {
         $selectUltimaEtapa = $this->sqlite->prepare('SELECT MAX(idetapa) AS id FROM etapa');
@@ -89,6 +121,28 @@ class Etapa
         $ultimaEtapa = $selectUltimaEtapa->execute()->fetchArray();
 
         return $ultimaEtapa['id'];
+    }
+
+    public function selecionarEtapaEspecifica(int $id)
+    {
+        $selectEtapaEspecifica = $this->sqlite->prepare('SELECT * FROM etapa WHERE idetapa = :id');
+
+        $selectEtapaEspecifica->bindParam(':id', $id);
+
+        $etapaEspecifica = $selectEtapaEspecifica->execute()->fetchArray();
+
+        return $etapaEspecifica;
+    }
+
+    public function selecionarMateriaisEtapa(int $id)
+    {
+        $selectMateriaisEtapaEspecifica = $this->sqlite->prepare('SELECT * FROM materiais_etapa WHERE idetapa = :id');
+
+        $selectMateriaisEtapaEspecifica->bindParam(':id', $id);
+
+        $materiaisEtapaEspecifica = $selectMateriaisEtapaEspecifica->execute();
+
+        return $materiaisEtapaEspecifica;
     }
 }
 ?>
