@@ -24,7 +24,7 @@
                 <a href="#"> Fórum </a>
                 <a hrf="#"><img src="../../assets/imgs/logo.svg" /></a>
                 <a href="#"> Contato </a>
-                <a href="../login/login.html"> Login </a>
+                <a href="../login/login.php"> Login </a>
             </nav>
         </header>
 

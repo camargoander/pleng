@@ -38,7 +38,7 @@
     <body>
         <header>
             <nav class="navMenu">
-                <a href="../home/index.html"> Início </a>
+                <a href="../home/index.php"> Início </a>
                 <a href="#"> Fórum </a>
                 <a hrf="#"><img src="../../assets/imgs/logo.svg" /></a>
                 <a href="#"> Contato </a>
