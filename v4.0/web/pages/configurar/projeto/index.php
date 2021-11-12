@@ -40,6 +40,8 @@
         // var_dump($projetoDados);
         $projetos->editarProjeto($projetoDados);
 
+        $_SESSION['nomeProjeto'] = $projetoDados->nome;
+        
         redireciona('../../menu/index.php');
     }
 

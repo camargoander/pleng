@@ -24,7 +24,7 @@
     
     $projeto = $projetos->selecionarProjeto($_SESSION['projeto']);
 
-
+    $_SESSION['nomeProjeto'] = $projeto['nome'];
 ?>
 
 <html>

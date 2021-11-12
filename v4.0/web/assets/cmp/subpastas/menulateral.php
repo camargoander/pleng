@@ -2,7 +2,7 @@
     <ul>
         <li class="nome">
             <h2> 
-                Seja bem-vindo, Janna
+                Seja bem-vindo, <?= $_SESSION['nomeUsuario'] ?>
             </h2>
         </li>  
 
@@ -16,7 +16,7 @@
         <li>                                 
             <a href="../../configurar/projeto/index.php">
                 <i class="fa gg-toolbox"></i>
-                <span class="nav-text"> Projeto ativo: </span>
+                <span class="nav-text"> Projeto ativo: <?= $_SESSION['nomeProjeto'] ?></span>
             </a>
         </li>    
 

@@ -31,6 +31,8 @@
 
         $usuario->editarUsuario($usuarioDados);
 
+        $_SESSION['nomeUsuario'] = $usuarioDados->nome;
+
         redireciona('../../menu/index.php');
     }
 ?>

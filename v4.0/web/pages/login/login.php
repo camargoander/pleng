@@ -13,6 +13,8 @@
 
         if(is_array($user)) {
             $_SESSION['usuario'] = $user['idusuario'];
+            $_SESSION['nomeUsuario'] = $user['nome'];
+
             redireciona('../projetos/index.php');
         }
     }
