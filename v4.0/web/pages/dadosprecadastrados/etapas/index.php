@@ -20,7 +20,9 @@
     $itemEtapa = $etapa->listarEtapa();
     $itemMaterial = $material->listarMaterial();
 
-    // $info = (isset($_GET['id'])) ? $empreiteiro->selecionarEmpreiteiro($_GET['id']) : '';
+    $info = (isset($_GET['id'])) ? $etapa->selecionarEtapaEspecifica($_GET['id']) : '';
+
+    $listaMaterialEtapa = (isset($_GET['id'])) ? $etapa->selecionarMateriaisEtapa($_GET['id']) : '';
 
     switch($action) {
         
@@ -41,12 +43,15 @@
             break;
         }
 
-        // case 'editar': {
-        //     $empreiteiro->editarEmpreiteiro($_POST['nome'], $_POST['id']);
-        //     redireciona('./index.php');
+        case 'editar': {
+            $materiais = explode("\\", $_POST['matValueEdit']);
 
-        //     break;
-        // }
+            $etapa->editarEtapa($_POST['nome'], $_POST['id'], $materiais);
+            
+            redireciona('./index.php');
+
+            break;
+        }
 
         case 'filtrar': {
             $itemEtapa = $etapa->listarEtapaComFiltro("%".strtoupper($_POST['filtro'])."%");
@@ -66,6 +71,9 @@
         <link href="../../../assets/styles/stylePopup.css" rel="stylesheet" />
 
         <title> PLENG | Etapas </title>
+
+    <script src="./main.js"></script>
+
     </head>
 
     <body>
@@ -117,7 +125,4 @@
 
         </main>
     </body>
-
-    <script src="./main.js"></script>
-
 </html>

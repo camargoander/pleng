@@ -98,19 +98,19 @@ class Etapa
 
     private function editarMaterialEtapa(int $idetapa, array $materiais)
     {
+        $this->deletarMaterialEtapa($idetapa);
+
         foreach($materiais as $material) {
             $material = json_decode($material);
             
-            $updateMatEtapa = $this->sqlite->prepare('UPDATE material_etapa
-                                                        SET qtde = :qtde
-                                                        WHERE idetapa = :etapa
-                                                        AND idmat = :material');
+            $insertMatEtapa = $this->sqlite->prepare('INSERT INTO material_Etapa(idetapa, idmat, qtde) 
+                                                    VALUES (:etapa, :material, :qtde)');
 
-            $updateMatEtapa->bindParam(':qtde', $material->qtde);
-            $updateMatEtapa->bindParam(':etapa', $id);
-            $updateMatEtapa->bindParam(':material', $material->id);
+            $insertMatEtapa->bindParam(':etapa', $idetapa);
+            $insertMatEtapa->bindParam(':material', $material->id);
+            $insertMatEtapa->bindParam(':qtde', $material->qtde);
 
-            $updateMatEtapa->execute();
+            $insertMatEtapa->execute();
         }
     }
 
@@ -136,7 +136,11 @@ class Etapa
 
     public function selecionarMateriaisEtapa(int $id)
     {
-        $selectMateriaisEtapaEspecifica = $this->sqlite->prepare('SELECT * FROM materiais_etapa WHERE idetapa = :id');
+        $selectMateriaisEtapaEspecifica = $this->sqlite->prepare('SELECT material_etapa.*, material.nome 
+                                                                    FROM material_etapa 
+                                                                    INNER JOIN material    
+                                                                    ON material_etapa.idmat = material.idmat 
+                                                                    WHERE material_etapa.idetapa = :id');
 
         $selectMateriaisEtapaEspecifica->bindParam(':id', $id);
 

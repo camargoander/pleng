@@ -148,7 +148,7 @@ form {
 }
 
 
-form .lista {
+form .lista, form .listaEdit {
     padding: 15px;
     border-radius: 10px;
     max-height: 160px;
@@ -156,37 +156,42 @@ form .lista {
     width: 100%;
   }
   
-  form .lista .itemlista {
+  form .lista .itemlista, form .listaEdit .itemlista {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 15px;
   }
   
-  form .lista .itemlista label {
+  form .lista .itemlista label, form .listaEdit .itemlista label{
     min-width: 200px;
   }
   
   form .lista .itemlista label:nth-child(2), form .lista .itemlista label:nth-child(3) {
     text-align: center;
   }
+
+  form .listaEdit .itemlista label:nth-child(2), form .listaEdit .itemlista label:nth-child(3) {
+    text-align: center;
+  }
   
-  form .lista .itemlista label:last-child {
+  form .lista .itemlista label:last-child, form .listaEdit .itemlista label:last-child {
     min-width: 50px;
     text-align: end;
   }
   
-  form .lista .itemlista:not(:first-child) {
+  form .lista .itemlista:not(:first-child), form .listaEdit .itemlista:not(:first-child) {
     border-top: 1px solid #00525E;
     padding-top: 10px;
   }
   
-  form .lista .itemlista a {
+  form .lista .itemlista a, form .listaEdit .itemlista a {
     text-decoration: none;
     color: #00525E;
     transition: all 0.5s ease;
+    cursor: pointer;
   }
   
-  form .lista .itemlista a:hover {
+  form .lista .itemlista a:hover, form .listaEdit .itemlista a:hover {
     color: #a50b0b;
   }

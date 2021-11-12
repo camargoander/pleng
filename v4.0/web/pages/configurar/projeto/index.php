@@ -40,7 +40,7 @@
         // var_dump($projetoDados);
         $projetos->editarProjeto($projetoDados);
 
-        redireciona('../../projetos/index.php');
+        redireciona('../../menu/index.php');
     }
 
 ?>
