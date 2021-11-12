@@ -23,6 +23,14 @@ main section:first-child {
     flex-wrap: wrap;
 }
 
+.pesquisa form {
+    padding: 0;
+    background: none;
+    display: block;
+    margin-top: -55px;
+    width: 100%!important;
+}
+
 .pesquisa button:first-child{
     width: calc(100% + 20px);
     height: 45px;
@@ -32,7 +40,7 @@ main section:first-child {
     transition: all 0.4s;
     cursor: pointer;
     color: #FEF9EF;
-} 
+}
 
 .pesquisa button:first-child:hover {
     background-color: #007D8D;
@@ -69,6 +77,10 @@ main section:first-child {
     text-align: center;
 }
 
+.cont {
+    text-align: center;
+}
+
 .etapas {
     text-align: center;
     display: flex;
@@ -77,6 +89,10 @@ main section:first-child {
     flex-flow: row wrap;
 }
 
+.etapas a {
+    text-decoration: none;
+    color: #00525E;
+}
 .etapas div {
     background-color: #FEF9EF;
     padding: 20px 25px 30px 25px;
@@ -97,4 +113,32 @@ main section:first-child {
 .etapas div span {
     margin-top: 10px;
     margin-left: 10;
+}
+
+.items {
+    width: 100%;
+    text-align: left;
+    display: flex;
+}
+
+.item {
+    width: 50%;
+}
+
+.item:first-child {
+    margin-right: 5%;
+}
+
+form {
+    width: 100%!important;
+}
+
+form .btnExcluir {
+    background-color: #FEF9EF;
+    color: #b81500;
+    border: 1px solid #b81500;
+}
+
+form .btnExcluir:hover {
+    background-color: #E1E5F2;
 }
