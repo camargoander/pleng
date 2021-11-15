@@ -53,8 +53,9 @@
                 </div>
                 <div class="grid-6">
                     <form method="POST" action="./index.php?action=filtrar">
-                    <input type="text" name="filtro" placeholder="Nome do seu projeto" />
-                    <button type="submit"> <i class="gg-search"></i> </button>
+                        <input type="text" name="filtro" placeholder="Nome do seu projeto" />
+                        <button type="submit"> <i class="gg-search"></i> </button>
+                    </form>
                 </div>
             </section>
 
