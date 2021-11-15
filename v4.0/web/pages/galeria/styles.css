@@ -16,10 +16,17 @@ nav .fa {
     display: block!important;
 }
 
-.pesquisa, .projetos {
+.pesquisa {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+.pesquisa form {
+    padding: 0;
+    background: none;
+    display: block;
+    margin-top: -55px;
 }
 
 .pesquisa button:first-child{
@@ -109,3 +116,21 @@ nav .fa {
     transform: rotateY(-28deg) rotateZ(-2deg) scale(1.02);
     text-shadow: 13px 2px #00525E;
 }
+
+form {
+    width: 100%!important;
+}
+
+.items {
+    width: 100%;
+    text-align: left;
+    display: flex;
+  }
+  
+  .item {
+    width: 50%;
+  }
+  
+  .item:first-child {
+    margin-right: 5%;
+  }

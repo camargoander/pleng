@@ -1,9 +1,55 @@
+<?php
+
+    require('../../../../server/config/conexaosubpastas.php');
+    require('../../../../server/config/redireciona.php');
+
+    include('../../../../server/src/Pasta.php');
+
+    if(!isset($_SESSION['usuario'])) {
+        redireciona('../login/login.php');
+
+        return;
+    }
+    if(!isset($_GET['id'])) {
+        redireciona('../index.php');
+
+        return;
+    }
+
+    $pastas = new Pasta($db);
+
+    $info = (isset($_GET['id'])) ? $pastas->selecionarPasta($_GET['id']) : '';
+
+    $action = (isset($_REQUEST['action'] )) ? $_REQUEST['action']  : '';
+
+    switch($action) {
+        
+        case 'deletar': {
+            $pastas->deletarPasta($_POST['id']);
+
+            redireciona('../index.php');
+            break;
+        }
+
+        case 'editar': {
+            $pastas->editarPasta($_POST['nome'], $_POST['id']);
+            redireciona('./index.php?id=' . $_POST['id']);
+
+            break;
+        }
+    }
+
+?>
+
 <html>
     <head>
 
         <?php 
             include('../../../assets/cmp/subpastas/head.php');
         ?>
+
+        <link href="../../../assets/styles/formulario.css" rel="stylesheet" />
+        <link href="../../../assets/styles/stylePopup.css" rel="stylesheet" />
 
         <link href='https://css.gg/arrow-left.css' rel='stylesheet'>
 
@@ -15,8 +61,13 @@
         ?>
 
         <nav>
-            <a href="../index.html"> <i class="gg-arrow-left"></i> </a>
-            <h1> Nome da pasta</h1>
+            <a class="seta" href="../index.php"> <i class="gg-arrow-left"></i> </a>
+            <h1> <?= $info['nome']; ?></h1>
+            <div>
+                <a href="#editarModal"><button title= "Editar" class="btnEditar"> e </button></a>
+                <button title= "Adicionar" class="btnAdicionar"> + </button>
+                <a href="#deletarModal"><button title= "Excluir" class="btnExcluir"> x </button></a>
+            </div>
         </nav>
 
         <main class="container">
@@ -79,6 +130,9 @@
                     <div class="content"><img src="https://source.unsplash.com/random/?tech,lamp" alt=""></div>
                 </div>
             </section>
+
+            <?php require('./popups.php');?>
+
         </main>
     </body>
 
