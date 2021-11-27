@@ -9,43 +9,73 @@ class DiarioDeObra
         $this->sqlite = $sqlite;
     }
 
-    public function cadastrarDiarioDeObra(object $diario)
+    public function cadastrarDiarioDeObra(object $diario, object $previsaoTempo, object $etapa)
     {
-        $insertDiario = $this->sqlite->prepare('INSERT INTO diario_obra( datadiario, nome, observacao, idproj) 
-                                                VALUES (:datadiario, :nome, :observacao, :idproj)');
+        $insertDiario = $this->sqlite->prepare('INSERT INTO diario_obra( datadiario, nome, observacao, idprojeto) 
+                                                VALUES (:datadiario, :nome, :observacao, :idprojeto)');
                                 
         $insertDiario->bindParam(':datadiario', $diario->datadiario);
         $insertDiario->bindParam(':nome', $diario->nome);
         $insertDiario->bindParam(':observacao', $diario->observacao);
-        $insertDiario->bindParam(':idproj', $diario->idproj);
+        $insertDiario->bindParam(':idprojeto', $diario->idprojeto);
 
         $insertDiario->execute();
 
-        $this->cadastrarPrevisaoTempo($diario);
+        $this->cadastrarPrevisaoTempo($previsaoTempo);
+        $this->cadastrarEtapa($etapa);
     }
 
-    public function cadastrarPrevisaoTempo(object $diario)
+    private function cadastrarPrevisaoTempo(object $previsaoTempo)
     {
         $insertPrevisao = $this->sqlite->prepare('INSERT INTO previsao_tempo(
                                                     temsegmanha, temsegtarde, 
                                                     temtermanha, temtertarde, 
                                                     temquamanha, temquatarde, 
                                                     temquimanha, temquitarde, 
-                                                    temsexmanha, temsextarde, iddiario)');
+                                                    temsexmanha, temsextarde, iddiario)
+                                                VALUES (:temsegmanha, :temsegtarde, 
+                                                        :temtermanha, :temtertarde, 
+                                                        :temquamanha, :temquatarde, 
+                                                        :temquimanha, :temquitarde, 
+                                                        :temsexmanha, :temsextarde, 
+                                                        (
+                                                            SELECT MAX(iddiario) FROM diario_obra
+                                                            WHERE idprojeto = :idprojeto
+                                                        )
+                                                       )');
                                 
         
-        $insertPrevisao->bindParam(':temsegmanha', $diario->temsegmanha);
-        $insertPrevisao->bindParam(':temsegtarde', $diario->temsegtarde);
-        $insertPrevisao->bindParam(':temtermanha', $diario->temtermanha);
-        $insertPrevisao->bindParam(':temtertarde', $diario->temtertarde);
-        $insertPrevisao->bindParam(':temquamanha', $diario->temquamanha);
-        $insertPrevisao->bindParam(':temquatarde', $diario->temquatarde);
-        $insertPrevisao->bindParam(':temquimanha', $diario->temquimanha);
-        $insertPrevisao->bindParam(':temquitarde', $diario->temquitarde);
-        $insertPrevisao->bindParam(':temsexmanha', $diario->temsexmanha);
-        $insertPrevisao->bindParam(':temsextarde', $diario->temsextarde);
+        $insertPrevisao->bindParam(':temsegmanha', $previsaoTempo->temsegmanha);
+        $insertPrevisao->bindParam(':temsegtarde', $previsaoTempo->temsegtarde);
+        $insertPrevisao->bindParam(':temtermanha', $previsaoTempo->temtermanha);
+        $insertPrevisao->bindParam(':temtertarde', $previsaoTempo->temtertarde);
+        $insertPrevisao->bindParam(':temquamanha', $previsaoTempo->temquamanha);
+        $insertPrevisao->bindParam(':temquatarde', $previsaoTempo->temquatarde);
+        $insertPrevisao->bindParam(':temquimanha', $previsaoTempo->temquimanha);
+        $insertPrevisao->bindParam(':temquitarde', $previsaoTempo->temquitarde);
+        $insertPrevisao->bindParam(':temsexmanha', $previsaoTempo->temsexmanha);
+        $insertPrevisao->bindParam(':temsextarde', $previsaoTempo->temsextarde);
+        
+        $insertPrevisao->bindParam(':idprojeto', $previsaoTempo->idprojeto);
 
         $insertPrevisao->execute();
+    }
+
+    private function cadastrarEtapa(object $etapa)
+    {
+        $insertEtapaDiario = $this->sqlite->prepare('INSERT INTO etapa_diario(
+                                                        iddiario, idlevantamento, qtde
+                                                    ) VALUES (
+                                                        (
+                                                            SELECT MAX(iddiario) FROM diario_obra
+                                                            WHERE idprojeto = :idprojeto
+                                                        ), :idlevantamento, :qtde)');
+                                
+        $insertEtapaDiario->bindParam(':idprojeto', $etapa->idprojeto);
+        $insertEtapaDiario->bindParam(':idlevantamento', $etapa->idlevantamento);
+        $insertEtapaDiario->bindParam(':qtde', $etapa->qtde);
+
+        $insertEtapaDiario->execute();
     }
 
     public function editarDiarioDeObra(object $diario)
@@ -113,6 +143,50 @@ class DiarioDeObra
 
         return $diarios;
     }
+
+    public function listarDiarioFiltrado(int $idprojeto, string $nome, string $dataDiario)
+    {
+        if(!empty($nome) && !empty($dataDiario)) {
+            $expressao = "upper(nome) LIKE :filtro AND  datadiario = :data";
+        }
+
+        if(empty($nome) && !empty($dataDiario)) {
+            $expressao = "datadiario = :data";
+        }
+
+        if(!empty($nome) && empty($dataDiario)) {
+            $expressao = "upper(nome) LIKE :filtro";
+        }
+
+        if(empty($nome) && empty($dataDiario)) {
+            return $this->listarDiario($idprojeto);
+        }
+
+        $selectDiarioFiltrados = $this->sqlite->prepare('SELECT * FROM diario_obra 
+                                                WHERE idprojeto = :idprojeto AND ' . $expressao);
+                                
+        $selectDiarioFiltrados->bindParam(':idprojeto', $idprojeto);
+        
+        if(!empty($nome) && !empty($dataDiario)) {
+            $selectDiarioFiltrados->bindParam(':filtro', $nome);
+            $selectDiarioFiltrados->bindParam(':data', $dataDiario);
+        }
+
+        if(empty($nome) && !empty($dataDiario)) {
+            $selectDiarioFiltrados->bindParam(':data', $dataDiario);
+        }
+
+        if(!empty($nome) && empty($dataDiario)) {
+            $nome = '%' . strtoupper($nome) . '%';
+            $selectDiarioFiltrados->bindParam(':filtro', $nome);
+        }
+
+        $diariosFiltrados = $selectDiarioFiltrados->execute();
+
+        return $diariosFiltrados;
+    }
+
+    
 }
 
 ?>

@@ -1,3 +1,65 @@
+<?php
+
+    require('../../../../server/config/conexaosubpastas.php');
+    require('../../../../server/config/redireciona.php');
+
+    include('../../../../server/src/DiarioDeObra.php');
+    include('../../../../server/src/LevantamentoInicial.php');
+
+    if(!isset($_SESSION['usuario'])) {
+        redireciona('../../login/login.php');
+
+        return;
+    }
+
+    if(!isset($_SESSION['projeto'])) {
+        redireciona('../../projetos/index.php');
+
+        return;
+    }
+
+    $diarios = new DiarioDeObra($db);
+    $etapas = new LevantamentoInicial($db);
+
+    $etapa = $etapas->listarLevantamento($_SESSION['projeto']);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $diarioDados = (object) array (
+            'datadiario' => $_POST['datadiario'],
+            'nome' => $_POST['nome'],
+            'observacao' => $_POST['observacao'],
+            'idprojeto' => $_SESSION['projeto']
+        );
+
+        $previsaoTempo = (object) array (
+            'temsegmanha' => $_POST['temsegmanha'],
+            'temsegtarde' => $_POST['temsegtarde'],
+            'temtermanha' => $_POST['temtermanha'],
+            'temtertarde' => $_POST['temtertarde'],
+            'temquamanha' => $_POST['temquamanha'],
+            'temquatarde' => $_POST['temquatarde'],
+            'temquimanha' => $_POST['temquimanha'],
+            'temquitarde' => $_POST['temquitarde'],
+            'temsexmanha' => $_POST['temsexmanha'],
+            'temsextarde' => $_POST['temsextarde'],
+            'idprojeto' => $_SESSION['projeto']
+        );
+
+        $etapaDados = (object) array(
+            'idprojeto' => $_SESSION['projeto'],
+            'idlevantamento' => $_POST['levantamento'],
+            'qtde' => $_POST['qtde']
+        );
+
+        // var_dump($diarioDados);
+        $diarios->cadastrarDiarioDeObra($diarioDados, $previsaoTempo, $etapaDados);
+        
+        redireciona('../index.php');
+    }
+
+?>
+
 <html>
     <head>
         
@@ -26,7 +88,7 @@
             <h1> Configure o diário de obra </h1>
 
 
-            <form>
+            <form method="POST" action="./index.php">
                 <div class="tabs">
   
                     <input type="radio" id="tab1" name="tab-control" checked>
@@ -73,82 +135,23 @@
                                 <div class="item">
                                     <fieldset>
                                         <label> Data: </label>
-                                        <input type="date" />
+                                        <input type="date" name="datadiario" />
                                     </fieldset>
                                 </div>
                                 <div class="item">
                                     <fieldset>
                                         <label> Nome: </label>
-                                        <input type="text" />
+                                        <input type="text" name="nome" />
                                     </fieldset>
                                 </div>
                             </div>
                             <fieldset>
                                 <label> Observação: </label>
-                                <textarea></textarea>
+                                <textarea name="observacao"></textarea>
                             </fieldset>
                         </section>
-                        <section>
-                            <h2>Tempo e clima</h2>
-                            <p> 
-                                Informe o dia que foi efetuado o diário de obra e a condição climatica de cada dia da semana. 
-                                Caso não saiba, deixe em branco.
-                            </p>
-                            
-                            <div class="fieldtempo">
-                                <label class="grid-3"> Segunda de manhã: </label>
-                                
-                                <label>
-                                    <input type="radio" name="climasegundatarde" value="nublado" checked />
-                                    <span>
-                                        <div class="icon">
-                                            <div class="cloud2 small-cloud"></div>
-                                            <div class="cloud2"></div>
-                                        </div>
-                                    </span>
-                                </label>
-    
-                                <label>
-                                    <input type="radio" name="climasegundatarde" value="chuva" />
-                                    <span>
-                                        <div class="icon">
-                                            <div class="cloud2"></div>
-                                            <div class="rain"></div>
-                                        </div>
-                                    </span>
-                                </label>
-    
-                                <label>
-                                    <input type="radio" name="climasegundatarde" value="sol" />
-                                    <span>
-                                        <div class="icon">
-                                            <div class="rays">
-                                                <div class="ray"></div>
-                                                <div class="ray"></div>
-                                                <div class="ray"></div>
-                                                <div class="ray"></div>
-                                            </div>
-                                            <div class="sun"></div>
-                                        </div>
-                                    </span>
-                                </label>
-    
-                                <label>
-                                    <input type="radio" name="climasegundatarde" value="vento" />
-                                    <span>
-                                        <div class="icon">
-                                            <div class="extreme text-center">
-                                                <div class="harsh-wind"></div>
-                                                <div class="harsh-wind"></div>
-                                                <div class="harsh-wind"></div>
-                                                <div class="harsh-wind"></div>
-                                                <div class="harsh-wind"></div>
-                                            </div>
-                                        </div>
-                                    </span>
-                                </label>
-                            </div>
-                        </section>
+                        
+                        <?php require('./previsaoTempo.php');?>
 
                         <section class="etapas">
                             <h2>Etapas</h2>
@@ -159,21 +162,33 @@
                                 <div class="item">
                                     <fieldset>
                                         <label> Etapa: </label>
-                                        <select>
-                                            <option> Nome da etapa </option>
-                                        </select>
+                                        <input list="etapa" name="obs" id="obs" />
+                                        <input type="hidden" name="levantamento" id="levantamento" />
+
+                                        <datalist id="etapa">
+                                            <?php while($etp = $etapa->fetchArray()) : ?>
+
+                                            <option value="<?= $etp['idlevantamento'];?> - <?= $etp['nome'];?>"> 
+                                                <?= $etp['nome']; ?> - 
+                                                <span id="<?= $etp['idlevantamento']; ?>">
+                                                    <?= $etp['tamanho_total'];?> m
+                                                </span>
+                                            </option>
+
+                                            <?php endwhile; ?>
+                                        </datalist>
                                     </fieldset>
                                 </div>
                                 <div class="item">
                                     <fieldset>
                                         <label> Tamanho concluido: </label>
-                                        <input type="text" />
+                                        <input type="text" name="qtde" />
                                     </fieldset>
                                 </div>
                                 <div class="item">
                                     <fieldset>
                                         <label> Tamanho total: </label>
-                                        <input type="text" />
+                                        <input type="text" readonly id="tamTotal" />
                                     </fieldset>
                                 </div>
                                 
@@ -184,7 +199,7 @@
                                 <div class="item">
                                     <fieldset>
                                         <label> Material: </label>
-                                        <select name="material">
+                                        <select name="material" class="material">
                                             <option value="1"> Nome do material </option>
                                             <option value="2"> Nome do material 2 </option>
                                             <option value="3"> Nome do material 3 </option>

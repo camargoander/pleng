@@ -49,6 +49,21 @@ class LevantamentoInicial
         $deleteLevantamento->execute();
     }
 
+    public function listarLevantamento(int $idprojeto) 
+    {
+        $selectLevantamento = $this->sqlite->prepare('SELECT levantamento_inicial.*, etapa.nome  
+                                                                FROM levantamento_inicial 
+                                                                INNER JOIN etapa 
+                                                                ON levantamento_inicial.idetapa = etapa.idetapa 
+                                                                WHERE idprojeto = :idprojeto');
+
+        $selectLevantamento->bindParam(':idprojeto', $idprojeto);
+
+        $levantamento = $selectLevantamento->execute();
+
+        return $levantamento;
+    }
+
     public function listarLevantamentoInicialAndamento(int $idprojeto)
     {
         $selectLevantamentoAndamento = $this->sqlite->prepare('SELECT levantamento_inicial.*, etapa.nome  
