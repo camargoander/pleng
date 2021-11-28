@@ -1,17 +1,16 @@
 var listaMateriais = [];
+var materiaisArray = [];
 
 function onClickSalvarMaterial() {
     var select = document.querySelector('select[name="material"]'),
         id = select.value,
         nome = select.children[select.selectedIndex].textContent,
-        qtdeUsada = document.querySelector('input[name="qtdeMatUsada"]').value,
-        qtdeTotal = 400;
+        qtdeUsada = document.querySelector('input[name="qtdeMatUsada"]').value;
     
     var material = {
         id: id,
         nome: nome,
-        qtdeUsada: qtdeUsada,
-        qtdeTotal: qtdeTotal
+        qtdeUsada: qtdeUsada
     };
 
     listaMateriais.push(material);
@@ -26,8 +25,6 @@ function criarCabecalho() {
         bNome = document.createElement('b'),
         labelQtdeUsada = document.createElement('label'),
         bQtdeUsada = document.createElement('b'),
-        labelQtdeTotal = document.createElement('label'),
-        bQtdeTotal = document.createElement('b'),
         labelExcluir = document.createElement('label'),
         bExcluir = document.createElement('b');
 
@@ -35,17 +32,14 @@ function criarCabecalho() {
 
     labelNome.innerText = "Nome do material";
     labelQtdeUsada.innerText = "Qtde usada";
-    labelQtdeTotal.innerText = "Qtde total";
     labelExcluir.innerText = "X";
 
     bNome.appendChild(labelNome);
     bQtdeUsada.appendChild(labelQtdeUsada);
-    bQtdeTotal.appendChild(labelQtdeTotal);
     bExcluir.appendChild(labelExcluir);
     
     div.appendChild(bNome);
     div.appendChild(bQtdeUsada);
-    div.appendChild(bQtdeTotal);
     div.appendChild(bExcluir);
 
     return div;
@@ -82,9 +76,13 @@ function onDeletarMaterial(id) {
 
 function onAtualizarLista() {
     var lista = document.querySelector('.lista'),
-        cabecalho = this.criarCabecalho();
+        cabecalho = this.criarCabecalho(),
+        materiaisInput = document.querySelector('#matValue');
 
     lista.innerHTML = "";
+
+    materiaisArray = [];
+    materiaisInput.value = null;
 
     lista.appendChild(cabecalho);
 
@@ -92,18 +90,15 @@ function onAtualizarLista() {
         listaMateriais.forEach(function(record) {
             var div = document.createElement('div'),
                 labelNome = document.createElement('label'),
-                labelQtdeUsada = document.createElement('label'),
-                labelQtdeTotal = document.createElement('label');
+                labelQtdeUsada = document.createElement('label');
 
             div.classList.add('itemlista');
 
             labelNome.innerText = record.nome;
             labelQtdeUsada.innerText = record.qtdeUsada;
-            labelQtdeTotal.innerText = record.qtdeTotal;
 
             div.appendChild(labelNome);
             div.appendChild(labelQtdeUsada);
-            div.appendChild(labelQtdeTotal);
 
             var btnExcluir = this.criarBtnExcluir(record.id)
             
@@ -114,7 +109,13 @@ function onAtualizarLista() {
             div.appendChild(btnExcluir);
 
             lista.appendChild(div);
+
+            materiaisArray.push(JSON.stringify(record))
+
         });
+
+        materiaisInput.value = materiaisArray.toString().replace('},', '}\\');
+
     }
 
     setTimeout(() => {
@@ -164,17 +165,50 @@ function executeCheckin(target, listAttr) {
         
         inValorTotal.value = valorTotal.substr(valorTotal.indexOf('-') + 2).trim()
         inLevantamento.value = currentValue;
+
+        var dados = {
+            isDiario: true,
+            etapa: currentValue
+        };
+
+        $.ajax({
+            url: '../../../../server/src/MaterialEtapa.php',
+            type: 'POST',
+            data: {data: JSON.stringify(dados)},
+            success: function(response){
+                // Retorno se tudo ocorreu normalmente
+                
+                // console.log(JSON.parse(response))
+                var selectMaterial = document.querySelector('.material');
+
+                JSON.parse(response).forEach(function(item) {
+                    var option = this.criarOptionMaterial(item.nome, item.idmatetapa);
+
+                    selectMaterial.append(option);
+                })
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Retorno caso algum erro ocorra
+                console.log("DEU ERRO!!! " + errorThrown)
+            }
+        });
+
     } else {
         inValorTotal.value = "";
         inLevantamento.value = "";
+
+        var selectMaterial = document.querySelector('.material');
+
+        selectMaterial.innerHTML = "";
     }
- }
+}
 
+function criarOptionMaterial(nome, id) {
+    var option = document.createElement('option');
 
-function calculaValorFaltante() {
-    var valorTotal = document.getElementById('valorTotal')
-    var valorRecebido = document.getElementById('valorRecebido')
-    var valorFaltante = document.getElementById('valorFaltante')
+    option.value = id;
+    option.textContent = nome;
 
-    valorFaltante.value = valorTotal.value - valorRecebido.value;
+    return option;
 }

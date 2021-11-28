@@ -18,6 +18,13 @@ main h1 {
     flex-wrap: wrap;
 }
 
+.pesquisa form {
+    padding: 0;
+    background: none;
+    display: block;
+    margin-top: -55px;
+}
+
 .pesquisa button:first-child{
     width: calc(100% + 20px);
     height: 45px;
@@ -68,7 +75,7 @@ main h1 {
 .diario {
     display: grid;
     flex-direction: row;
-    grid-template-columns: 60% 275px 100px 25px;
+    grid-template-columns: 60% 275px 100px 45px 45px;
     justify-content: center;
     align-items: center;
     background: #FEF9EF;
@@ -111,3 +118,34 @@ main h1 {
     margin-top: -20px;
     cursor: pointer;
 }
+
+.diario .btnExcluir {
+    background-color: #FEF9EF;
+    color: #b80000;
+    border: none;
+    transition: all 0.4s;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.diario .btnExcluir:hover {
+    color: #660707;
+}
+
+form {
+    width: 100%!important;
+}
+
+.items {
+    width: 100%;
+    text-align: left;
+    display: flex;
+  }
+  
+  .item {
+    width: 50%;
+  }
+  
+  .item:first-child {
+    margin-right: 5%;
+  }

@@ -5,6 +5,7 @@
 
     include('../../../../server/src/Etapa.php');
     include('../../../../server/src/Material.php');
+    include('../../../../server/src/MaterialEtapa.php');
 
     if(!isset($_SESSION['usuario'])) {
         redireciona('../login/login.php');
@@ -16,13 +17,14 @@
 
     $etapa = new Etapa($db);
     $material = new Material($db);
+    $materialEtapa = new MaterialEtapa($db);
 
     $itemEtapa = $etapa->listarEtapa();
     $itemMaterial = $material->listarMaterial();
 
     $info = (isset($_GET['id'])) ? $etapa->selecionarEtapaEspecifica($_GET['id']) : '';
 
-    $listaMaterialEtapa = (isset($_GET['id'])) ? $etapa->selecionarMateriaisEtapa($_GET['id']) : '';
+    $listaMaterialEtapa = (isset($_GET['id'])) ? $materialEtapa->selecionarMateriaisEtapa($_GET['id']) : '';
 
     switch($action) {
         

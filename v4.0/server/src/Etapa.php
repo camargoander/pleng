@@ -34,7 +34,9 @@ class Etapa
     public function deletarEtapa(int $id)
     {
 
-        $this->deletarMaterialEtapa($id);
+        $materialEtapa = new MaterialEtapa($this->sqlite);
+
+        $materialEtapa->deletarMaterialEtapa($id);
 
         $deleteEtapa = $this->sqlite->prepare('DELETE FROM etapa WHERE idetapa = :id');
                                 
@@ -43,17 +45,11 @@ class Etapa
         $deleteEtapa->execute();
     }
 
-    private function deletarMaterialEtapa(int $id)
-    {
-        $deleteMatEtapa = $this->sqlite->prepare('DELETE FROM material_etapa WHERE idetapa = :id');
-                                
-        $deleteMatEtapa->bindParam(':id', $id);
-
-        $deleteMatEtapa->execute();
-    }
 
     public function cadastrarEtapa(string $nome, array $materiais)
     {
+        $materialEtapa = new MaterialEtapa($this->sqlite);
+
         $insertEtapa = $this->sqlite->prepare('INSERT INTO etapa(nome) 
                                                 VALUES (:nome)');
                                 
@@ -61,29 +57,13 @@ class Etapa
 
         $insertEtapa->execute();
 
-        $this->cadastrarMaterialEtapa($materiais);
-    }
-
-    private function cadastrarMaterialEtapa(array $materiais)
-    {
-        $id = $this->selecionaUltimaEtapa();
-
-        foreach($materiais as $material) {
-            $material = json_decode($material);
-            
-            $insertMatEtapa = $this->sqlite->prepare('INSERT INTO material_Etapa(idetapa, idmat, qtde) 
-                                                    VALUES (:etapa, :material, :qtde)');
-
-            $insertMatEtapa->bindParam(':etapa', $id);
-            $insertMatEtapa->bindParam(':material', $material->id);
-            $insertMatEtapa->bindParam(':qtde', $material->qtde);
-
-            $insertMatEtapa->execute();
-        }
+        $materialEtapa->cadastrarMaterialEtapa($materiais);
     }
 
     public function editarEtapa(string $nome, int $id, array $materiais)
     {
+        $materialEtapa = new MaterialEtapa($this->sqlite);
+
         $updateEtapa = $this->sqlite->prepare('UPDATE etapa 
                                                 SET nome = :nome
                                                 WHERE idetapa = :id');
@@ -93,34 +73,7 @@ class Etapa
 
         $updateEtapa->execute();
 
-        $this->editarMaterialEtapa($id, $materiais);
-    }
-
-    private function editarMaterialEtapa(int $idetapa, array $materiais)
-    {
-        $this->deletarMaterialEtapa($idetapa);
-
-        foreach($materiais as $material) {
-            $material = json_decode($material);
-            
-            $insertMatEtapa = $this->sqlite->prepare('INSERT INTO material_Etapa(idetapa, idmat, qtde) 
-                                                    VALUES (:etapa, :material, :qtde)');
-
-            $insertMatEtapa->bindParam(':etapa', $idetapa);
-            $insertMatEtapa->bindParam(':material', $material->id);
-            $insertMatEtapa->bindParam(':qtde', $material->qtde);
-
-            $insertMatEtapa->execute();
-        }
-    }
-
-    private function selecionaUltimaEtapa()
-    {
-        $selectUltimaEtapa = $this->sqlite->prepare('SELECT MAX(idetapa) AS id FROM etapa');
-
-        $ultimaEtapa = $selectUltimaEtapa->execute()->fetchArray();
-
-        return $ultimaEtapa['id'];
+        $materialEtapa->editarMaterialEtapa($id, $materiais);
     }
 
     public function selecionarEtapaEspecifica(int $id)
@@ -134,19 +87,6 @@ class Etapa
         return $etapaEspecifica;
     }
 
-    public function selecionarMateriaisEtapa(int $id)
-    {
-        $selectMateriaisEtapaEspecifica = $this->sqlite->prepare('SELECT material_etapa.*, material.nome 
-                                                                    FROM material_etapa 
-                                                                    INNER JOIN material    
-                                                                    ON material_etapa.idmat = material.idmat 
-                                                                    WHERE material_etapa.idetapa = :id');
-
-        $selectMateriaisEtapaEspecifica->bindParam(':id', $id);
-
-        $materiaisEtapaEspecifica = $selectMateriaisEtapaEspecifica->execute();
-
-        return $materiaisEtapaEspecifica;
-    }
+    
 }
 ?>

@@ -52,12 +52,13 @@
             'qtde' => $_POST['qtde']
         );
 
+        $materiaisEtapa = explode("\\", $_POST['matValue']);
+
         // var_dump($diarioDados);
-        $diarios->cadastrarDiarioDeObra($diarioDados, $previsaoTempo, $etapaDados);
+        $diarios->cadastrarDiarioDeObra($diarioDados, $previsaoTempo, $etapaDados, $materiaisEtapa);
         
         redireciona('../index.php');
     }
-
 ?>
 
 <html>
@@ -195,14 +196,12 @@
                             </div>
 
                             <div class="items">
+                                <input type="hidden" name="matValue" id="matValue" multiple/>
                                 
                                 <div class="item">
                                     <fieldset>
                                         <label> Material: </label>
                                         <select name="material" class="material">
-                                            <option value="1"> Nome do material </option>
-                                            <option value="2"> Nome do material 2 </option>
-                                            <option value="3"> Nome do material 3 </option>
                                         </select>
                                     </fieldset>
                                 </div>
@@ -225,7 +224,6 @@
                                 <div class="itemlista">
                                     <label> <b> Nome do material </b></label>
                                     <label> <b> Qtde usada </b></label>
-                                    <label> <b> Qtde total </b></label>
 
                                     <label> <b> X </b></label>
                                 </div>
@@ -239,5 +237,6 @@
         </main>
     </body>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./main.js"></script>
 </html>

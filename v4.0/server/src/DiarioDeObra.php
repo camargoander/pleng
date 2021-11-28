@@ -9,7 +9,7 @@ class DiarioDeObra
         $this->sqlite = $sqlite;
     }
 
-    public function cadastrarDiarioDeObra(object $diario, object $previsaoTempo, object $etapa)
+    public function cadastrarDiarioDeObra(object $diario, object $previsaoTempo, object $etapa, array $materiais)
     {
         $insertDiario = $this->sqlite->prepare('INSERT INTO diario_obra( datadiario, nome, observacao, idprojeto) 
                                                 VALUES (:datadiario, :nome, :observacao, :idprojeto)');
@@ -23,6 +23,7 @@ class DiarioDeObra
 
         $this->cadastrarPrevisaoTempo($previsaoTempo);
         $this->cadastrarEtapa($etapa);
+        $this->cadastrarMateriais($materiais, $diario->idprojeto);
     }
 
     private function cadastrarPrevisaoTempo(object $previsaoTempo)
@@ -76,6 +77,34 @@ class DiarioDeObra
         $insertEtapaDiario->bindParam(':qtde', $etapa->qtde);
 
         $insertEtapaDiario->execute();
+    }
+
+    private function cadastrarMateriais(array $materiais, int $idprojeto) {
+        $id = $this->selecionaUltimoDiario($idprojeto);
+
+        foreach($materiais as $material) {
+            $material = json_decode($material);
+            
+            $insertMatDiario = $this->sqlite->prepare('INSERT INTO material_etapa_diario(qtde, idmatetapa, iddiario) 
+                                                    VALUES (:qtde, :matetapa, :diario)');
+
+            $insertMatDiario->bindParam(':qtde', $material->qtdeUsada);
+            $insertMatDiario->bindParam(':matetapa', $material->id);
+            $insertMatDiario->bindParam(':diario', $id);
+
+            $insertMatDiario->execute();
+        }
+    }
+
+    private function selecionaUltimoDiario(int $idprojeto) {
+        $selectUltimoDiario = $this->sqlite->prepare('SELECT MAX(iddiario) AS id FROM diario_obra
+                                                        WHERE idprojeto = :idprojeto');
+
+        $selectUltimoDiario->bindParam(':idprojeto', $idprojeto);
+
+        $ultimoDiario = $selectUltimoDiario->execute()->fetchArray();
+
+        return $ultimoDiario['id'];
     }
 
     public function editarDiarioDeObra(object $diario)
