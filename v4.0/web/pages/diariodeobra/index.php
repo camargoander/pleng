@@ -80,7 +80,9 @@
                     <label> <?= $diario['nome']; ?> </label>
                     <input type="date" value="<?= $diario['datadiario']; ?>" />
 
-                    <button type="button" class="btnVerMais"> Ver mais </button>
+                    <a href="./formulario/index.php?id=<?= $diario['iddiario'];?>">
+                        <button type="button" class="btnVerMais"> Ver mais </button>
+                    </a>
                     <button type="button" class="btnImprimir" title="Imprimir relatório"> <i class="fa gg-file"></i> </button>
                     <a href="?id=<?= $diario['iddiario']?>#deletarModal">
                         <button type="button" class="btnExcluir" title="Excluir"> x </button>

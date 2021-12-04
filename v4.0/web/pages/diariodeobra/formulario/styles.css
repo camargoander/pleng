@@ -27,7 +27,7 @@ width: 65%;
 
 .item:first-child {
 margin-right: 5%;
-width: 30%;
+/* width: 30%; */
 }
 
 .item input[type='date'] {
@@ -60,7 +60,7 @@ justify-content: space-between;
 }
 
 .etapas .item {
-width: 30%;
+width: 45%;
 }
 
 .etapas .item input, .etapas .item .material {
@@ -73,7 +73,6 @@ margin-right: 0;
 
 .etapas button {
 margin-top: 25px;
-width: 120%;
 }
 
 .etapas .lista {
@@ -145,7 +144,7 @@ transition: all 0.2s ease-in-out;
 
 .tabs .slider {
 position: relative;
-width: 34%;
+width: 25%;
 transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
 }
 
@@ -182,16 +181,22 @@ transform: translateX(0%);
 display: block;
 }
 .tabs input[name=tab-control]:nth-of-type(2):checked ~ .slider {
-transform: translateX(95%);
+transform: translateX(90%);
 }
 .tabs input[name=tab-control]:nth-of-type(2):checked ~ .content > section:nth-child(2) {
 display: block;
 }
 
 .tabs input[name=tab-control]:nth-of-type(3):checked ~ .slider {
-transform: translateX(200%);
+transform: translateX(215%);
 }
 .tabs input[name=tab-control]:nth-of-type(3):checked ~ .content > section:nth-child(3) {
+display: block;
+}
+.tabs input[name=tab-control]:nth-of-type(4):checked ~ .slider {
+transform: translateX(305%);
+}
+.tabs input[name=tab-control]:nth-of-type(4):checked ~ .content > section:nth-child(4) {
 display: block;
 }
 

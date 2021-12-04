@@ -9,8 +9,12 @@ class DiarioDeObra
         $this->sqlite = $sqlite;
     }
 
-    public function cadastrarDiarioDeObra(object $diario, object $previsaoTempo, object $etapa, array $materiais)
+    public function cadastrarDiarioDeObra(object $diario, object $previsaoTem, array $etapa, array $materiais)
     {
+        $PrevisaoTempo = new PrevisaoTempo($this->sqlite);
+        $EtapaDiario = new EtapaDiario($this->sqlite);
+        $MaterialEtapaDiario = new MaterialEtapaDiario($this->sqlite);
+
         $insertDiario = $this->sqlite->prepare('INSERT INTO diario_obra( datadiario, nome, observacao, idprojeto) 
                                                 VALUES (:datadiario, :nome, :observacao, :idprojeto)');
                                 
@@ -21,99 +25,22 @@ class DiarioDeObra
 
         $insertDiario->execute();
 
-        $this->cadastrarPrevisaoTempo($previsaoTempo);
-        $this->cadastrarEtapa($etapa);
-        $this->cadastrarMateriais($materiais, $diario->idprojeto);
+        $PrevisaoTempo->cadastrarPrevisaoTempo($previsaoTem);
+        $EtapaDiario->cadastrarEtapa($etapa, $diario->idprojeto);
+        $MaterialEtapaDiario->cadastrarMateriais($materiais, $diario->idprojeto);
     }
 
-    private function cadastrarPrevisaoTempo(object $previsaoTempo)
+    public function editarDiarioDeObra(object $diario, object $previsaoTem, array $etapas, array $materiais)
     {
-        $insertPrevisao = $this->sqlite->prepare('INSERT INTO previsao_tempo(
-                                                    temsegmanha, temsegtarde, 
-                                                    temtermanha, temtertarde, 
-                                                    temquamanha, temquatarde, 
-                                                    temquimanha, temquitarde, 
-                                                    temsexmanha, temsextarde, iddiario)
-                                                VALUES (:temsegmanha, :temsegtarde, 
-                                                        :temtermanha, :temtertarde, 
-                                                        :temquamanha, :temquatarde, 
-                                                        :temquimanha, :temquitarde, 
-                                                        :temsexmanha, :temsextarde, 
-                                                        (
-                                                            SELECT MAX(iddiario) FROM diario_obra
-                                                            WHERE idprojeto = :idprojeto
-                                                        )
-                                                       )');
-                                
-        
-        $insertPrevisao->bindParam(':temsegmanha', $previsaoTempo->temsegmanha);
-        $insertPrevisao->bindParam(':temsegtarde', $previsaoTempo->temsegtarde);
-        $insertPrevisao->bindParam(':temtermanha', $previsaoTempo->temtermanha);
-        $insertPrevisao->bindParam(':temtertarde', $previsaoTempo->temtertarde);
-        $insertPrevisao->bindParam(':temquamanha', $previsaoTempo->temquamanha);
-        $insertPrevisao->bindParam(':temquatarde', $previsaoTempo->temquatarde);
-        $insertPrevisao->bindParam(':temquimanha', $previsaoTempo->temquimanha);
-        $insertPrevisao->bindParam(':temquitarde', $previsaoTempo->temquitarde);
-        $insertPrevisao->bindParam(':temsexmanha', $previsaoTempo->temsexmanha);
-        $insertPrevisao->bindParam(':temsextarde', $previsaoTempo->temsextarde);
-        
-        $insertPrevisao->bindParam(':idprojeto', $previsaoTempo->idprojeto);
+        $PrevisaoTempo = new PrevisaoTempo($this->sqlite);
+        $EtapaDiario = new EtapaDiario($this->sqlite);
+        $MaterialEtapaDiario = new MaterialEtapaDiario($this->sqlite);
 
-        $insertPrevisao->execute();
-    }
-
-    private function cadastrarEtapa(object $etapa)
-    {
-        $insertEtapaDiario = $this->sqlite->prepare('INSERT INTO etapa_diario(
-                                                        iddiario, idlevantamento, qtde
-                                                    ) VALUES (
-                                                        (
-                                                            SELECT MAX(iddiario) FROM diario_obra
-                                                            WHERE idprojeto = :idprojeto
-                                                        ), :idlevantamento, :qtde)');
-                                
-        $insertEtapaDiario->bindParam(':idprojeto', $etapa->idprojeto);
-        $insertEtapaDiario->bindParam(':idlevantamento', $etapa->idlevantamento);
-        $insertEtapaDiario->bindParam(':qtde', $etapa->qtde);
-
-        $insertEtapaDiario->execute();
-    }
-
-    private function cadastrarMateriais(array $materiais, int $idprojeto) {
-        $id = $this->selecionaUltimoDiario($idprojeto);
-
-        foreach($materiais as $material) {
-            $material = json_decode($material);
-            
-            $insertMatDiario = $this->sqlite->prepare('INSERT INTO material_etapa_diario(qtde, idmatetapa, iddiario) 
-                                                    VALUES (:qtde, :matetapa, :diario)');
-
-            $insertMatDiario->bindParam(':qtde', $material->qtdeUsada);
-            $insertMatDiario->bindParam(':matetapa', $material->id);
-            $insertMatDiario->bindParam(':diario', $id);
-
-            $insertMatDiario->execute();
-        }
-    }
-
-    private function selecionaUltimoDiario(int $idprojeto) {
-        $selectUltimoDiario = $this->sqlite->prepare('SELECT MAX(iddiario) AS id FROM diario_obra
-                                                        WHERE idprojeto = :idprojeto');
-
-        $selectUltimoDiario->bindParam(':idprojeto', $idprojeto);
-
-        $ultimoDiario = $selectUltimoDiario->execute()->fetchArray();
-
-        return $ultimoDiario['id'];
-    }
-
-    public function editarDiarioDeObra(object $diario)
-    {
-        $updateDiario = $this->sqlite->prepare('UPDATE diario_obra SET 
-                                                    datadiario = :datadiario, 
+        $updateDiario = $this->sqlite->prepare('UPDATE diario_obra 
+                                                SET datadiario = :datadiario, 
                                                     nome = :nome, 
-                                                    observacao = :observacao
-                                                WHERE iddiario = :iddiario) ');
+                                                    observacao = :observacao 
+                                                WHERE iddiario = :iddiario');
                                 
         $updateDiario->bindParam(':datadiario', $diario->datadiario);
         $updateDiario->bindParam(':nome', $diario->nome);
@@ -121,36 +48,10 @@ class DiarioDeObra
         $updateDiario->bindParam(':iddiario', $diario->iddiario);
 
         $updateDiario->execute();
-    }
 
-    public function editarPrevisaoTempo(object $diario)
-    {
-        $updatePrevisao = $this->sqlite->prepare('UPDATE diario_obra SET 
-                                                    temsegmanha = :temsegmanha, 
-                                                    temsegtarde = :temsegtarde, 
-                                                    temtermanha = :temtermanha, 
-                                                    temtertarde = :temtertarde, 
-                                                    temquamanha = :temquamanha, 
-                                                    temquatarde = :temquatarde, 
-                                                    temquimanha = :temquimanha, 
-                                                    temquitarde = :temquitarde, 
-                                                    temsexmanha = :temsexmanha, 
-                                                    temsextarde = :temsextarde
-                                                WHERE idprev = :idprev) ');
-                                
-        $updatePrevisao->bindParam(':temsegmanha', $diario->temsegmanha);
-        $updatePrevisao->bindParam(':temsegtarde', $diario->temsegtarde);
-        $updatePrevisao->bindParam(':temtermanha', $diario->temtermanha);
-        $updatePrevisao->bindParam(':temtertarde', $diario->temtertarde);
-        $updatePrevisao->bindParam(':temquamanha', $diario->temquamanha);
-        $updatePrevisao->bindParam(':temquatarde', $diario->temquatarde);
-        $updatePrevisao->bindParam(':temquimanha', $diario->temquimanha);
-        $updatePrevisao->bindParam(':temquitarde', $diario->temquitarde);
-        $updatePrevisao->bindParam(':temsexmanha', $diario->temsexmanha);
-        $updatePrevisao->bindParam(':temsextarde', $diario->temsextarde);
-        $updatePrevisao->bindParam(':idprev', $diario->idprev);
-
-        $updatePrevisao->execute();
+        $PrevisaoTempo->editarPrevisaoTempo($previsaoTem);
+        $MaterialEtapaDiario->editarMateriais($materiais, $diario->iddiario);
+        $EtapaDiario->editarEtapa($etapas, $diario->iddiario);
     }
 
     public function excluirDiario(int $iddiario)
@@ -215,6 +116,27 @@ class DiarioDeObra
         return $diariosFiltrados;
     }
 
+    public function selecionarDiario(int $id) {
+        $selectDiarioEspecifico = $this->sqlite->prepare('SELECT * FROM diario_obra 
+                                                WHERE iddiario = :id');
+
+        $selectDiarioEspecifico->bindParam(':id', $id);
+
+        $diarioEspecifico = $selectDiarioEspecifico->execute()->fetchArray();
+
+        return $diarioEspecifico;
+    }
+
+    public function selecionaUltimoDiario(int $idprojeto) {
+        $selectUltimoDiario = $this->sqlite->prepare('SELECT MAX(iddiario) AS id FROM diario_obra
+                                                        WHERE idprojeto = :idprojeto');
+
+        $selectUltimoDiario->bindParam(':idprojeto', $idprojeto);
+
+        $ultimoDiario = $selectUltimoDiario->execute()->fetchArray();
+
+        return $ultimoDiario['id'];
+    }
     
 }
 
