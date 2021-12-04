@@ -132,7 +132,7 @@ function onAtualizarLista() {
             materiaisArray.push(JSON.stringify(record))
         });
 
-        materiaisInput.value = materiaisArray.toString().replace('},', '}\\');
+        materiaisInput.value = materiaisArray.toString().replaceAll('},', '}\\');
     }
 
 
@@ -186,6 +186,6 @@ function onAtualizarListaEditar() {
             materiaisArray.push(JSON.stringify(record))
         });
 
-        materiaisInput.value = materiaisArray.toString().replace('},', '}\\');
+        materiaisInput.value = materiaisArray.toString().replaceAll('},', '}\\');
     }
 }
