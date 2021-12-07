@@ -4,6 +4,7 @@
     require('../../../../server/config/redireciona.php');
 
     include('../../../../server/src/Pasta.php');
+    include('../../../../server/src/Galeria.php');
 
     if(!isset($_SESSION['usuario'])) {
         redireciona('../login/login.php');
@@ -17,8 +18,11 @@
     }
 
     $pastas = new Pasta($db);
+    $galeria = new Galeria($db);
 
     $info = (isset($_GET['id'])) ? $pastas->selecionarPasta($_GET['id']) : '';
+
+    $fotos = $galeria->listarFotos($_GET['id']);
 
     $action = (isset($_REQUEST['action'] )) ? $_REQUEST['action']  : '';
 
@@ -33,6 +37,22 @@
 
         case 'editar': {
             $pastas->editarPasta($_POST['nome'], $_POST['id']);
+            redireciona('./index.php?id=' . $_POST['id']);
+
+            break;
+        }
+
+        case 'cadastrar': {
+            $fotosDados = (object) array(
+                "nome" => $_POST['nome'],
+                "descricao" => $_POST['descricao'],
+                "data_foto" => $_POST['data_foto'],
+                "foto" => $_FILES['foto'],
+                "pasta" => $_POST['id']
+            );
+
+            $galeria->cadastrarFoto($fotosDados);
+
             redireciona('./index.php?id=' . $_POST['id']);
 
             break;
@@ -65,7 +85,7 @@
             <h1> <?= $info['nome']; ?></h1>
             <div>
                 <a href="#editarModal"><button title= "Editar" class="btnEditar"> e </button></a>
-                <button title= "Adicionar" class="btnAdicionar"> + </button>
+                <a href="#cadastrarModal"><button title= "Adicionar" class="btnAdicionar"> + </button></a>
                 <a href="#deletarModal"><button title= "Excluir" class="btnExcluir"> x </button></a>
             </div>
         </nav>
@@ -73,62 +93,26 @@
         <main class="container">
 
             <section class="gallery" id="gallery">
-                <div class="gallery-item">
-                    <div class="wrapper">
-                        <a href="#" class="close-button">
-                          <div class="in">
-                            <div class="close-button-block"></div>
-                            <div class="close-button-block"></div>
-                          </div>
-                          <div class="out">
-                            <div class="close-button-block"></div>
-                            <div class="close-button-block"></div>
-                          </div>
-                        </a>
+                <?php while($foto = $fotos->fetchArray()) :?>
+                    <div class="gallery-item">
+                        <div class="wrapper">
+                            <a href="#" class="close-button">
+                            <div class="in">
+                                <div class="close-button-block"></div>
+                                <div class="close-button-block"></div>
+                            </div>
+                            <div class="out">
+                                <div class="close-button-block"></div>
+                                <div class="close-button-block"></div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="content">
+                            <img src="./imgproj/<?= $foto['foto']; ?>" alt="<?= $foto['nome']; ?>">
+                        </div>   
                     </div>
-                    <div class="content">
-                        <img src="https://source.unsplash.com/random/?tech,care" alt="">
-                        <p> Para fazer parte do PLENG e aproveitar o que ele dispõe, você precisa entrar 
-                            em contato com nossa equipe e aguardar nosso retorno com demais informações sobre 
-                            seu acesso.
-                        </p>
-                    </div>
-
-                    
-                </div>
-                <div class="gallery-item">
-                    <div class="wrapper">
-                        <a href="#" class="close-button">
-                          <div class="in">
-                            <div class="close-button-block"></div>
-                            <div class="close-button-block"></div>
-                          </div>
-                          <div class="out">
-                            <div class="close-button-block"></div>
-                            <div class="close-button-block"></div>
-                          </div>
-                        </a>
-                    </div>
-                    <div class="content">
-                        <img src="https://source.unsplash.com/random/?tech,studied" alt="">
-                        <p> Para fazer parte do PLENG e aproveitar o que ele dispõe, você precisa entrar 
-                            em contato com nossa equipe e aguardar nosso retorno com demais informações sobre 
-                            seu acesso.
-                        </p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="content"><img src="https://source.unsplash.com/random/?tech,substance" alt=""></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="content"><img src="https://source.unsplash.com/random/?tech,choose" alt=""></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="content"><img src="https://source.unsplash.com/random/?tech,past" alt=""></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="content"><img src="https://source.unsplash.com/random/?tech,lamp" alt=""></div>
-                </div>
+                <?php endwhile; ?>
+                
             </section>
 
             <?php require('./popups.php');?>

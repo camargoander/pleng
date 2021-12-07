@@ -91,53 +91,19 @@ nav div .btnExcluir:hover {
     background-color: #f2e1e1;
 }
 
-.full {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.full .content {
-    background-color: rgba(0,0,0,0.75) !important;
-    height: 100%;
-    width: 100%;
-    display: grid;
-}
-
-.full .content img {
-    left: 50%;
-    transform: translate3d(0, 0, 0);
-    animation: zoomin 1s ease;
-    max-width: 60%;
-    max-height: 45%;
-    margin: 20px auto;
-}
-
-.full .wrapper {
-    display: none;
-}
-
-.full .content p {
-    display: block;
-    border-radius: 0;
-    padding: 50px 80px;
-}
-
 .gallery {
     width: 85%;
     margin-left: 10%;
     display: grid;
     grid-column-gap: 8px;
     grid-row-gap: 8px;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     grid-auto-rows: 8px;
 }
 
 .gallery .content {
     position: relative;
+    max-width: 200px;
 }
 
 .gallery img {
@@ -145,30 +111,6 @@ nav div .btnExcluir:hover {
     border-radius: 8px;
     box-shadow: 0 0 16px #333;
     transition: all 1.5s ease;
-}
-
-.gallery p {
-    position: absolute;
-    z-index: 9999;
-    bottom: 0;
-    padding: 30px 10px 10px 10px;
-    background: rgb(2,0,36);
-    background: linear-gradient(360deg, 
-    rgba(2,0,36,1) 0%, 
-    rgba(0,125,141,0.7203256302521008) 84%, 
-    rgba(166,233,241,0) 100%);
-    margin-bottom: 0;
-    border-radius: 8px;
-    color: #FEF9EF;
-    display: none;
-}
-
-.gallery img:hover ~ p {
-    display: block;
-}
-
-.gallery p:hover {
-    display: block;
 }
 
 .gallery img:hover {
@@ -180,14 +122,11 @@ nav div .btnExcluir:hover {
     transition: transform 300ms ease;
     transition: all 0.5s ease;
     cursor: pointer;
+    max-width: 200px;
 }
 
 .gallery .gallery-item:hover {
     transform: scale(1.025);
-}
-
-.hidden {
-    display: none !important;
 }
 
 .wrapper {
@@ -272,19 +211,6 @@ nav div .btnExcluir:hover {
 
 .close-button:hover .out .close-button-block:after {
     transform: translateX(15px) translateY(15px) rotate(-45deg);
-}
-
-@keyframes zoomin {
-    0% {
-      max-width: 50%;
-      filter: blur(4px);
-    }
-    30% {
-      filter: blur(4px);
-    }
-    100% {
-      max-width: 50%;
-    }
 }
 
 form {
