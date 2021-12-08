@@ -21,6 +21,7 @@
     $galeria = new Galeria($db);
 
     $info = (isset($_GET['id'])) ? $pastas->selecionarPasta($_GET['id']) : '';
+    $infoFoto = (isset($_GET['idfoto'])) ? $galeria->selecionarFoto($_GET['idfoto']) : '';
 
     $fotos = $galeria->listarFotos($_GET['id']);
 
@@ -55,6 +56,28 @@
 
             redireciona('./index.php?id=' . $_POST['id']);
 
+            break;
+        }
+
+        case 'editarFoto': {
+            $fotosDados = (object) array(
+                "nome" => $_POST['nome'],
+                "descricao" => $_POST['descricao'],
+                "data_foto" => $_POST['data_foto'],
+                "idgaleria" => $_POST['id']
+            );
+
+            $galeria->editarFoto($fotosDados);
+
+            redireciona('./index.php?id=' . $_POST['pasta']);
+
+            break;
+        }
+        case 'deletarFoto': {
+            $galeria->deletarFoto($_POST['id']);
+
+            redireciona('./index.php?id=' . $_POST['pasta']);
+            
             break;
         }
     }
@@ -94,23 +117,13 @@
 
             <section class="gallery" id="gallery">
                 <?php while($foto = $fotos->fetchArray()) :?>
-                    <div class="gallery-item">
-                        <div class="wrapper">
-                            <a href="#" class="close-button">
-                            <div class="in">
-                                <div class="close-button-block"></div>
-                                <div class="close-button-block"></div>
-                            </div>
-                            <div class="out">
-                                <div class="close-button-block"></div>
-                                <div class="close-button-block"></div>
-                            </div>
-                            </a>
+                    <a class="gallery-item" href="?id=<?= $_GET['id']; ?>&idfoto=<?= $foto['idgaleria']; ?>#editarFotoModal">
+                        <div>
+                            <div class="content">
+                                <img src="./imgproj/<?= $foto['foto']; ?>" alt="<?= $foto['nome']; ?>">
+                            </div>   
                         </div>
-                        <div class="content">
-                            <img src="./imgproj/<?= $foto['foto']; ?>" alt="<?= $foto['nome']; ?>">
-                        </div>   
-                    </div>
+                    </a>
                 <?php endwhile; ?>
                 
             </section>

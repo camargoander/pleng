@@ -5,6 +5,7 @@
     require('../../../server/config/redireciona.php');
 
     include('../../../server/src/Pasta.php');
+    include('../../../server/src/Galeria.php');
 
     if(!isset($_SESSION['usuario'])) {
         redireciona('../login/login.php');
@@ -18,23 +19,26 @@
         return;
     }
 
-    $pastas = new Pasta($db);
+    $Pastas = new Pasta($db);
+    $Galeria = new Galeria($db);
 
-    $itemPasta = $pastas->listarPastas($_SESSION['projeto']);
+    $itemPasta = $Pastas->listarPastas($_SESSION['projeto']);
+
+    $itemGaleria = $Galeria->selecionarUltimasFotos($_SESSION['projeto']);
 
     $action = (isset($_REQUEST['action'] )) ? $_REQUEST['action']  : '';
 
     switch($action) {
 
         case 'cadastrar': {
-            $pastas->cadastrarPasta($_POST['nome'], $_SESSION['projeto']);
+            $Pastas->cadastrarPasta($_POST['nome'], $_SESSION['projeto']);
             redireciona('./index.php');
 
             break;
         }
 
         case 'filtrar': {
-            $itemPasta = $pastas->listarPastasFiltrada($_SESSION['projeto'], "%".strtoupper($_POST['filtro'])."%");
+            $itemPasta = $Pastas->listarPastasFiltrada($_SESSION['projeto'], "%".strtoupper($_POST['filtro'])."%");
             $action = '';
 
             break;
@@ -101,11 +105,13 @@
                 </section>
                 <section class="lista grid-4">
                     <div class="item"><h3> últimos arquivos adicionados </h3></div>
-                    <div class="item"><i class="fa fa-file-o" aria-hidden="true"></i><p>test-file-1.pdf</p></div>
-                    <div class="item"><i class="fa fa-file-o" aria-hidden="true"></i><p>test-file-2.pdf</p></div>
-                    <div class="item"><i class="fa fa-file-o" aria-hidden="true"></i><p>test-file-3.pdf</p></div>
-                    <div class="item"><i class="fa fa-file-o" aria-hidden="true"></i><p>test-file-4.pdf</p></div>
-                    <div class="item"><i class="fa fa-file-o" aria-hidden="true"></i><p>test-file-5.pdf</p></div>
+
+                    <?php while($item = $itemGaleria->fetchArray()) : ?>
+                        <div class="item">
+                            <i class="fa fa-file-o" aria-hidden="true"></i>
+                            <p><?= $item['pasta']; ?>/<?= $item['nome']; ?><?= substr($item['foto'], strpos($item['foto'], '.')); ?></p>
+                        </div>
+                    <?php endwhile; ?>
                 </section>
             </section>
             

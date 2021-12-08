@@ -91,6 +91,13 @@ nav div .btnExcluir:hover {
     background-color: #f2e1e1;
 }
 
+.byebye {
+    opacity: 0;
+  }
+  .byebye:hover {
+    transform: scale(0.2) !important;
+  }
+  
 .gallery {
     width: 85%;
     margin-left: 10%;
@@ -129,90 +136,6 @@ nav div .btnExcluir:hover {
     transform: scale(1.025);
 }
 
-.wrapper {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-  
-.close-button {
-    display: block;
-    width: 35px;
-    height: 35px;
-    position: relative;
-    overflow: hidden;
-}
-
-.close-button > div {
-    position: relative;
-}
-
-.close-button-block {
-    width: 40px;
-    height: 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.close-button-block:before, .close-button-block:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: calc(55% - 4px);
-    display: block;
-    width: 4px;
-    height: 20px;
-    transform-origin: bottom center;
-    background: white;
-    transition: all ease-out 280ms;
-}
-
-.close-button-block:last-of-type {
-    transform: rotate(180deg);
-}
-
-.close-button .in .close-button-block:before {
-    transition-delay: 280ms;
-    transform: translateX(20px) translateY(-20px) rotate(45deg);
-}
-
-.close-button .in .close-button-block:after {
-    transition-delay: 280ms;
-    transform: translateX(-22px) translateY(-22px) rotate(-45deg);
-}
-
-.close-button .out {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.close-button .out .close-button-block:before {
-    transform: translateX(-5px) translateY(5px) rotate(45deg);
-}
-
-.close-button .out .close-button-block:after {
-    transform: translateX(5px) translateY(5px) rotate(-45deg);
-}
-
-.close-button:hover .in .close-button-block:before {
-    transform: translateX(-5px) translateY(5px) rotate(45deg);
-}
-
-.close-button:hover .in .close-button-block:after {
-    transform: translateX(5px) translateY(5px) rotate(-45deg);
-}
-
-.close-button:hover .out .close-button-block:before {
-    transform: translateX(-15px) translateY(15px) rotate(45deg);
-}
-
-.close-button:hover .out .close-button-block:after {
-    transform: translateX(15px) translateY(15px) rotate(-45deg);
-}
-
 form {
     width: 100%!important;
 }
@@ -230,4 +153,29 @@ form {
 .item:first-child {
     margin-right: 5%;
 }
+
+#editarFotoModal > div{
+    width: 750px;
+}
   
+#editarFotoModal img {
+    max-width: 300px;
+}
+
+#editarFotoModal input[type='date'] {
+    padding: 10px;
+}
+
+
+#editarFotoModal .btnExcluir {
+    background-color: #FEF9EF;
+    color: #b80000;
+    border: 1px solid #b80000;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+
+#editarFotoModal .btnExcluir:hover {
+    color: #660707;
+    background-color: #dad9d8;
+}
