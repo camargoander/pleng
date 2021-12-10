@@ -106,6 +106,26 @@ class MaterialEtapa
         return $ultimaEtapa['id'];
     }
 
+    public function infoMaterialProjeto(int $projeto)
+    {
+        $selectMateriaisEtapaProjeto = $this->sqlite->prepare('SELECT levantamento_inicial.tamanho_total AS tamanhoTotal, 
+                                                                    material.nome,
+                                                                    material_etapa.qtde,
+                                                                    (material_etapa.qtde * levantamento_inicial.tamanho_total) AS total,
+                                                                    (MAX(material_etapa_diario.qtde) * levantamento_inicial.tamanho_total) AS qtdeAtual
+                                                                FROM levantamento_inicial
+                                                                INNER JOIN material_etapa ON material_etapa.idetapa = levantamento_inicial.idetapa
+                                                                INNER JOIN material_etapa_diario ON material_etapa_diario.idmatetapa = material_etapa.idmatetapa
+                                                                INNER JOIN material ON material.idmat = material_etapa.idmat
+                                                                WHERE levantamento_inicial.idprojeto = :id 
+                                                                GROUP BY material_etapa.idmat');
+
+        $selectMateriaisEtapaProjeto->bindParam(':id', $projeto);
+
+        $materiaisEtapaProjeto = $selectMateriaisEtapaProjeto->execute();
+
+        return $materiaisEtapaProjeto;
+    }
 }
 
 ?>

@@ -47,7 +47,9 @@ class EtapaDiario
 
     public function selecionarEtapaDiario(int $id) 
     {
-        $selectEtapaDiario = $this->sqlite->prepare('SELECT etapa.nome, etapa_diario.*, levantamento_inicial.tamanho_total
+        $selectEtapaDiario = $this->sqlite->prepare('SELECT etapa.nome, etapa_diario.*, 
+                                                        levantamento_inicial.situacao, 
+                                                        levantamento_inicial.tamanho_total
                                                         FROM etapa_diario 
                                                             INNER JOIN levantamento_inicial 
                                                             ON levantamento_inicial.idlevantamento = etapa_diario.idlevantamento

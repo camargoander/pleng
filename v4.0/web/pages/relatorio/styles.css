@@ -19,6 +19,12 @@ main h1 {
     flex-flow: row wrap;
 }
 
+.container section a {
+    margin: 5px 20px;
+    text-decoration: none;
+    color: #00525E;
+}
+
 .container section div {
     background-color: #FEF9EF;
     padding: 20px 25px 30px 25px;
