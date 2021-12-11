@@ -27,22 +27,32 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        $projetoDados = (object) array (
-            'nome' => $_POST['nome'],
-            'descricao' => $_POST['descricao'],
-            'endereco' => $_POST['endereco'],
-            'dataini' => $_POST['data_inicio'],
-            'qtdedias' => $_POST['qtde_dias'],
-            'idempreiteiro' => $_POST['empreiteiro'],
-            'projeto' => $_SESSION['projeto']
-        );
+        $action = (isset($_REQUEST['action'] )) ? $_REQUEST['action']  : '';
 
-        // var_dump($projetoDados);
-        $projetos->editarProjeto($projetoDados);
+        if($action == "deletar") {
+            $projetos->deletarProjeto($_POST['id']);
 
-        $_SESSION['nomeProjeto'] = $projetoDados->nome;
-        
-        redireciona('../../menu/index.php');
+            unset($_SESSION['projeto']);
+            
+            redireciona('../../projetos/index.php');
+        } else {
+            $projetoDados = (object) array (
+                'nome' => $_POST['nome'],
+                'descricao' => $_POST['descricao'],
+                'endereco' => $_POST['endereco'],
+                'dataini' => $_POST['data_inicio'],
+                'qtdedias' => $_POST['qtde_dias'],
+                'idempreiteiro' => $_POST['empreiteiro'],
+                'projeto' => $_SESSION['projeto']
+            );
+    
+            // var_dump($projetoDados);
+            $projetos->editarProjeto($projetoDados);
+    
+            $_SESSION['nomeProjeto'] = $projetoDados->nome;
+            
+            redireciona('../../menu/index.php');
+        }
     }
 
 ?>
@@ -55,6 +65,7 @@
         ?>
 
         <link href="../../../assets/styles/formulario.css" rel="stylesheet" />
+        <link href="../../../assets/styles/stylePopup.css" rel="stylesheet" />
 
         <title> PLENG | Editar infromações do projeto </title>
     </head>
@@ -168,11 +179,41 @@
 
                     <div class="buttons">
                         <button type="submit"> Salvar </button>
-                        <a href="../../menu/index.php"><button type="button" class="btnSecundario"> Cancelar </button></a>
+                        <a href="?id=<?= $projeto['idprojeto']?>#deletarModal"><button type="button" class="btnExcluir"> Excluir </button></a>
                     </div>
                 </form>
             </section>
         </main>
+
+        
+        <!-- popup de deletar -->
+        <div id="deletarModal" class="modalDialog">
+            <div>
+                <a href="#" title="Close" class="close">
+                    <div class="close-container">
+                        <div class="leftright"></div>
+                        <div class="rightleft"></div>
+                    </div>
+                </a>
+                <h2>Deseja excluir esse projeto?</h2>
+                <p>Uma vez deletado, todos os dados relacionados ao mesmo serão apagados e não poderão mais ser recuperados.</p>
+
+                <form method="POST" action="./index.php?action=deletar">
+                    <fieldset class="btn">
+                        <input type="hidden" name="id" value="<?= $projeto['idprojeto']; ?>" />
+                        <div class="items">
+                            <div class="item">
+                                <a href="#"><button type="button" class="btnSecundario"> Cancelar </button></a>
+                            </div>
+                            <div class="item">
+                                <button type="submit" class="btnPrincipal"> Deletar </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
     </body>
 
     <script src="./main.js"></script>
