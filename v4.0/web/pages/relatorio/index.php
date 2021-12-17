@@ -24,7 +24,7 @@
                 <a href="../../../server/relatorios/MaterialEtapa.php" class="grid-3">
                     <div> <i class="fa gg-file"></i> <span> Materiais por etapa </span> </div>
                 </a>
-                <a href="" class="grid-3">
+                <a href="../../../server/relatorios/MaterialProjeto.php" class="grid-3">
                     <div> <i class="fa gg-file"></i> <span> Materiais do projeto </span> </div>
                 </a>
                 <a href="../../../server/relatorios/ResumoDiarios.php" class="grid-3">

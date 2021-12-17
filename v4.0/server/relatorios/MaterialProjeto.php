@@ -4,7 +4,6 @@ session_start();
 
 require('./fpdf/fpdf.php');
 require('../src/Projeto.php');
-require('../src/LevantamentoInicial.php');
 require('../src/MaterialEtapa.php');
 
 require('../config/redireciona.php');
@@ -43,7 +42,7 @@ class PDF extends FPDF
 
     //     // Title
         $this->SetFont('Arial','B',15);
-        $this->Cell(0,10,utf8_decode('Relatório de materiais por etapa'),0,5,'C');
+        $this->Cell(0,10,utf8_decode('Relatório de materiais por projeto'),0,5,'C');
         $this->SetFont('Arial','B',10);
 
         $Projetos = new Projeto($db);
@@ -77,39 +76,43 @@ class PDF extends FPDF
     {
         global $db;
 
-        $Levantamentos = new LevantamentoInicial($db);
+        $Projetos = new Projeto($db);
 
-        $levantamento = $Levantamentos->listarLevantamento($_SESSION['projeto']);
+        $projeto = $Projetos->selecionarProjeto($_SESSION['projeto']);
 
-        while ($row = $levantamento->fetchArray()) {
-            $this->SetFont('Arial','b',10);
-            $this->Cell(92,8,utf8_decode('Etapa: ' .$row['nome']),0, 0, 'L');
-            $this->Ln();
-
-            // Header
-            foreach($header as $col) {
-                $this->SetFont('Arial','b',11);
-                
-                $this->Cell(92,8,$col,1);
-                
-            }
-
-            $this->Ln();
-
-            $Materiais = new MaterialEtapa($db);
-
-            $material = $Materiais->selecionarMateriaisEtapa($row['idetapa']);
+        $this->SetFont('Arial','b',10);
+        $this->Cell(92,8,utf8_decode('Projeto: '. $projeto['nome']),0,0,'L');
+        $this->Ln();           
+        
+        // Header
+        foreach($header as $col) {
+            $this->SetFont('Arial','b',8);
             
-            while($rowMaterial = $material->fetchArray()) {
-                $this->SetFont('Arial','',8);
+            if($col == "Material") {
+                $this->Cell(71,8,$col,1);
+            } else if($col == "Unidade") {
+                $this->Cell(25,8,$col,1);
+            } else{
+                $this->Cell(45,8,$col,1);
+            }
+        }
 
-                $this->Cell(92,8,utf8_decode($rowMaterial['nome']),1);
-                $this->Cell(92,8,utf8_decode($rowMaterial['qtde']),1);
+        $this->Ln();           
 
-                $this->Ln();
-            }   
-            $this->Ln();         
-        }   
+        $this->SetFont('Arial','',8);
+
+        $MateriaisEtapa = new MaterialEtapa($db);
+        
+        $material = $MateriaisEtapa->infoMaterialProjeto($_SESSION['projeto']);
+        
+        while ($mat = $material->fetchArray()) {
+            $this->Cell(71,8,utf8_decode($mat['nome']),1);
+            $this->Cell(45,8,utf8_decode($mat['qtde_atual']),1, '', 'R');
+            $this->Cell(45,8,utf8_decode($mat['qtde_total']),1, '', 'R');
+            $this->Cell(25,8,utf8_decode($mat['unidade']),1);
+            
+            $this->Ln();           
+        } 
     }
 }
 
@@ -117,7 +120,7 @@ class PDF extends FPDF
 $pdf = new PDF();
 
 // title
-$title = 'Relatório de materiais por etapa';
+$title = 'Relatório de materiais por projeto';
 $pdf->SetTitle(utf8_decode($title));
 
 // Iniciar pdf
@@ -127,23 +130,11 @@ $pdf->AliasNbPages();
 $pdf->Ln();
 
 $header = array('Material', 
-                 utf8_decode('Quantidade utilizada até o momento'),
-                 utf8_decode('Quantidade a ser utilizada até o final'));
+                 utf8_decode('Qtde. utilizada até o momento'),
+                 utf8_decode('Qtde. a ser utilizada até o final'),
+                'Unidade');
 
 $pdf->BasicTable($header);
 
 $pdf->Output();
 ?>
-
-<!-- SELECT SUM(levantamento_inicial.tamanho_total) AS tamanhoTotal, 
-       material.nome,
-       SUM(material_etapa.qtde),
-       SUM(material_etapa.qtde * levantamento_inicial.tamanho_total) AS total,
-       MAX(material_etapa_diario.qtde) AS atual 
-       --(MAX(material_etapa_diario.qtde) * levantamento_inicial.tamanho_total) AS qtdeAtual
-   FROM levantamento_inicial
-   INNER JOIN material_etapa ON material_etapa.idetapa = levantamento_inicial.idetapa
-   INNER JOIN material_etapa_diario ON material_etapa_diario.idmatetapa = material_etapa.idmatetapa
-   INNER JOIN material ON material.idmat = material_etapa.idmat
-   WHERE levantamento_inicial.idprojeto = 1 
-   GROUP BY material_etapa.idmat -->

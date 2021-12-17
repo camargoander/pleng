@@ -108,17 +108,23 @@ class MaterialEtapa
 
     public function infoMaterialProjeto(int $projeto)
     {
-        $selectMateriaisEtapaProjeto = $this->sqlite->prepare('SELECT levantamento_inicial.tamanho_total AS tamanhoTotal, 
-                                                                    material.nome,
-                                                                    material_etapa.qtde,
-                                                                    (material_etapa.qtde * levantamento_inicial.tamanho_total) AS total,
-                                                                    (MAX(material_etapa_diario.qtde) * levantamento_inicial.tamanho_total) AS qtdeAtual
-                                                                FROM levantamento_inicial
-                                                                INNER JOIN material_etapa ON material_etapa.idetapa = levantamento_inicial.idetapa
-                                                                INNER JOIN material_etapa_diario ON material_etapa_diario.idmatetapa = material_etapa.idmatetapa
-                                                                INNER JOIN material ON material.idmat = material_etapa.idmat
+        $selectMateriaisEtapaProjeto = $this->sqlite->prepare('SELECT SUM(levantamento_inicial.tamanho_total * material_etapa.qtde) AS qtde_total,
+                                                                (SELECT material.nome FROM material
+                                                                    WHERE material.idmat = material_etapa.idmat
+                                                                ) AS nome,
+                                                                (SELECT material.unidade FROM material
+                                                                    WHERE material.idmat = material_etapa.idmat) as unidade,
+                                                                SUM(
+                                                                    (SELECT SUM(material_etapa_diario.qtde)
+                                                                        FROM material_etapa_diario
+                                                                        WHERE material_etapa_diario.idmatetapa = material_etapa.idmatetapa
+                                                                    )
+                                                                ) AS qtde_atual
+                                                                FROM levantamento_inicial, material_etapa
                                                                 WHERE levantamento_inicial.idprojeto = :id 
-                                                                GROUP BY material_etapa.idmat');
+                                                                AND levantamento_inicial.idetapa = material_etapa.idetapa 
+                                                                GROUP BY material_etapa.idmat
+                                                            ');
 
         $selectMateriaisEtapaProjeto->bindParam(':id', $projeto);
 
