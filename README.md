@@ -91,6 +91,38 @@ PLENG (sigla para Planejamento de Engenharia) é um sistema desenvolvido princip
    </li>
 </ol>
 
+<hr/>
+
+<h2> Versão 4.0 - Liberada dia 17/12/2021 </h2>
+
+<p> A versão 4.0 do <b> PLENG </b> está oficialmente liberada e conta com novas atualizações e correções. Confira a lista com as novas funcionalidades disponiveis e o que foi alterado: </p>
+
+<ol>
+   <li>
+      <h3> Programação Orientada a Objetos </h3>
+      <p> O back-end do PLENG foi reestruturado e agora utiliza os pilares da Orientação a Objetos, contando com Classes e seus Métodos para o gerenciamento do sistema.</p>
+   </li>
+   
+   <li>
+      <h3> Design </h3>
+      <p> O PLENG conta com um design mais amigável e simples para facilitar sua usabilidade e entendimento. O novo layout busca melhorar a experiência do usuário durante o uso do sistema.</p>
+   </li>
+   
+   <li>
+      <h3> Correções </h3>
+      <ol>
+         <li>
+            <p> O cadastro de Grupos foi removido. </p>
+         </li>
+         <li>
+            <p> Os Materiais de cada Etapa são cadastrados diretamente no cadastro das Etapas. </p>
+         </li>
+         <li>
+            <p> A tela de Dashboards está temporariamente desabilitada. </p>
+         </li>
+      </ol>
+  </li> 
+</ol>
 
 
 
