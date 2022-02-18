@@ -204,7 +204,7 @@
                                 <a href="?action=deletar&id=<?= $_GET['id']; ?>"><button type="button" class="btnExcluir"> Excluir </button></a>
                             </div>
                             <div class="item">
-                                <button type="submit" class="btnPrincipal"> Cadastrar </button>
+                                <button type="submit" class="btnPrincipal"> Editar </button>
                             </div>
                         </div>
                     </form>

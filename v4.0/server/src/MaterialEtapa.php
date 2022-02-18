@@ -40,10 +40,12 @@ class MaterialEtapa
     public function selecionarMateriaisEtapa(int $id)
     {
         $selectMateriaisEtapa = $this->sqlite->prepare('SELECT material_etapa.*, material.nome 
-                                                                    FROM material_etapa 
-                                                                    INNER JOIN material    
-                                                                    ON material_etapa.idmat = material.idmat 
-                                                                    WHERE material_etapa.idetapa = :id');
+                                                            FROM material_etapa 
+                                                            INNER JOIN material    
+                                                            ON material_etapa.idmat = material.idmat 
+                                                            INNER JOIN levantamento_inicial
+                                                            ON levantamento_inicial.idetapa = material_etapa.idetapa
+                                                            WHERE levantamento_inicial.idlevantamento = :id');
 
         $selectMateriaisEtapa->bindParam(':id', $id);
 
