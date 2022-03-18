@@ -14,20 +14,8 @@
                 <input type="text" name="nome" placeholder="Nome do material" />
             </fieldset>
             <fieldset>
-                <input type="text" name="fornecedor" placeholder="Nome do fornecedor" />
+                <input type="text" name="unidade" placeholder="Unidade" />
             </fieldset>
-            <div class="items">
-                <div class="item">
-                    <fieldset>
-                        <input type="text" name="unidade" placeholder="Unidade" />
-                    </fieldset>
-                </div>
-                <div class="item">
-                    <fieldset>
-                        <input type="text" name="preco" placeholder="Preço" />
-                    </fieldset>
-                </div>
-            </div>
             <div class="items">
                 <div class="item">
                     <a href="#"><button type="button" class="btnSecundario"> Cancelar </button></a>
@@ -86,23 +74,9 @@
                 <input type="text" name="nome" placeholder="Nome do material" value="<?= $info['nome']; ?>" />
             </fieldset>
             <fieldset>
-            <label> fornecedor: </label>
-                <input type="text" name="fornecedor" placeholder="Nome do fornecedor" value="<?= $info['fornecedor']; ?>"/>
-            </fieldset>
-            <div class="items">
-                <div class="item">
-                    <fieldset>
-                        <label> Unidade: </label>
-                        <input type="text" name="unidade" placeholder="Unidade" value="<?= $info['unidade']; ?>"/>
-                    </fieldset>
-                </div>
-                <div class="item">
-                    <fieldset>
-                        <label> Preço: </label>
-                        <input type="text" name="preco" placeholder="Preço" value="<?= $info['preco']; ?>"/>
-                    </fieldset>
-                </div>
-            </div>
+                <label> Unidade: </label>
+                <input type="text" name="unidade" placeholder="Unidade" value="<?= $info['unidade']; ?>"/>
+            </fieldset>    
             <div class="items">
                 <div class="item">
                     <a href="#"><button type="button" class="btnSecundario"> Cancelar </button></a>

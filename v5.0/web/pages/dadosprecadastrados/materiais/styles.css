@@ -68,7 +68,7 @@ main h1 {
 .mat {
     display: grid;
     flex-direction: row;
-    grid-template-columns: 60% 275px 100px 25px;
+    grid-template-columns: 70% 100px 25px;
     justify-content: center;
     align-items: center;
     background: #FEF9EF;

@@ -31,9 +31,7 @@
         case 'cadastrar': {
             $materialDados = (object) array (
                 'nome' => $_POST['nome'],
-                'fornecedor' => $_POST['fornecedor'],
-                'unidade' => $_POST['unidade'],
-                'preco' => $_POST['preco']
+                'unidade' => $_POST['unidade']
             );
 
             $material->cadastrarMaterial($materialDados);
@@ -45,9 +43,7 @@
         case 'editar': {
             $materialDados = (object) array (
                 'nome' => $_POST['nome'],
-                'fornecedor' => $_POST['fornecedor'],
                 'unidade' => $_POST['unidade'],
-                'preco' => $_POST['preco'],
                 'idmat' => $_POST['id']
             );
 
@@ -108,7 +104,6 @@
 
                     <div class="mat grid-12">
                         <label> <?= $mat['nome']; ?> </label>
-                        <input type="text" value="R$ <?= $mat['preco']; ?>" readonly />
 
                         <a href="?id=<?= $mat['idmat'];?>#editarModal">
                             <button type="button" class="btnEditar"> Editar </button>

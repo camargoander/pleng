@@ -11,13 +11,11 @@ class Material
 
     public function cadastrarMaterial(object $material)
     {
-        $insertMaterial = $this->sqlite->prepare('INSERT INTO material(nome, fornecedor, unidade, preco) 
-                                                VALUES (:nome, :fornecedor, :unidade, :preco)');
+        $insertMaterial = $this->sqlite->prepare('INSERT INTO material(nome, unidade) 
+                                                VALUES (:nome, :unidade)');
                                 
         $insertMaterial->bindParam(':nome', $material->nome);
-        $insertMaterial->bindParam(':fornecedor', $material->fornecedor);
         $insertMaterial->bindParam(':unidade', $material->unidade);
-        $insertMaterial->bindParam(':preco', $material->preco);
 
         $insertMaterial->execute();
     }
@@ -26,15 +24,11 @@ class Material
     {
         $updateMaterial = $this->sqlite->prepare('UPDATE material SET 
                                                     nome = :nome,
-                                                    fornecedor = :fornecedor,
-                                                    unidade = :unidade,
-                                                    preco = :preco 
+                                                    unidade = :unidade 
                                                 WHERE idmat = :idmat');
                                 
         $updateMaterial->bindParam(':nome', $material->nome);
-        $updateMaterial->bindParam(':fornecedor', $material->fornecedor);
         $updateMaterial->bindParam(':unidade', $material->unidade);
-        $updateMaterial->bindParam(':preco', $material->preco);
         $updateMaterial->bindParam(':idmat', $material->idmat);
 
         $updateMaterial->execute();
