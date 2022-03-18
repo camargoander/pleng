@@ -37,6 +37,21 @@ class MaterialEtapa
         $this->sqlite = $sqlite;
     }
 
+    public function selecionarMateriaisEtapaPreCadastrada(int $id)
+    {
+        $selectMateriaisEtapa = $this->sqlite->prepare('SELECT material_etapa.*, material.nome 
+                                                            FROM material_etapa 
+                                                            INNER JOIN material    
+                                                            ON material_etapa.idmat = material.idmat
+                                                            WHERE material_etapa.idetapa = :id');
+
+        $selectMateriaisEtapa->bindParam(':id', $id);
+
+        $materiaisEtapa = $selectMateriaisEtapa->execute();
+
+        return $materiaisEtapa;
+    }
+
     public function selecionarMateriaisEtapa(int $id)
     {
         $selectMateriaisEtapa = $this->sqlite->prepare('SELECT material_etapa.*, material.nome 
@@ -70,7 +85,7 @@ class MaterialEtapa
         foreach($materiais as $material) {
             $material = json_decode($material);
             
-            $insertMatEtapa = $this->sqlite->prepare('INSERT INTO material_Etapa(idetapa, idmat, qtde) 
+            $insertMatEtapa = $this->sqlite->prepare('INSERT INTO material_etapa(idetapa, idmat, qtde) 
                                                     VALUES (:etapa, :material, :qtde)');
 
             $insertMatEtapa->bindParam(':etapa', $id);

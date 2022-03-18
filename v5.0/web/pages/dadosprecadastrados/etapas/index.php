@@ -24,7 +24,7 @@
 
     $info = (isset($_GET['id'])) ? $etapa->selecionarEtapaEspecifica($_GET['id']) : '';
 
-    $listaMaterialEtapa = (isset($_GET['id'])) ? $materialEtapa->selecionarMateriaisEtapa($_GET['id']) : '';
+    $listaMaterialEtapa = (isset($_GET['id'])) ? $materialEtapa->selecionarMateriaisEtapaPreCadastrada($_GET['id']) : '';
 
     switch($action) {
         
@@ -74,7 +74,7 @@
 
         <title> PLENG | Etapas </title>
 
-    <script src="./main.js"></script>
+        <script src="./main.js"></script>
 
     </head>
 
