@@ -21,6 +21,13 @@
         </li>    
 
         <li class="darkerlishadow">
+            <a href="../menu/index.php">
+                <i class="fa gg-list"></i>
+                <span class="nav-text">Menu</span>
+            </a>
+        </li>
+
+        <li class="darkerli">
             <a href="">
                 <i class="fa gg-trello"></i>
                 <span class="nav-text">Dashboards</span>
