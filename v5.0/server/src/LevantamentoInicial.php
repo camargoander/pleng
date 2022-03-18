@@ -11,8 +11,8 @@ class LevantamentoInicial
 
     public function cadastrarLevantamentoInicial(object $levantamento)
     {
-        $insertLevantamento = $this->sqlite->prepare('INSERT INTO levantamento_inicial(idetapa, idprojeto, situacao, descricao, tamanho_total, tamanho_atual)
-                                                VALUES(:idetapa, :idproj, :situacao, :descricao, :tamanhototal, :tamanhoatual)');
+        $insertLevantamento = $this->sqlite->prepare('INSERT INTO levantamento_inicial(idetapa, idprojeto, situacao, descricao, tamanho_total, tamanho_atual, data_ini, data_fim)
+                                                VALUES(:idetapa, :idproj, :situacao, :descricao, :tamanhototal, :tamanhoatual, :data_ini, :data_fim)');
         
         $insertLevantamento->bindParam(':idetapa', $levantamento->idetapa);
         $insertLevantamento->bindParam(':idproj', $levantamento->idproj);
@@ -20,23 +20,29 @@ class LevantamentoInicial
         $insertLevantamento->bindParam(':descricao', $levantamento->descricao);
         $insertLevantamento->bindParam(':tamanhototal', $levantamento->tamanhototal);
         $insertLevantamento->bindParam(':tamanhoatual', $levantamento->tamanhoatual);
-
+        $insertLevantamento->bindParam(':data_ini', $levantamento->dataini);
+        $insertLevantamento->bindParam(':data_fim', $levantamento->datafim);
+        
         $insertLevantamento->execute();
     }
-
+    
     public function editarLevantamentoInicial(object $levantamento)
     {
         $updateLevantamento = $this->sqlite->prepare('UPDATE levantamento_inicial SET
                                                         tamanho_total = :tamanhototal,
                                                         situacao = :situacao,
-                                                        descricao = :descricao
+                                                        descricao = :descricao,
+                                                        data_ini = :data_ini,
+                                                        data_fim = :data_fim
                                                     WHERE idlevantamento = :idlevantamento');
         
         $updateLevantamento->bindParam(':tamanhototal', $levantamento->tamanhototal);
         $updateLevantamento->bindParam(':situacao', $levantamento->situacao);
         $updateLevantamento->bindParam(':descricao', $levantamento->descricao);
+        $updateLevantamento->bindParam(':data_ini', $levantamento->dataini);
+        $updateLevantamento->bindParam(':data_fim', $levantamento->datafim);
         $updateLevantamento->bindParam(':idlevantamento', $levantamento->idlevantamento);
-
+        
         $updateLevantamento->execute();
     }
 
@@ -55,7 +61,8 @@ class LevantamentoInicial
                                                                 FROM levantamento_inicial 
                                                                 INNER JOIN etapa 
                                                                 ON levantamento_inicial.idetapa = etapa.idetapa 
-                                                                WHERE idprojeto = :idprojeto');
+                                                                WHERE idprojeto = :idprojeto
+                                                                ORDER BY data_ini');
 
         $selectLevantamento->bindParam(':idprojeto', $idprojeto);
 
@@ -71,7 +78,8 @@ class LevantamentoInicial
                                                                     INNER JOIN etapa 
                                                                     ON levantamento_inicial.idetapa = etapa.idetapa 
                                                                     WHERE idprojeto = :idprojeto 
-                                                                    AND situacao = "A"');
+                                                                    AND situacao = "A"
+                                                                    ORDER BY data_ini');
 
         $selectLevantamentoAndamento->bindParam(':idprojeto', $idprojeto);
 
@@ -87,7 +95,8 @@ class LevantamentoInicial
                                                                     INNER JOIN etapa 
                                                                     ON levantamento_inicial.idetapa = etapa.idetapa 
                                                                     WHERE idprojeto = :idprojeto 
-                                                                    AND situacao = "F"');
+                                                                    AND situacao = "F"
+                                                                    ORDER BY data_ini');
 
         $selectLevantamentoFinalizado->bindParam(':idprojeto', $idprojeto);
 
@@ -103,7 +112,8 @@ class LevantamentoInicial
                                                                     INNER JOIN etapa 
                                                                     ON levantamento_inicial.idetapa = etapa.idetapa 
                                                                     WHERE idprojeto = :idprojeto 
-                                                                    AND situacao = "N"');
+                                                                    AND situacao = "N"
+                                                                    ORDER BY data_ini');
 
         $selectLevantamentoNaoIniciada->bindParam(':idprojeto', $idprojeto);
 
@@ -120,7 +130,8 @@ class LevantamentoInicial
                                                                     ON levantamento_inicial.idetapa = etapa.idetapa 
                                                                     WHERE idprojeto = :idprojeto 
                                                                     AND situacao = "A"
-                                                                    AND levantamento_inicial.idetapa = :idetapa');
+                                                                    AND levantamento_inicial.idetapa = :idetapa
+                                                                    ORDER BY data_ini');
 
         $selectLevantamentoAndamento->bindParam(':idprojeto', $idprojeto);
         $selectLevantamentoAndamento->bindParam(':idetapa', $idetapa);
@@ -138,7 +149,8 @@ class LevantamentoInicial
                                                                     ON levantamento_inicial.idetapa = etapa.idetapa 
                                                                     WHERE idprojeto = :idprojeto 
                                                                     AND situacao = "F"
-                                                                    AND levantamento_inicial.idetapa = :idetapa');
+                                                                    AND levantamento_inicial.idetapa = :idetapa
+                                                                    ORDER BY data_ini');
 
         $selectLevantamentoFinalizado->bindParam(':idprojeto', $idprojeto);
         $selectLevantamentoFinalizado->bindParam(':idetapa', $idetapa);
@@ -156,7 +168,8 @@ class LevantamentoInicial
                                                                     ON levantamento_inicial.idetapa = etapa.idetapa 
                                                                     WHERE idprojeto = :idprojeto 
                                                                     AND situacao = "N"
-                                                                    AND levantamento_inicial.idetapa = :idetapa');
+                                                                    AND levantamento_inicial.idetapa = :idetapa
+                                                                    ORDER BY data_ini');
 
         $selectLevantamentoNaoIniciada->bindParam(':idprojeto', $idprojeto);
         $selectLevantamentoNaoIniciada->bindParam(':idetapa', $idetapa);

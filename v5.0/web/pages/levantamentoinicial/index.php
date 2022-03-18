@@ -42,7 +42,9 @@
                 'idlevantamento' => $_POST['id'],
                 'situacao' => $_POST['situacao'],
                 'descricao' => $_POST['descricao'],
-                'tamanhototal' => $_POST['tamanhoTotal']
+                'tamanhototal' => $_POST['tamanhoTotal'],
+                'dataini' => $_POST['data_ini'],
+                'datafim' => $_POST['data_fim']
             );
     
             $levantamentos->editarLevantamentoInicial($etapaDados);
@@ -196,6 +198,21 @@
                                     <label> Tamanho total </label>
                                     <input type="text" name="tamanhoTotal" value="<?= $info['tamanho_total']; ?>" />
                                 <fieldset>    
+                            </div>
+                        </div>
+
+                        <div class="items">
+                            <div class="item">
+                                <fieldset>
+                                    <label> Data inicial: </label>
+                                    <input type="date" name="data_ini" value="<?= $info['data_ini']; ?>" />
+                                </fieldset>
+                            </div>
+                            <div class="item">
+                                <fieldset>
+                                    <label> Data final: </label>
+                                    <input type="date" name="data_fim" value="<?= $info['data_fim']; ?>" />
+                                </fieldset>
                             </div>
                         </div>
 

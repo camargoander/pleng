@@ -32,6 +32,8 @@
             'descricao' => $_POST['descricao'],
             'tamanhoatual' => $_POST['tamanho_atual'],
             'tamanhototal' => $_POST['tamanho_total'],
+            'dataini' => $_POST['data_ini'],
+            'datafim' => $_POST['data_fim']
         );
 
         $levantamentos->cadastrarLevantamentoInicial($etapaDados);
@@ -100,6 +102,21 @@
                             <fieldset>
                                 <label> Tamanho total: </label>
                                 <input type="text" name="tamanho_total" />
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="items">
+                        <div class="item">
+                            <fieldset>
+                                <label> Data inicial: </label>
+                                <input type="date" name="data_ini" />
+                            </fieldset>
+                        </div>
+                        <div class="item">
+                            <fieldset>
+                                <label> Data final: </label>
+                                <input type="date" name="data_fim" />
                             </fieldset>
                         </div>
                     </div>
