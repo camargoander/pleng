@@ -15,9 +15,11 @@
                 name="temsegmanha" 
                 value="nublado" 
                 <?php
-                    if($infosPrevisao['temsegmanha'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsegmanha'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -34,9 +36,11 @@
                 name="temsegmanha" 
                 value="chuva" 
                 <?php
-                    if($infosPrevisao['temsegmanha'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsegmanha'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -53,9 +57,11 @@
                 name="temsegmanha" 
                 value="sol" 
                 <?php
-                    if($infosPrevisao['temsegmanha'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsegmanha'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -77,9 +83,11 @@
                 name="temsegmanha" 
                 value="vento" 
                 <?php
-                    if($infosPrevisao['temsegmanha'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsegmanha'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -104,9 +112,11 @@
                 name="temsegtarde" 
                 value="nublado"
                 <?php
-                    if($infosPrevisao['temsegtarde'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsegtarde'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -123,9 +133,11 @@
                 name="temsegtarde" 
                 value="chuva"
                 <?php
-                    if($infosPrevisao['temsegtarde'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsegtarde'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -142,9 +154,11 @@
                 name="temsegtarde" 
                 value="sol"
                 <?php
-                    if($infosPrevisao['temsegtarde'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsegtarde'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -166,9 +180,11 @@
                 name="temsegtarde" 
                 value="vento"
                 <?php
-                    if($infosPrevisao['temsegtarde'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsegtarde'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -195,9 +211,11 @@
                 name="temtermanha" 
                 value="nublado" 
                 <?php
-                    if($infosPrevisao['temtermanha'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temtermanha'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -214,9 +232,11 @@
                 name="temtermanha" 
                 value="chuva" 
                 <?php
-                    if($infosPrevisao['temtermanha'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temtermanha'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -233,9 +253,11 @@
                 name="temtermanha" 
                 value="sol" 
                 <?php
-                    if($infosPrevisao['temtermanha'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temtermanha'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -257,9 +279,11 @@
                 name="temtermanha" 
                 value="vento" 
                 <?php
-                    if($infosPrevisao['temtermanha'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temtermanha'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -282,11 +306,13 @@
             <input 
                 type="radio" 
                 name="temtertarde" 
-                value="nublado" checked 
+                value="nublado" 
                 <?php
-                    if($infosPrevisao['temtertarde'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temtertarde'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -303,9 +329,11 @@
                 name="temtertarde" 
                 value="chuva" 
                 <?php
-                    if($infosPrevisao['temtertarde'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temtertarde'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -322,9 +350,11 @@
                 name="temtertarde" 
                 value="sol" 
                 <?php
-                    if($infosPrevisao['temtertarde'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temtertarde'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -346,9 +376,11 @@
                 name="temtertarde" 
                 value="vento" 
                 <?php
-                    if($infosPrevisao['temtertarde'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temtertarde'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -376,9 +408,11 @@
                 name="temquamanha" 
                 value="nublado" 
                 <?php
-                    if($infosPrevisao['temquamanha'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquamanha'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -395,9 +429,11 @@
                 name="temquamanha" 
                 value="chuva" 
                 <?php
-                    if($infosPrevisao['temquamanha'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquamanha'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -414,9 +450,11 @@
                 name="temquamanha" 
                 value="sol" 
                 <?php
-                    if($infosPrevisao['temquamanha'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquamanha'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -438,9 +476,11 @@
                 name="temquamanha" 
                 value="vento" 
                 <?php
-                    if($infosPrevisao['temquamanha'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquamanha'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -465,9 +505,11 @@
                 name="temquatarde" 
                 value="nublado" 
                 <?php
-                    if($infosPrevisao['temquatarde'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquatarde'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -484,9 +526,11 @@
                 name="temquatarde" 
                 value="chuva" 
                 <?php
-                    if($infosPrevisao['temquatarde'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquatarde'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -503,9 +547,11 @@
                 name="temquatarde" 
                 value="sol" 
                 <?php
-                    if($infosPrevisao['temquatarde'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquatarde'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -527,9 +573,11 @@
                 name="temquatarde" 
                 value="vento" 
                 <?php
-                    if($infosPrevisao['temquatarde'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquatarde'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?> 
             />
             <span>
@@ -557,9 +605,11 @@
                 name="temquimanha" 
                 value="nublado" 
                 <?php
-                    if($infosPrevisao['temquimanha'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquimanha'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -576,9 +626,11 @@
                 name="temquimanha" 
                 value="chuva" 
                 <?php
-                    if($infosPrevisao['temquimanha'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquimanha'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -595,9 +647,11 @@
                 name="temquimanha" 
                 value="sol" 
                 <?php
-                    if($infosPrevisao['temquimanha'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquimanha'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -619,9 +673,11 @@
                 name="temquimanha" 
                 value="vento" 
                 <?php
-                    if($infosPrevisao['temquimanha'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquimanha'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -646,9 +702,11 @@
                 name="temquitarde" 
                 value="nublado" 
                 <?php
-                    if($infosPrevisao['temquitarde'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquitarde'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -665,9 +723,11 @@
                 name="temquitarde" 
                 value="chuva" 
                 <?php
-                    if($infosPrevisao['temquitarde'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquitarde'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -684,9 +744,11 @@
                 name="temquitarde" 
                 value="sol" 
                 <?php
-                    if($infosPrevisao['temquitarde'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquitarde'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -708,9 +770,11 @@
                 name="temquitarde" 
                 value="vento" 
                 <?php
-                    if($infosPrevisao['temquitarde'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temquitarde'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -738,9 +802,11 @@
                 name="temsexmanha" 
                 value="nublado" 
                 <?php
-                    if($infosPrevisao['temsexmanha'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsexmanha'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -757,9 +823,11 @@
                 name="temsexmanha" 
                 value="chuva" 
                 <?php
-                    if($infosPrevisao['temsexmanha'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsexmanha'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -776,9 +844,11 @@
                 name="temsexmanha" 
                 value="sol" 
                 <?php
-                    if($infosPrevisao['temsexmanha'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsexmanha'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -800,9 +870,11 @@
                 name="temsexmanha" 
                 value="vento" 
                 <?php
-                    if($infosPrevisao['temsexmanha'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsexmanha'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -827,9 +899,11 @@
                 name="temsextarde" 
                 value="nublado" 
                 <?php
-                    if($infosPrevisao['temsextarde'] == 'nublado') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsextarde'] == 'nublado') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -846,9 +920,11 @@
                 name="temsextarde" 
                 value="chuva" 
                 <?php
-                    if($infosPrevisao['temsextarde'] == 'chuva') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsextarde'] == 'chuva') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -865,9 +941,11 @@
                 name="temsextarde" 
                 value="sol" 
                 <?php
-                    if($infosPrevisao['temsextarde'] == 'sol') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsextarde'] == 'sol') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>
@@ -889,9 +967,11 @@
                 name="temsextarde" 
                 value="vento" 
                 <?php
-                    if($infosPrevisao['temsextarde'] == 'vento') {
-                        echo "checked";
-                    } 
+                    if($infosPrevisao != '') {
+                        if($infosPrevisao['temsextarde'] == 'vento') {
+                            echo "checked";
+                        } 
+                    }
                 ?>
             />
             <span>

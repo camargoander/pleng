@@ -187,24 +187,24 @@
                                 que você tenha todos os dados registrados e possa emitir seus relatórios completos 
                                 quando necessário.
                             </p>
-                            <input type="hidden" value="<?= $infos['iddiario']?>" name="iddiario" />
+                            <input type="hidden" value="<?php echo $infos != '' ? $infos['iddiario'] : '' ?>" name="iddiario" />
                             <div class="items">
                                 <div class="item">
                                     <fieldset>
                                         <label> Data: </label>
-                                        <input type="date" value="<?= $infos['datadiario']?>" name="datadiario" />
+                                        <input type="date" value="<?php echo $infos != '' ? $infos['datadiario'] : '' ?>" name="datadiario" />
                                     </fieldset>
                                 </div>
                                 <div class="item">
                                     <fieldset>
                                         <label> Nome: </label>
-                                        <input type="text" value="<?= $infos['nome']?>" name="nome" />
+                                        <input type="text" value="<?php echo $infos != '' ? $infos['nome'] : '' ?>" name="nome" />
                                     </fieldset>
                                 </div>
                             </div>
                             <fieldset>
                                 <label> Observação: </label>
-                                <textarea name="observacao"><?= $infos['observacao']?></textarea>
+                                <textarea name="observacao"><?php echo $infos != '' ? $infos['observacao'] : '' ?></textarea>
                             </fieldset>
                         </section>
                         
