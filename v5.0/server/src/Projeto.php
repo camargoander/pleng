@@ -1,5 +1,8 @@
 <?php
 
+include('./LevantamentoInicial.php');
+include('./DiarioDeObra.php');
+
 class Projeto
 {
     private $sqlite;
@@ -134,6 +137,29 @@ class Projeto
         $qtde = $qtdeProjetos->execute()->fetchArray();
 
         return $qtde; 
+    }
+
+    public function duplicarProjeto(int $idprojeto, int $idusuario) 
+    {
+        $projetoAtual = $this->selecionarProjetoAtualizar($idprojeto);
+
+        $this->cadastrarProjeto((object)$projetoAtual);
+
+        $projetoDuplicado = $this->selecionarUltimoProjeto($idusuario);
+
+        return $projetoDuplicado['idprojeto'];
+    }
+
+    public function selecionarUltimoProjeto(int $idusuario)
+    {
+        $selecionaProjeto = $this->sqlite->prepare('SELECT MAX(idprojeto) as idprojeto
+                                                    FROM projeto WHERE idusuario = :id');
+
+        $selecionaProjeto->bindParam(':id', $idusuario);
+
+        $projeto = $selecionaProjeto->execute()->fetchArray();
+
+        return $projeto; 
     }
 }
 ?>

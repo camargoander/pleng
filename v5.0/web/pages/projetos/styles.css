@@ -85,3 +85,14 @@ main h1 {
 .projetos div button:hover {
     background-color: #007D8D;
 }
+
+.projetos div .duplicar {
+    border: 1px solid #00A2B8;
+    background-color: transparent;
+    color: #00A2B8;
+    margin-top: 5px;
+}
+
+.projetos div .duplicar:hover {
+    background-color: #FEF9EF;
+}

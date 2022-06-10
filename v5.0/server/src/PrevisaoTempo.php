@@ -85,5 +85,38 @@ class PrevisaoTempo
 
         return $previsaoTempo;
     }
+
+    public function cadastrarPrevisaoTempoDuplicada(array $previsaoTempo, int $iddiario)
+    {
+        $insertPrevisao = $this->sqlite->prepare('INSERT INTO previsao_tempo(
+                                                    temsegmanha, temsegtarde, 
+                                                    temtermanha, temtertarde, 
+                                                    temquamanha, temquatarde, 
+                                                    temquimanha, temquitarde, 
+                                                    temsexmanha, temsextarde, iddiario)
+                                                VALUES (:temsegmanha, :temsegtarde, 
+                                                        :temtermanha, :temtertarde, 
+                                                        :temquamanha, :temquatarde, 
+                                                        :temquimanha, :temquitarde, 
+                                                        :temsexmanha, :temsextarde, 
+                                                        :iddiario
+                                                       )');
+                                
+        
+        $insertPrevisao->bindParam(':temsegmanha', $previsaoTempo['temsegmanha']);
+        $insertPrevisao->bindParam(':temsegtarde', $previsaoTempo['temsegtarde']);
+        $insertPrevisao->bindParam(':temtermanha', $previsaoTempo['temtermanha']);
+        $insertPrevisao->bindParam(':temtertarde', $previsaoTempo['temtertarde']);
+        $insertPrevisao->bindParam(':temquamanha', $previsaoTempo['temquamanha']);
+        $insertPrevisao->bindParam(':temquatarde', $previsaoTempo['temquatarde']);
+        $insertPrevisao->bindParam(':temquimanha', $previsaoTempo['temquimanha']);
+        $insertPrevisao->bindParam(':temquitarde', $previsaoTempo['temquitarde']);
+        $insertPrevisao->bindParam(':temsexmanha', $previsaoTempo['temsexmanha']);
+        $insertPrevisao->bindParam(':temsextarde', $previsaoTempo['temsextarde']);
+        
+        $insertPrevisao->bindParam(':iddiario', $iddiario);
+
+        $insertPrevisao->execute();
+    }
 }
 ?>

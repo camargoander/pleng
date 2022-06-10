@@ -31,6 +31,21 @@ class EtapaDiario
         }
     }
 
+    public function cadastrarEtapaDuplicada(SQLite3Result $etapas, int $iddiario)
+    {
+        while($etp = $etapas->fetchArray()) {
+            $insertEtapaDiario = $this->sqlite->prepare('INSERT INTO etapa_diario(
+                                                            iddiario, idlevantamento, qtde
+                                                        ) VALUES (:iddiario, :idlevantamento, :qtde)');
+
+            $insertEtapaDiario->bindParam(':iddiario', $iddiario);
+            $insertEtapaDiario->bindParam(':idlevantamento', $etp['idlevantamento']);
+            $insertEtapaDiario->bindParam(':qtde', $etp['qtde']);
+
+            $insertEtapaDiario->execute();
+        }
+    }
+
     public function selectQtdeEtapaDiario(int $id) 
     {
 

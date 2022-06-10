@@ -5,6 +5,12 @@
 
     include('../../../server/src/Projeto.php');
 
+    include('../../../server/src/LevantamentoInicial.php');
+    include('../../../server/src/DiarioDeObra.php');
+    include('../../../server/src/EtapaDiario.php');
+    include('../../../server/src/PrevisaoTempo.php');
+    include('../../../server/src/MaterialEtapaDiario.php');
+    
     if(!isset($_SESSION['usuario'])) {
         redireciona('../login/login.php');
 
@@ -20,6 +26,17 @@
     if($action == 'filtrar') {
         $itemProjeto = $projetos->listarProjetosFiltrado($_SESSION['usuario'], "%".strtoupper($_POST['filtro'])."%");
         $action = '';
+    } else if($action == 'duplicar') {
+        $lev = new LevantamentoInicial($db);
+        $diarioObra = new DiarioDeObra($db);
+
+        $projDuplicado = $projetos->duplicarProjeto($_GET['id'], $_SESSION['usuario']);
+
+        $lev->duplicarLevantamento($_GET['id'], $projDuplicado);
+
+        $diarioObra->duplicarDiarioDeObra($_GET['id'], $projDuplicado);
+
+        //redireciona('../menu/index.php?id=' . $projDuplicado);
     }
 ?>
 
@@ -68,6 +85,9 @@
                         <p><b> Local: </b> <?= $proj['endereco']; ?> </p>
                         <a href="../menu/index.php?id=<?= $proj['idprojeto']?>">
                             <button type="button"> Selecionar </button>
+                        </a>
+                        <a href="./index.php?action=duplicar&id=<?= $proj['idprojeto']?>">
+                            <button class="duplicar" type="button"> Duplicar </button>
                         </a>
                     </div>
 

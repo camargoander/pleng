@@ -27,13 +27,13 @@
 
         $etapaDados = (object) array (
             'idetapa' => $_POST['etapa'],
-            'idproj' => $_SESSION['projeto'],
+            'idprojeto' => $_SESSION['projeto'],
             'situacao' => $_POST['situacao'],
             'descricao' => $_POST['descricao'],
-            'tamanhoatual' => $_POST['tamanho_atual'],
-            'tamanhototal' => $_POST['tamanho_total'],
-            'dataini' => $_POST['data_ini'],
-            'datafim' => $_POST['data_fim']
+            'tamanho_atual' => $_POST['tamanho_atual'],
+            'tamanho_total' => $_POST['tamanho_total'],
+            'data_ini' => $_POST['data_ini'],
+            'data_fim' => $_POST['data_fim']
         );
 
         $levantamentos->cadastrarLevantamentoInicial($etapaDados);

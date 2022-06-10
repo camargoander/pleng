@@ -15,13 +15,13 @@ class LevantamentoInicial
                                                 VALUES(:idetapa, :idproj, :situacao, :descricao, :tamanhototal, :tamanhoatual, :data_ini, :data_fim)');
         
         $insertLevantamento->bindParam(':idetapa', $levantamento->idetapa);
-        $insertLevantamento->bindParam(':idproj', $levantamento->idproj);
+        $insertLevantamento->bindParam(':idproj', $levantamento->idprojeto);
         $insertLevantamento->bindParam(':situacao', $levantamento->situacao);
         $insertLevantamento->bindParam(':descricao', $levantamento->descricao);
-        $insertLevantamento->bindParam(':tamanhototal', $levantamento->tamanhototal);
-        $insertLevantamento->bindParam(':tamanhoatual', $levantamento->tamanhoatual);
-        $insertLevantamento->bindParam(':data_ini', $levantamento->dataini);
-        $insertLevantamento->bindParam(':data_fim', $levantamento->datafim);
+        $insertLevantamento->bindParam(':tamanhototal', $levantamento->tamanho_total);
+        $insertLevantamento->bindParam(':tamanhoatual', $levantamento->tamanho_atual);
+        $insertLevantamento->bindParam(':data_ini', $levantamento->data_ini);
+        $insertLevantamento->bindParam(':data_fim', $levantamento->data_fim);
         
         $insertLevantamento->execute();
     }
@@ -189,6 +189,17 @@ class LevantamentoInicial
         $levantamentoEspecifico = $selectLevantamentoEspecifico->execute()->fetchArray();
 
         return $levantamentoEspecifico;
+    }
+
+    public function duplicarLevantamento(int $idprojetoVelho, int $idprojetoDuplicado) 
+    {
+        $levantamentos = $this->listarLevantamento($idprojetoVelho);
+
+        while($lvt = $levantamentos->fetchArray()) {
+            $lvt['idprojeto'] = $idprojetoDuplicado;
+
+            $this->cadastrarLevantamentoInicial((object)$lvt);
+        }
     }
 }
 

@@ -138,6 +138,48 @@ class DiarioDeObra
         return $ultimoDiario['id'];
     }
     
+    public function duplicarDiarioDeObra(int $idprojetoVelho, int $idProjetoDuplicado)
+    {
+        $PrevisaoTempo = new PrevisaoTempo($this->sqlite);
+        $EtapaDiario = new EtapaDiario($this->sqlite);
+        $MaterialEtapaDiario = new MaterialEtapaDiario($this->sqlite);
+
+        $diarios = $this->listarDiario($idprojetoVelho);
+
+        while($diario = $diarios->fetchArray()) {
+
+            $etpDiario = $EtapaDiario->selecionarEtapaDiario($diario['iddiario']);
+            $prevTempo = $PrevisaoTempo->selecionarPrevisaoTempo($diario['iddiario']);
+            $matEtp    = $MaterialEtapaDiario->selectMaterialEtapaDiario($diario['iddiario']);
+
+            $diario['idprojeto'] = $idProjetoDuplicado;
+
+            $this->cadastrarDiarioDeObraDuplicado((object)$diario, $prevTempo, $etpDiario, $matEtp);
+        }
+    }
+
+    public function cadastrarDiarioDeObraDuplicado(object $diario, array $prevTempo, SQLite3Result $etapa, SQLite3Result $matEtp)
+    {
+        $PrevisaoTempo = new PrevisaoTempo($this->sqlite);
+        $EtapaDiario = new EtapaDiario($this->sqlite);
+        $MaterialEtapaDiario = new MaterialEtapaDiario($this->sqlite);
+
+        $insertDiario = $this->sqlite->prepare('INSERT INTO diario_obra( datadiario, nome, observacao, idprojeto) 
+                                                VALUES (:datadiario, :nome, :observacao, :idprojeto)');
+                                
+        $insertDiario->bindParam(':datadiario', $diario->datadiario);
+        $insertDiario->bindParam(':nome', $diario->nome);
+        $insertDiario->bindParam(':observacao', $diario->observacao);
+        $insertDiario->bindParam(':idprojeto', $diario->idprojeto);
+
+        $insertDiario->execute();
+
+        $diario->iddiario = $this->selecionaUltimoDiario($diario->idprojeto);
+
+        $PrevisaoTempo->cadastrarPrevisaoTempoDuplicada($prevTempo, $diario->iddiario);
+        $EtapaDiario->cadastrarEtapaDuplicada($etapa, $diario->iddiario);
+        $MaterialEtapaDiario->cadastrarMateriaisDuplicada($matEtp, $diario->iddiario);
+    }
 }
 
 ?>

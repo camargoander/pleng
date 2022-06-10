@@ -29,6 +29,20 @@ class MaterialEtapaDiario
         }
     }
 
+    public function cadastrarMateriaisDuplicada(SQLite3Result $materiais, int $iddiario)
+    {
+        while($mat = $materiais->fetchArray()) {
+            $insertMatEtapaDiario = $this->sqlite->prepare('INSERT INTO material_etapa_diario(qtde, idmatetapa, iddiario) 
+                                                            VALUES (:qtde, :matetapa, :diario)');
+
+            $insertMatEtapaDiario->bindParam(':qtde', $mat['qtde']);
+            $insertMatEtapaDiario->bindParam(':matetapa', $mat['idmatetapa']);
+            $insertMatEtapaDiario->bindParam(':diario', $iddiario);
+
+            $insertMatEtapaDiario->execute();
+        }
+    }
+
     public function selectMaterialEtapaDiario(int $id) 
     {
         $selectMatEtapaDiario = $this->sqlite->prepare('SELECT material.nome, material_etapa_diario.*, material_etapa.idetapa 
