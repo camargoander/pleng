@@ -91,7 +91,7 @@ class Galeria
                                                         FROM pasta
                                                         INNER JOIN galeria
                                                         ON pasta.idpasta = galeria.idpasta
-                                                        WHERE pasta.idprojeto = 1
+                                                        WHERE pasta.idprojeto = :id
                                                         ORDER BY galeria.data_foto DESC
                                                         LIMIT 5');
 
@@ -100,6 +100,21 @@ class Galeria
         $ultimasFotos = $selectUltimasFotos->execute();
 
         return $ultimasFotos;
+    }
+
+    public function selecionarFotosLogo(int $id) {
+        $selectLogos = $this->sqlite->prepare("SELECT galeria.nome, galeria.foto, galeria.idgaleria 
+                                                        FROM galeria
+                                                        INNER JOIN pasta
+                                                        ON pasta.idpasta = galeria.idpasta
+                                                        WHERE pasta.nome = 'logo'
+                                                        AND pasta.idprojeto = :id");
+
+        $selectLogos->bindParam(':id', $id);
+
+        $logos = $selectLogos->execute();
+
+        return $logos;
     }
 }
 ?>

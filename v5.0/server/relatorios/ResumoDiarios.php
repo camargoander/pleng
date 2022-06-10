@@ -7,6 +7,7 @@ session_start();
 require('./fpdf/fpdf.php');
 require('../src/Projeto.php');
 require('../src/DiarioDeObra.php');
+require('../src/Galeria.php');
 
 require('../config/redireciona.php');
 
@@ -35,7 +36,11 @@ class PDF extends FPDF
         
         $data = date('d/m/Y');
         // Logo
-        $this->Image('../../web/assets/imgs/logo.png',10,6, 30, 30, '', '');
+        $Galeria = new Galeria($db);
+        $foto = $Galeria->selecionarFoto($_GET['foto']);
+        
+        $this->Image('../../web/pages/galeria/pasta/imgproj/' . $foto['foto'],10,6, 30, 30, '', '');
+        
         
         $this->SetFont('Arial','B',8);
 

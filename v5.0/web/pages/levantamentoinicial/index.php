@@ -131,7 +131,7 @@
                 <div class="etapas">
 
                     <?php while($liAndamento = $levantamentoAndamento->fetchArray()) : ?>
-                        <a class="grid-3" href="?id=<?= $liAndamento['idlevantamento']; ?>#editarModal">
+                        <a onmousedown="overlay(this)" class="grid-3" href="?id=<?= $liAndamento['idlevantamento']; ?>#editarModal">
                             <div> 
                                 <i class="fa gg-user-list"></i> 
                                 <span> <?= $liAndamento['nome']; ?> </span> 
@@ -142,7 +142,7 @@
                 <h3> Etapas não iniciadas </h3>
                 <div class="etapas">
                     <?php while($liNaoIniciado = $levantamentoNaoIniciado->fetchArray()) : ?>
-                        <a class="grid-3" href="?id=<?= $liNaoIniciado['idlevantamento']; ?>#editarModal">
+                        <a onmousedown="overlay(this)" class="grid-3" href="?id=<?= $liNaoIniciado['idlevantamento']; ?>#editarModal">
                             <div> 
                                 <i class="fa gg-sand-clock"></i> 
                                 <span> <?= $liNaoIniciado['nome']; ?> </span> 
@@ -229,5 +229,6 @@
             </div>
 
         </main>
+        <script src="main.js"></script>
     </body>
 </html>
