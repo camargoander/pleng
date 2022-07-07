@@ -125,4 +125,34 @@ PLENG (sigla para Planejamento de Engenharia) é um sistema desenvolvido princip
 </ol>
 
 
+<hr/>
+
+<h2> Versão 5.0 - Liberada dia 09/06/2022 </h2>
+
+<p> A versão 5.0 do <b> PLENG </b> está oficialmente liberada e conta com novas atualizações e correções. Confira a lista com as novas funcionalidades disponiveis e o que foi alterado: </p>
+
+<ol>
+   <li>
+      <h3> Duplicar projeto </h3>
+      <p> Agora é possivel duplicar todas as informações de um projeto já cadastrado, facilitando o trabalho do usuário na criação de outros projetos semelhantes.</p>
+   </li>
+   
+   <li>
+      <h3> Logo para relatórios </h3>
+      <p> Ao emitir relatórios, o usuário poderá selecionar o logo da sua empresa para que o mesmo apareça no documento emitido (Porém, é necessário que a imagem esteja no sistema dentro de uma pasta criada pelo usuário chamada <b> logo </b>).</p>
+   </li>
+   
+   <li>
+      <h3> Correções </h3>
+      <ol>
+         <li>
+            <p> O cadastro de materiai foi alterado e não conta mais com informações referente a fornecedor e valor. </p>
+         </li>
+         <li>
+            <p> O relatório de material foi corrigido. </p>
+         </li>
+      </ol>
+  </li> 
+</ol>
+
 
