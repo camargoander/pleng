@@ -89,7 +89,7 @@ class PDF extends FPDF
         while ($row = $levantamento->fetchArray()) {
             $this->SetFont('Arial','b',10);
             $this->Cell(92,8,utf8_decode('Etapa: ' .$row['nome']),0, 0, 'L');
-            $this->Cell(92,8,utf8_decode('Tamanho total: ' .$row['tamanho_total']),0, 0, 'L');
+            $this->Cell(92,8,utf8_decode('Tamanho total: ' .$row['tamanho_total'] . ' ' . $row['unidade']),0, 0, 'L');
             $this->Ln();
 
             // Header
@@ -108,7 +108,7 @@ class PDF extends FPDF
             
             while($rowMaterial = $material->fetchArray()) {
                 $qtdeSemVirgula = str_replace(',', '.', $rowMaterial['qtde']);
-                $qtdeTotal = $row['tamanho_total']* $qtdeSemVirgula;
+                $qtdeTotal = $row['tamanho_total'] * $qtdeSemVirgula;
 
                 $this->SetFont('Arial','',8);
 
