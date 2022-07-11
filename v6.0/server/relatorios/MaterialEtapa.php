@@ -108,7 +108,9 @@ class PDF extends FPDF
             
             while($rowMaterial = $material->fetchArray()) {
                 $qtdeSemVirgula = str_replace(',', '.', $rowMaterial['qtde']);
-                $qtdeTotal = $row['tamanho_total'] * $qtdeSemVirgula;
+		    $tamTotalSemVirgula = str_replace(',', '.', $row['tamanho_total']);
+
+                $qtdeTotal = floatval($tamTotalSemVirgula) * floatval($qtdeSemVirgula);
 
                 $this->SetFont('Arial','',8);
 
