@@ -1,0 +1,93 @@
+body {
+    background-color: #F4F4F4;
+    color: #00525E;
+}
+
+main {
+    max-width: 1200px;
+    text-align: justify;
+}
+
+main h1 {
+    margin-left: 10%;
+}
+
+nav .fa {
+    display: block!important;
+}
+
+
+.pesquisa {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pesquisa input {
+    margin: 0 5 0 20;
+    padding: 10;
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid #007D8D;
+    width: 90%;
+}
+
+.pesquisa button {
+    border:none;
+    width: 24px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.pesquisa button i {
+    color: #00A2B8;
+    transition: all 0.4s;
+}
+
+.pesquisa button i:hover {
+    color: #007D8D;
+}
+
+.item {
+    margin-bottom: 10px!important;
+}
+
+.orc {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #FEF9EF;
+    box-shadow: 0px 0px 5px 2px rgba(218, 218, 218, 0.65);
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.orc .btnImprimir {
+    border: 0;
+    background: none;
+    margin-top: -20px;
+    cursor: pointer;
+}
+
+.collapse {
+    height: 0px;
+    overflow: hidden;
+    padding: 0px;
+    border-radius: 0px 0px 10px 10px;
+    transition: height 0.8s;
+    width: calc(100% - 10px);
+    border: 1px solid #007D8D;
+}
+
+.mat {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 40% 50% 10%;
+}
+
+.mat .meio {
+    display: grid;
+    grid-template-columns: 20% 20% 30% 30%;
+    margin-bottom: 10px;
+}
