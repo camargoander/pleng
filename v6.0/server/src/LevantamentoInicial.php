@@ -71,6 +71,24 @@ class LevantamentoInicial
         return $levantamento;
     }
 
+    public function listarLevantamentoFiltrado(int $idprojeto, int $idetapa)  
+    {
+        $selectLevantamento = $this->sqlite->prepare('SELECT levantamento_inicial.*, etapa.nome  
+                                                        FROM levantamento_inicial 
+                                                        INNER JOIN etapa 
+                                                        ON levantamento_inicial.idetapa = etapa.idetapa 
+                                                        WHERE idprojeto = :idprojeto 
+                                                        AND levantamento_inicial.idetapa = :idetapa
+                                                        ORDER BY data_ini');
+
+        $selectLevantamento->bindParam(':idprojeto', $idprojeto);
+        $selectLevantamento->bindParam(':idetapa', $idetapa);
+
+        $levantamento = $selectLevantamento->execute();
+
+        return $levantamento;
+    }
+
     public function listarLevantamentoInicialAndamento(int $idprojeto)
     {
         $selectLevantamentoAndamento = $this->sqlite->prepare('SELECT levantamento_inicial.*, etapa.nome  

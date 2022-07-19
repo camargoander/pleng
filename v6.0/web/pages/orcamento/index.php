@@ -22,14 +22,15 @@
 
     $levantamentos = new LevantamentoInicial($db);
 
-    $etapas = $levantamentos->listarLevantamento($_SESSION['projeto']);
-
     $orcamentos = new Orcamento($db);
 
     $materialEtapa = new MaterialEtapa($db);
 
-    
+    $etapas = $levantamentos->listarLevantamento($_SESSION['projeto']);
+
     $listaMaterialEtapa = (isset($_GET['id'])) ? $materialEtapa->selecionarMateriaisEtapa($_GET['id']) : '';
+
+    $info = (isset($_GET['idmat'])) ? $orcamentos->selecionarOrcamento($_GET['idmat']) : '';
     
     $action = (isset($_REQUEST['action'] )) ? $_REQUEST['action']  : '';
 
@@ -49,6 +50,38 @@
             $orcamentos->cadastrarOrcamento($orcamentoDados);
 
             redireciona('./index.php');
+            break;
+        }
+
+        case 'editar': {
+            $orcamentoDados = (object) array (
+                "idorcamento" => $_POST['idorcamento'],
+                "fornecedor" => $_POST['fornecedor'],
+                "qtde_comprada" => $_POST['qtde_comprada'],
+                "qtde_faltante" => $_POST['qtde_faltante'],
+                "valor_compra" => $_POST['valor_compra'],
+                "data_compra" => $_POST['data_compra']
+            );
+
+            $orcamentos->editarOrcamento($orcamentoDados);
+
+            redireciona('./index.php');
+            break;
+        }
+
+        case 'deletar': {
+            $orcamentos->deletarOrcamento($_POST['id']);
+
+            redireciona('./index.php');
+            break;
+
+        }
+
+        case 'filtrar': {
+            if($_POST['etapa'] !== "") {
+                $etapas = $levantamentos->listarLevantamentoFiltrado($_SESSION['projeto'], $_POST['etapa']);
+                $action = '';
+            }
             break;
         }
     }
@@ -84,7 +117,12 @@
 
             <section class="pesquisa grid-12">
                 <form class="grid-6" method="POST" action="./index.php?action=filtrar">
-                    <input type="text" name="filtro" placeholder="Nome da etapa" />
+                    <select name="etapa">
+                        <option value=""> Etapa </option>
+                        <?php while($etp = $etapas->fetchArray()) : ?>
+                            <option value="<?= $etp['idetapa']?>"> <?= $etp['nome']; ?></option>
+                        <?php endwhile; ?>
+                    </select>
                     <button type="submit"> <i class="gg-search"></i> </button>
                 </form>
             </section>
@@ -134,13 +172,13 @@
                                 <div class="meio">
                                     <label> <?= $mat['qtde_comprada']; ?> </label>
                                     <label> <?= $mat['qtde_faltante']; ?> </label>
-                                    <label> <?= $mat['data_compra']; ?> </label>
-                                    <label> R$ <?= number_format($mat['valor_compra'], 2) ?> </label>
+                                    <label> <?= date('d/m/Y', strtotime($mat['data_compra'])); ?> </label>
+                                    <label> R$ <?= number_format($mat['valor_compra'], 2, ',', '.') ?> </label>
                                 </div>
 
                                 <div>
-                                    <button> e </button>
-                                    <button> x </button>
+                                    <a href="?idmat=<?= $mat['idorcamento']; ?>#editarModal"><button> e </button></a>
+                                    <a href="?idmat=<?= $mat['idorcamento']; ?>#deletarModal"><button class="btnSecundario"> x </button></a>
                                 </div>
                             <?php endwhile; ?>
                         </div>
@@ -151,74 +189,7 @@
                 <?php endwhile; ?>
             </section>
 
-            <!-- popup de cadastrar -->
-            <?php if(isset($_GET['id'])): ?>
-            <div id="cadastrarModal" class="modalDialog">
-                <div>
-                    <a href="#" title="Close" class="close">
-                        <div class="close-container">
-                            <div class="leftright"></div>
-                            <div class="rightleft"></div>
-                        </div>
-                    </a>
-                    <h2> Material </h2>
-
-                    <form method="POST" action="./index.php?action=cadastrar">
-                        <input type="hidden" value="<?= $_GET['id']; ?>" name="idlevantamento" />
-                        <fieldset>
-                            <select name="material">
-                                <?php while($matetp = $listaMaterialEtapa->fetchArray()): ?>
-
-                                <option value="<?= $matetp['idmat']; ?>"> <?= $matetp['nome']; ?></option>
-
-                                <?php endwhile; ?>
-                            </select>
-                        </fieldset>
-
-                        <fieldset>
-                            <input type="text" name="fornecedor" placeholder="Fornecedor" />
-                        </fieldset>
-
-                        <div class="items">
-                            <div class="item">
-                                <fieldset>
-                                    <input type="text" name="qtde_comprada" placeholder="Quantidade comprada" />
-                                </fieldset>
-                            </div>
-                            
-                            <div class="item">
-                                <fieldset>
-                                    <input type="text" name="qtde_faltante" placeholder="Quantidade faltante" />
-                                </fieldset>
-                            </div>
-                        </div>
-
-                        <div class="items">
-                            <div class="item">
-                                <fieldset>
-                                    <input type="text" name="valor_compra" placeholder="Valor total" />
-                                </fieldset>
-                            </div>
-                            
-                            <div class="item">
-                                <fieldset>
-                                    <input type="date" name="data_compra" />
-                                </fieldset>
-                            </div>
-                        </div>
-                        
-                        <div class="items">
-                            <div class="item">
-                                <a href="#"><button type="button" class="btnSecundario"> Cancelar </button></a>
-                            </div>
-                            <div class="item">
-                                <button type="submit" class="btnPrincipal"> Cadastrar </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <?php endif; ?>
+            <?php include('./popups.php'); ?>
         </main>
     </body>
 
