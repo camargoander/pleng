@@ -60,7 +60,7 @@
                 <a class="grid-3" href="../relatorio/index.php">
                     <div class="grid-12"> <i class="fa gg-file"></i> <span> Relatórios </span> </div>
                 </a>
-                <a class="grid-3" href="">
+                <a class="grid-3" href="../orcamento/index.php">
                     <div class="grid-12"> <i class="fa gg-calculator"></i> <span> Orçamento </span> </div>
                 </a>
                 <a class="grid-3" href="../levantamentoinicial/index.php">

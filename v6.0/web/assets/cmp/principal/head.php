@@ -30,3 +30,4 @@
 <link href='https://css.gg/organisation.css' rel='stylesheet'>
 <link href='https://css.gg/list.css' rel='stylesheet'>
 <link href='https://css.gg/search.css' rel='stylesheet'>
+<link href='https://css.gg/add-r.css' rel='stylesheet'>
