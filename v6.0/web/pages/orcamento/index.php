@@ -6,6 +6,7 @@
 
     include('../../../server/src/LevantamentoInicial.php');
     include('../../../server/src/Orcamento.php');
+    include('../../../server/src/MaterialEtapa.php');
 
     if(!isset($_SESSION['usuario'])) {
         redireciona('../login/login.php');
@@ -24,6 +25,33 @@
     $etapas = $levantamentos->listarLevantamento($_SESSION['projeto']);
 
     $orcamentos = new Orcamento($db);
+
+    $materialEtapa = new MaterialEtapa($db);
+
+    
+    $listaMaterialEtapa = (isset($_GET['id'])) ? $materialEtapa->selecionarMateriaisEtapa($_GET['id']) : '';
+    
+    $action = (isset($_REQUEST['action'] )) ? $_REQUEST['action']  : '';
+
+    switch($action) {
+        
+        case 'cadastrar': {
+            $orcamentoDados = (object) array (
+                "idlevantamento" => $_POST['idlevantamento'],
+                "idmaterial" => $_POST['material'],
+                "qtde_comprada" => $_POST['qtde_comprada'],
+                "qtde_faltante" => $_POST['qtde_faltante'],
+                "fornecedor" => $_POST['fornecedor'],
+                "data_compra" => $_POST['data_compra'],
+                "valor_compra" => $_POST['valor_compra']
+            );
+
+            $orcamentos->cadastrarOrcamento($orcamentoDados);
+
+            redireciona('./index.php');
+            break;
+        }
+    }
 ?>
 
 
@@ -35,6 +63,8 @@
         ?>
 
         <link rel="stylesheet" href="https://cdn.es.gov.br/fonts/font-awesome/css/font-awesome.min.css">
+        <link href="../../assets/styles/stylePopup.css" rel="stylesheet" />
+        <link href="../../assets/styles/formulario.css" rel="stylesheet" />
 
         <title> PLENG | Orçamento do projeto </title>
     </head>
@@ -66,11 +96,18 @@
                     <div class="orc">
                         <label> <?= $etp['nome']?> </label>
     
-                        <a href="?nomerel=OrcamentoDetalhado#logoModal">
-                            <button type="button" class="btnImprimir" title="Imprimir orçamento"> 
-                                <i class="fa gg-file"></i> 
-                            </button>
-                        </a>
+                        <div>
+                            <a href="?nomerel=OrcamentoDetalhado#logoModal">
+                                <button type="button" title="Imprimir orçamento"> 
+                                    <i class="gg-file"></i> 
+                                </button>
+                            </a>
+                            <a href="?id=<?= $etp['idlevantamento']; ?>#cadastrarModal">
+                                <button  type="button" title="Adicionar novo material">
+                                    <i class="gg-add-r"></i>
+                                </button>
+                            </a>
+                        </div>
                     </div>
                     
                     <div id="collapse<?= $etp['idlevantamento'] ?>" class="collapse">
@@ -113,6 +150,75 @@
                 </div>
                 <?php endwhile; ?>
             </section>
+
+            <!-- popup de cadastrar -->
+            <?php if(isset($_GET['id'])): ?>
+            <div id="cadastrarModal" class="modalDialog">
+                <div>
+                    <a href="#" title="Close" class="close">
+                        <div class="close-container">
+                            <div class="leftright"></div>
+                            <div class="rightleft"></div>
+                        </div>
+                    </a>
+                    <h2> Material </h2>
+
+                    <form method="POST" action="./index.php?action=cadastrar">
+                        <input type="hidden" value="<?= $_GET['id']; ?>" name="idlevantamento" />
+                        <fieldset>
+                            <select name="material">
+                                <?php while($matetp = $listaMaterialEtapa->fetchArray()): ?>
+
+                                <option value="<?= $matetp['idmat']; ?>"> <?= $matetp['nome']; ?></option>
+
+                                <?php endwhile; ?>
+                            </select>
+                        </fieldset>
+
+                        <fieldset>
+                            <input type="text" name="fornecedor" placeholder="Fornecedor" />
+                        </fieldset>
+
+                        <div class="items">
+                            <div class="item">
+                                <fieldset>
+                                    <input type="text" name="qtde_comprada" placeholder="Quantidade comprada" />
+                                </fieldset>
+                            </div>
+                            
+                            <div class="item">
+                                <fieldset>
+                                    <input type="text" name="qtde_faltante" placeholder="Quantidade faltante" />
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="items">
+                            <div class="item">
+                                <fieldset>
+                                    <input type="text" name="valor_compra" placeholder="Valor total" />
+                                </fieldset>
+                            </div>
+                            
+                            <div class="item">
+                                <fieldset>
+                                    <input type="date" name="data_compra" />
+                                </fieldset>
+                            </div>
+                        </div>
+                        
+                        <div class="items">
+                            <div class="item">
+                                <a href="#"><button type="button" class="btnSecundario"> Cancelar </button></a>
+                            </div>
+                            <div class="item">
+                                <button type="submit" class="btnPrincipal"> Cadastrar </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <?php endif; ?>
         </main>
     </body>
 

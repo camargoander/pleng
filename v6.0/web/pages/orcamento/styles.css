@@ -63,10 +63,20 @@ nav .fa {
     border-radius: 10px 10px 0px 0px;
 }
 
-.orc .btnImprimir {
+.orc label {
+    cursor: pointer;
+
+}
+
+.orc div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.orc div button {
     border: 0;
     background: none;
-    margin-top: -20px;
     cursor: pointer;
 }
 
@@ -90,4 +100,32 @@ nav .fa {
     display: grid;
     grid-template-columns: 20% 20% 30% 30%;
     margin-bottom: 10px;
+}
+
+
+form {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    align-items: stretch;
+    width: 100%!important;
+}
+  
+form .items {
+    width: 100%;
+    text-align: left;
+    display: flex;
+}
+  
+form .item {
+    width: 50%;
+    margin-bottom: 0px!important;
+}
+  
+form .item:first-child {
+    margin-right: 5%;
+}
+
+form button {
+    margin-top: 10px!important;
 }
