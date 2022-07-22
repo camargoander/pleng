@@ -11,9 +11,9 @@
             <h2> Material </h2>
 
             <form method="POST" action="./index.php?action=cadastrar">
-                <input type="hidden" value="<?= $_GET['id']; ?>" name="idlevantamento" />
+                <input type="hidden" id="levcad" value="<?= $_GET['id']; ?>" name="idlevantamento" />
                 <fieldset>
-                    <select name="material">
+                    <select id="material" name="material">
                         <?php while($matetp = $listaMaterialEtapa->fetchArray()): ?>
 
                         <option value="<?= $matetp['idmat']; ?>"> <?= $matetp['nome']; ?></option>
@@ -29,13 +29,13 @@
                 <div class="items">
                     <div class="item">
                         <fieldset>
-                            <input type="text" name="qtde_comprada" placeholder="Quantidade comprada" />
+                            <input type="text" onchange="onCalculaQtdeFaltanteCad()" id="qtdeccad"name="qtde_comprada" placeholder="Quantidade comprada" />
                         </fieldset>
                     </div>
                     
                     <div class="item">
                         <fieldset>
-                            <input type="text" name="qtde_faltante" placeholder="Quantidade faltante" />
+                            <input type="text" readonly name="qtde_faltante" id="qtdefcad" placeholder="Quantidade faltante" />
                         </fieldset>
                     </div>
                 </div>
@@ -81,6 +81,10 @@
 
             <form method="POST" action="./index.php?action=editar">
                 <input type="hidden" value="<?= $_GET['idmat']; ?>" name="idorcamento" />
+
+                <input type="hidden" value="<?= $info['idmaterial'] ?>" id="idmat" />
+                <input type="hidden" value="<?= $info['idlevantamento'] ?>" id="idlevantamento" />
+
                 <fieldset>
                     <label> Material </label>
                     <input type="text" name="material" value="<?= $info['nome']; ?>" readonly>
@@ -95,14 +99,14 @@
                     <div class="item">
                         <fieldset>
                             <label> Qtde. Comprada </label>
-                            <input type="text" name="qtde_comprada" placeholder="Quantidade comprada" value="<?= $info['qtde_comprada']; ?>"/>
+                            <input onchange="onCalculaValorFaltanteEdit()" type="text" id="qtde_comprada" name="qtde_comprada" placeholder="Quantidade comprada" value="<?= $info['qtde_comprada']; ?>"/>
                         </fieldset>
                     </div>
                     
                     <div class="item">
                         <fieldset>
                             <label> Qtde. Faltante </label>
-                            <input type="text" name="qtde_faltante" placeholder="Quantidade faltante" value="<?= $info['qtde_faltante']; ?>" readonly/>
+                            <input type="text" id="qtde_faltante" name="qtde_faltante" placeholder="Quantidade faltante" value="<?= $info['qtde_faltante']; ?>" readonly/>
                         </fieldset>
                     </div>
                 </div>

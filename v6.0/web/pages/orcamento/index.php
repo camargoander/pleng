@@ -99,6 +99,8 @@
         <link href="../../assets/styles/stylePopup.css" rel="stylesheet" />
         <link href="../../assets/styles/formulario.css" rel="stylesheet" />
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
         <title> PLENG | Orçamento do projeto </title>
     </head>
 

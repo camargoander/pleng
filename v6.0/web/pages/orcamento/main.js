@@ -9,3 +9,50 @@ function onMostrarMateriais(idetapa) {
         materiais.style.padding = '10px 0px 10px 10px'
     }
 }
+
+function onCalculaValorFaltanteEdit() {
+    var dados = {
+        levantamento: document.getElementById('idlevantamento').value,
+        material: document.getElementById('idmat').value
+    };
+
+    $.ajax({
+        url: '../../../server/src/Orcamento.php',
+        type: 'POST',
+        data: {dataOrc: JSON.stringify(dados)},
+        success: function(response){
+            let qtdeFaltante = document.getElementById('qtde_faltante');
+            let qtdeComprada = document.getElementById('qtde_comprada');
+            // Retorno se tudo ocorreu normalmente
+            
+            qtdeFaltante.value = (response - qtdeComprada.value).toFixed(2);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // Retorno caso algum erro ocorra
+            console.log("DEU ERRO!!! " + errorThrown)
+        }
+    });
+}
+function onCalculaQtdeFaltanteCad() {
+    var dados = {
+        levantamento: document.getElementById('levcad').value,
+        material: document.getElementById('material').value
+    };
+
+    $.ajax({
+        url: '../../../server/src/Orcamento.php',
+        type: 'POST',
+        data: {dataOrc: JSON.stringify(dados)},
+        success: function(response){
+            let qtdeFaltante = document.getElementById('qtdefcad');
+            let qtdeComprada = document.getElementById('qtdeccad');
+            // Retorno se tudo ocorreu normalmente
+            
+            qtdeFaltante.value = (response - qtdeComprada.value).toFixed(2);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // Retorno caso algum erro ocorra
+            console.log("DEU ERRO!!! " + errorThrown)
+        }
+    });
+}

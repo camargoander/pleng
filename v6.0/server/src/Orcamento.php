@@ -1,5 +1,32 @@
 <?php
 
+if(isset($_POST['dataOrc'])) {
+
+    class MyDB extends SQLite3
+        {
+        function __construct()
+        {
+            $this->open('../database/pleng.db');
+        }
+    }
+
+    $db = new MyDB();
+
+    $orcamento = new Orcamento($db);
+
+    $dados = $_POST['dataOrc']; 
+    $infos = json_decode($dados, true);
+
+    $qtde =  $orcamento->retornaQtdeParaOrcamento($infos['material'], $infos['levantamento']);
+   
+    $qtdeSemVirgula = str_replace(',', '.', $qtde['qtde']);
+    $tamTotalSemVirgula = str_replace(',', '.', $qtde['tamanho_total']);
+
+    $qtdeTotal = floatval($tamTotalSemVirgula) * floatval($qtdeSemVirgula);
+
+    echo number_format($qtdeTotal, 2);
+}
+
 class Orcamento 
 {
     private $sqlite;
@@ -47,7 +74,8 @@ class Orcamento
         $selectOrcamento = $this->sqlite->prepare('SELECT orcamento.*, material.nome 
                                                     FROM orcamento
                                                     INNER JOIN material
-                                                    ON idorcamento = :id');
+                                                    ON orcamento.idmaterial = material.idmat 
+                                                    where idorcamento = :id');
         
         $selectOrcamento->bindParam(':id', $id);
     
@@ -83,6 +111,23 @@ class Orcamento
         $deleteOrcamento->bindParam(':idorcamento', $idorcamento);
 
         $deleteOrcamento->execute();
+    }
+
+    public function retornaQtdeParaOrcamento(int $idmat, int $idlevantamento) 
+    {
+        $selectInfos = $this->sqlite->prepare('SELECT qtde, tamanho_total
+                                                FROM material_etapa
+                                                inner join levantamento_inicial
+                                                on material_etapa.idetapa = levantamento_inicial.idetapa
+                                                where idmat = :idmat
+                                                and idlevantamento = :idlevantamento');
+
+        $selectInfos->bindParam(':idmat', $idmat);
+        $selectInfos->bindParam(':idlevantamento', $idlevantamento);
+
+        $infos = $selectInfos->execute()->fetchArray();
+
+        return $infos;
     }
 }
 
