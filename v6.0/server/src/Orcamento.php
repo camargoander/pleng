@@ -149,6 +149,72 @@ class Orcamento
 
         return $infosRel;
     }
+
+    public function gerarInfosRelatorioMes(string $data, int $projeto)
+    {
+        $dataini = $data . '-01';
+        $datafim = $data . '-31';
+
+        $selectRel = $this->sqlite->prepare('SELECT orcamento.*, material.nome as material, etapa.nome as etapa
+                                             FROM orcamento
+                                                INNER JOIN material
+                                                ON orcamento.idmaterial = material.idmat
+                                                INNER JOIN levantamento_inicial
+                                                ON levantamento_inicial.idlevantamento = orcamento.idlevantamento
+                                                INNER JOIN etapa
+                                                ON levantamento_inicial.idetapa = etapa.idetapa
+                                                WHERE data_compra BETWEEN :dataini AND :datafim
+                                                AND levantamento_inicial.idprojeto = :projeto
+                                             ORDER BY data_compra ASC');
+
+        $selectRel->bindParam(':dataini', $dataini);
+        $selectRel->bindParam(':datafim', $datafim);
+        $selectRel->bindParam(':projeto', $projeto);
+
+        $infosRel = $selectRel->execute();
+
+        return $infosRel;
+    }
+
+    public function selecionarDatasOrcamento(int $projeto)
+    {
+        $dataslist = $this->sqlite->prepare("SELECT data_compra 
+                                             FROM orcamento
+                                             INNER JOIN levantamento_inicial
+                                                ON levantamento_inicial.idlevantamento = orcamento.idlevantamento
+                                                WHERE levantamento_inicial.idprojeto = :projeto
+                                             GROUP BY strftime('%Y-%m', data_compra)
+                                             ORDER BY data_compra ASC");
+
+        $dataslist->bindParam(':projeto', $projeto);
+
+        $datas = $dataslist->execute();
+
+        return $datas;
+    }
+
+    public function selecionarDatasOrcamentoAno(string $ano, int $projeto)
+    {
+        $dataini = $ano . '-01';
+        $datafim = $ano . '-31';
+
+        $dataslist = $this->sqlite->prepare("SELECT data_compra 
+                                             FROM orcamento
+                                             INNER JOIN levantamento_inicial
+                                                ON levantamento_inicial.idlevantamento = orcamento.idlevantamento
+                                                WHERE levantamento_inicial.idprojeto = :projeto
+                                                AND data_compra BETWEEN :dataini AND :datafim
+                                             GROUP BY strftime('%Y-%m', data_compra)
+                                             ORDER BY data_compra ASC");
+
+        $dataslist->bindParam(':dataini', $dataini);
+        $dataslist->bindParam(':datafim', $datafim);
+        $dataslist->bindParam(':projeto', $projeto);
+
+        $datas = $dataslist->execute();
+
+        return $datas;
+    }
 }
 
 ?>

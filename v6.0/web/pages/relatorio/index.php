@@ -21,7 +21,20 @@
     $listaLogo = $galeria->selecionarFotosLogo($_SESSION['projeto']);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        redireciona('../../../server/relatorios/' .$_POST['nomerel']. '.php?foto=' . $_POST['foto']);
+
+        if($_POST['origem'] == 'ano') {
+            $ano = (!empty($_POST['ano'] )) ? $_POST['ano']  : '0';
+            redireciona('../../../server/relatorios/' .$_POST['nomerel']. '.php?foto=' . $_POST['foto'] . '&data=' . $ano);
+        } else if($_POST['origem'] == 'mes') {
+            redireciona('../../../server/relatorios/' .$_POST['nomerel']. '.php?foto=' . $_POST['foto'] . '&data=' . $_POST['mes']);
+        }
+
+        if($_POST['nomerel'] == 'OrcamentoMes' || $_POST['nomerel'] == 'OrcamentoAno') {
+            redireciona('./index.php?nomerel=' . $_POST['nomerel'] . '&foto=' . $_POST['foto'] . '#' . $_POST['nomerel']. 'Modal');
+        } else {
+            redireciona('../../../server/relatorios/' .$_POST['nomerel']. '.php?foto=' . $_POST['foto']);
+        }
+        
     }
 ?>
 
@@ -60,6 +73,12 @@
                 <a href="?nomerel=ResumoDiarios#logoModal" class="grid-3">
                     <div> <i class="fa gg-file"></i> <span> Resumo de diários </span> </div>
                 </a>
+                <a href="?nomerel=OrcamentoMes#logoModal" class="grid-3">
+                    <div> <i class="fa gg-file"></i> <span> Orçamento por mês </span> </div>
+                </a>
+                <a href="?nomerel=OrcamentoAno#logoModal" class="grid-3">
+                    <div> <i class="fa gg-file"></i> <span> Orçamento por ano </span> </div>
+                </a>
                 <a href="" class="grid-3">
                     <div> <i class="fa gg-file"></i> <span> Manual de usuário </span> </div>
                 </a>
@@ -97,6 +116,76 @@
                                     endwhile;
                                 ?>
 
+                            </div>
+
+                            <div class="items">
+                                <div class="item">
+                                    <a href="#"><button type="button" class="btnSecundario"> Cancelar </button></a>
+                                </div>
+                                <div class="item">
+                                    <button type="submit" class="btnPrincipal"> Emitir </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <!-- modal ano -->
+            <div id="OrcamentoAnoModal" class="modalDialog">
+                <div>
+                    <a href="#" title="Close" class="close">
+                        <div class="close-container">
+                            <div class="leftright"></div>
+                            <div class="rightleft"></div>
+                        </div>
+                    </a>
+                    <h2>Selecione o ano do orçamento</h2>
+                    <p>Selecione o  ano para verificar o orçamento do seu projeto ou deixe em branco para emitir todos.</p>
+
+                    <form method="POST" action="./index.php">
+                        <fieldset class="btn">
+                            <input type="hidden" name="nomerel" value="<?= $_GET['nomerel'] ?>" />
+                            <input type="hidden" name="foto" value="<?= $_GET['foto'] ?>" />
+                            <input type="hidden" name="origem" value="ano" />
+
+                            <div>
+                                <input type="number" name="ano" />
+                            </div>
+
+                            <div class="items">
+                                <div class="item">
+                                    <a href="#"><button type="button" class="btnSecundario"> Cancelar </button></a>
+                                </div>
+                                <div class="item">
+                                    <button type="submit" class="btnPrincipal"> Emitir </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <!-- modal ano -->
+            <div id="OrcamentoMesModal" class="modalDialog">
+                <div>
+                    <a href="#" title="Close" class="close">
+                        <div class="close-container">
+                            <div class="leftright"></div>
+                            <div class="rightleft"></div>
+                        </div>
+                    </a>
+                    <h2>Selecione o mês do orçamento</h2>
+                    <p>Selecione o mês para verificar o orçamento do seu projeto.</p>
+
+                    <form method="POST" action="./index.php">
+                        <fieldset class="btn">
+                            <input type="hidden" name="nomerel" value="<?= $_GET['nomerel'] ?>" />
+                            <input type="hidden" name="foto" value="<?= $_GET['foto'] ?>" />
+                            <input type="hidden" name="origem" value="mes" />
+
+                            <div>
+                                <input type="month" name="mes" />
                             </div>
 
                             <div class="items">
