@@ -129,6 +129,26 @@ class Orcamento
 
         return $infos;
     }
+
+    public function gerarInfosRelatorio(int $idlevantamento)
+    {
+        $selectRel = $this->sqlite->prepare('SELECT orcamento.*, material.nome as material, etapa.nome as etapa
+                                             FROM orcamento
+                                                INNER JOIN material
+                                                ON orcamento.idmaterial = material.idmat
+                                                INNER JOIN levantamento_inicial
+                                                ON levantamento_inicial.idlevantamento = orcamento.idlevantamento
+                                                INNER JOIN etapa
+                                                ON levantamento_inicial.idetapa = etapa.idetapa
+                                             WHERE orcamento.idlevantamento = :id
+                                             ORDER BY data_compra DESC');
+
+        $selectRel->bindParam(':id', $idlevantamento);
+
+        $infosRel = $selectRel->execute();
+
+        return $infosRel;
+    }
 }
 
 ?>

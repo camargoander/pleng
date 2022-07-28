@@ -167,3 +167,51 @@
     </div>
 </div>
 <?php endif; ?>
+
+<!-- popup de logo -->
+<div id="logoModal" class="modalDialog">
+    <div>
+        <a href="#" title="Close" class="close">
+            <div class="close-container">
+                <div class="leftright"></div>
+                <div class="rightleft"></div>
+            </div>
+        </a>
+        <h2>Selecione o logo do seu relatório</h2>
+        <p>Selecione o melhor logo da sua empresa para que ele esteja presente na emissão do seu relatório.</p>
+
+        <form method="POST" action="./index.php?action=relatorio">
+            <fieldset class="btn">
+                <input type="hidden" name="nomerel" value="<?= $_GET['nomerel'] ?>" />
+                <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
+
+                <div>
+
+                    <?php
+                        while($logo = $listaLogo->fetchArray()):
+                    ?>
+
+                    <label class="rad-label">
+                        <input type="radio" class="rad-input" name="foto" value="<?= $logo['idgaleria']?>">
+                        <div class="rad-design"></div>
+                        <div class="rad-text"><?= $logo['nome']; ?></div>
+                    </label>
+
+                    <?php
+                        endwhile;
+                    ?>
+
+                </div>
+
+                <div class="items">
+                    <div class="item">
+                        <a href="#"><button type="button" class="btnSecundario"> Cancelar </button></a>
+                    </div>
+                    <div class="item">
+                        <button type="submit" class="btnPrincipal"> Emitir </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

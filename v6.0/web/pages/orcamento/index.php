@@ -7,6 +7,7 @@
     include('../../../server/src/LevantamentoInicial.php');
     include('../../../server/src/Orcamento.php');
     include('../../../server/src/MaterialEtapa.php');
+    include('../../../server/src/Galeria.php');
 
     if(!isset($_SESSION['usuario'])) {
         redireciona('../login/login.php');
@@ -26,7 +27,11 @@
 
     $materialEtapa = new MaterialEtapa($db);
 
+    $galeria = new Galeria($db);
+
     $etapas = $levantamentos->listarLevantamento($_SESSION['projeto']);
+
+    $listaLogo = $galeria->selecionarFotosLogo($_SESSION['projeto']);
 
     $listaMaterialEtapa = (isset($_GET['id'])) ? $materialEtapa->selecionarMateriaisEtapa($_GET['id']) : '';
 
@@ -84,6 +89,11 @@
             }
             break;
         }
+
+        case 'relatorio': {
+            redireciona('../../../server/relatorios/' .$_POST['nomerel']. '.php?foto=' . $_POST['foto'] . '&id=' . $_POST['id']);
+            break;
+        }
     }
 ?>
 
@@ -137,7 +147,7 @@
                         <label> <?= $etp['nome']?> </label>
     
                         <div>
-                            <a href="?nomerel=OrcamentoDetalhado#logoModal">
+                            <a href="?nomerel=OrcamentoDetalhado&id=<?= $etp['idlevantamento']; ?>#logoModal">
                                 <button type="button" title="Imprimir orçamento"> 
                                     <i class="gg-file"></i> 
                                 </button>
