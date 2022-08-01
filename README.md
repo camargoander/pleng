@@ -155,4 +155,36 @@ PLENG (sigla para Planejamento de Engenharia) é um sistema desenvolvido princip
   </li> 
 </ol>
 
+<hr/>
+
+<h2> Versão 6.0 - Liberada dia 28/07/2022 </h2>
+
+<p> A versão 6.0 do <b> PLENG </b> está oficialmente liberada e conta com novas atualizações e correções. Confira a lista com as novas funcionalidades disponiveis e o que foi alterado: </p>
+
+<ol>
+   <li>
+      <h3> Orçamento </h3>
+      <p> Com essa nova funcionalidade, o usuário consegue registrar e editar quanto gastou na compra de cada material das etapas cadastradas no levantamento inicial do seu projeto. Além disso, ao informar a quantidade comprada, o sistema calcula quanto material falta ser comprado para a finalização da etapa em si. Dessa forma, terá um controle financeiro melhor.</p>
+   </li>
+   
+   <li>
+      <h3> Relatório de orçamento </h3>
+      <p> O módulo de relatório conta com a emissão de três novos relatórios:</p>
+      <ul>
+         <li> Relatório da etapa, onde será listado os materiais e suas informações de orçamento da etapa em si.</li>
+         <li> Relatório por mês, onde será listado os materiais e suas informações de orçamento de todas as etapas do projeto de acordo com o mês da compra do material.</li>
+         <li> Relatório por ano, onde será listado os materiais e suas informações de orçamento de todas as etapas do projeto de acordo com o ano da compra do material (caso o campo fique em branco, será listado todos os registros, independente do ano).</li>
+      </ul>
+   </li>
+   
+   <li>
+      <h3> Correções </h3>
+      <ol>
+         <li>
+            <p> O relatório de material por etapa foi corrigido. </p>
+         </li>
+      </ol>
+  </li> 
+</ol>
+
 
