@@ -18,13 +18,22 @@ if(isset($_POST['dataOrc'])) {
     $infos = json_decode($dados, true);
 
     $qtde =  $orcamento->retornaQtdeParaOrcamento($infos['material'], $infos['levantamento']);
+    $qtdeComprada = $orcamento->retornarQtdeCompradaParaOrcamento($infos['material'], $infos['levantamento']);
+
+    $qf = 0;
+
+    while($q = $qtdeComprada->fetchArray()) {
+        // $qtdeFaltanteSemVirgula = str_replace(',', '.', $q['qtde']);
+
+        $qf = $qf + floatval($q['qtde_comprada']);
+    }
    
     $qtdeSemVirgula = str_replace(',', '.', $qtde['qtde']);
     $tamTotalSemVirgula = str_replace(',', '.', $qtde['tamanho_total']);
 
-    $qtdeTotal = floatval($tamTotalSemVirgula) * floatval($qtdeSemVirgula);
+    $qtdeTotal = (floatval($tamTotalSemVirgula) * floatval($qtdeSemVirgula));
 
-    echo number_format($qtdeTotal, 2);
+    echo '{"qtdetotal":' . number_format($qtdeTotal, 2) . ', "qtdecomprada":' . $qf . '}';
 }
 
 class Orcamento 
@@ -126,6 +135,21 @@ class Orcamento
         $selectInfos->bindParam(':idlevantamento', $idlevantamento);
 
         $infos = $selectInfos->execute()->fetchArray();
+
+        return $infos;
+    }
+
+    public function retornarQtdeCompradaParaOrcamento(int $idmat, int $idlevantamento)
+    {
+        $selectInfosQtde = $this->sqlite->prepare('SELECT qtde_comprada
+                                                FROM orcamento
+                                                where idmaterial = :idmat
+                                                and idlevantamento = :idlevantamento');
+
+        $selectInfosQtde->bindParam(':idmat', $idmat);
+        $selectInfosQtde->bindParam(':idlevantamento', $idlevantamento);
+
+        $infos = $selectInfosQtde->execute();
 
         return $infos;
     }

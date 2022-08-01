@@ -98,6 +98,7 @@ nav .fa {
     transition: height 0.8s;
     width: calc(100% - 10px);
     border: 1px solid #007D8D;
+    max-height: 140px;
 }
 
 .mat {
