@@ -18,16 +18,16 @@
 
 <link rel="icon" href="../../../assets/imgs/logo.svg" type="image/svg" />
 
-<link href='https://css.gg/profile.css' rel='stylesheet'>
-<link href='https://css.gg/toolbox.css' rel='stylesheet'>
-<link href='https://css.gg/trello.css' rel='stylesheet'>
-<link href='https://css.gg/file.css' rel='stylesheet'>
-<link href='https://css.gg/calculator.css' rel='stylesheet'>
-<link href='https://css.gg/album.css' rel='stylesheet'>
-<link href='https://css.gg/calendar-today.css' rel='stylesheet'>
-<link href='https://css.gg/image.css' rel='stylesheet'>
-<link href='https://css.gg/terminal.css' rel='stylesheet'>
-<link href='https://css.gg/organisation.css' rel='stylesheet'>
-<link href='https://css.gg/list.css' rel='stylesheet'>
-<link href='https://css.gg/search.css' rel='stylesheet'>
-<link href='https://css.gg/add-r.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/profile.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/toolbox.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/trello.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/file.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/calculator.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/album.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/calendar-today.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/image.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/terminal.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/organisation.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/list.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/search.css' rel='stylesheet'>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/add-r.css' rel='stylesheet'>

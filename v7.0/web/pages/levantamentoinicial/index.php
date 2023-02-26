@@ -81,9 +81,10 @@
             include('../../assets/cmp/principal/head.php');
         ?>
 
-        <link href='https://css.gg/check-r.css' rel='stylesheet'>
-        <link href='https://css.gg/sand-clock.css' rel='stylesheet'>
-        <link href='https://css.gg/user-list.css' rel='stylesheet'>
+        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/check-r.css' rel='stylesheet'>
+        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/sand-clock.css' rel='stylesheet'>
+        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/user-list.css' rel='stylesheet'>
+
 
         <title> PLENG | Levantamento inicial </title>
     </head>

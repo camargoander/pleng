@@ -94,7 +94,7 @@
         <link href="../../../assets/styles/formulario.css" rel="stylesheet" />
         <link href="../../../assets/styles/stylePopup.css" rel="stylesheet" />
 
-        <link href='https://css.gg/arrow-left.css' rel='stylesheet'>
+        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left.css' rel='stylesheet'>
 
         <title> PLENG | Pasta de fotos </title>
     </head>
