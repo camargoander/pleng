@@ -185,7 +185,7 @@
                                     <label> <?= $mat['qtde_comprada']; ?> </label>
                                     <label> <?= $mat['qtde_faltante']; ?> </label>
                                     <label> <?= date('d/m/Y', strtotime($mat['data_compra'])); ?> </label>
-                                    <label> R$ <?= number_format($mat['valor_compra'], 2, ',', '.') ?> </label>
+                                    <label> R$ <?= number_format(floatval($mat['valor_compra']), 2, ',', '.') ?> </label>
                                 </div>
 
                                 <div>
